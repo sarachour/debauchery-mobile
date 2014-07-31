@@ -32,7 +32,7 @@ public class MainActivity extends ActionBarActivity {
 				startActivity(i);
 			}
 		});
-		draw.setOnClickListener(new OnClickListener(){
+		describe.setOnClickListener(new OnClickListener(){
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
