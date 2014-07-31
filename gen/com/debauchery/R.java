@@ -1091,7 +1091,7 @@ containing a value of this type.
         public static final int action_menu_divider=0x7f050016;
         public static final int action_menu_presenter=0x7f050017;
         public static final int action_mode_close_button=0x7f050024;
-        public static final int action_settings=0x7f05004a;
+        public static final int action_settings=0x7f050049;
         public static final int activity_chooser_view_content=0x7f050025;
         public static final int always=0x7f05000b;
         public static final int beginning=0x7f050011;
@@ -1099,7 +1099,6 @@ containing a value of this type.
         public static final int collapseActionView=0x7f05000d;
         public static final int container=0x7f050040;
         public static final int cv_canv=0x7f050047;
-        public static final int cv_debug=0x7f050049;
         public static final int cv_done=0x7f050048;
         public static final int cv_prompt=0x7f050046;
         public static final int default_activity_button=0x7f050028;

@@ -26,25 +26,12 @@ public class DrawActivity extends ActionBarActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_sketch);
 		final TextView prompt =  (TextView) findViewById(R.id.cv_prompt);
-		final ImageView debug = (ImageView) findViewById(R.id.cv_debug);
 		final Button done = (Button) findViewById(R.id.cv_done);
 		
 		//update text
 		prompt.setText(promptText);
 		
-		//update canvas
-		debug.setOnClickListener(new OnClickListener(){
-
-			@Override
-			public void onClick(View arg0) {
-				// TODO Auto-generated method stub
-				SketchPad canv =  (SketchPad) findViewById(R.id.cv_canv);
-				final ImageView debug = (ImageView) findViewById(R.id.cv_debug);
-				Bitmap img = canv.getImage();
-				debug.setImageBitmap(img);
-			}
-			
-		});
+	
 		//update done
 		done.setOnClickListener(new OnClickListener(){
 
