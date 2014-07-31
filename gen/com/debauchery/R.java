@@ -1098,7 +1098,7 @@ containing a value of this type.
         public static final int checkbox=0x7f05002d;
         public static final int collapseActionView=0x7f05000d;
         public static final int container=0x7f050040;
-        public static final int cv_canvas=0x7f050047;
+        public static final int cv_canv=0x7f050047;
         public static final int cv_done=0x7f050048;
         public static final int cv_prompt=0x7f050046;
         public static final int default_activity_button=0x7f050028;

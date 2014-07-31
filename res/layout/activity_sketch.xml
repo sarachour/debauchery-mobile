@@ -14,11 +14,10 @@
         android:text="Large Text"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
-    <SurfaceView
-        android:id="@+id/cv_canvas"
+    <com.debauchery.sketch.SketchPad
+        android:id="@+id/cv_canv"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.47" />
+        android:layout_height="334dp" />
 
     <Button
         android:id="@+id/cv_done"

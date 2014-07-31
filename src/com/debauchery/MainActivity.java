@@ -1,18 +1,13 @@
 package com.debauchery;
 
 import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.ActionBar;
-import android.support.v4.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup;
 import android.widget.Button;
-import android.os.Build;
 
 public class MainActivity extends ActionBarActivity {
 
@@ -29,6 +24,7 @@ public class MainActivity extends ActionBarActivity {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				Intent i = new Intent(getApplicationContext(), DrawActivity.class);
+				i.putExtra("prompt", "a blue walrus");
 				startActivity(i);
 			}
 		});
@@ -37,6 +33,7 @@ public class MainActivity extends ActionBarActivity {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				Intent i = new Intent(getApplicationContext(), DescribeActivity.class);
+				i.putExtra("picture", "a blue walrus");
 				startActivity(i);
 			}
 		});
