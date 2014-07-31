@@ -10,8 +10,7 @@
         android:id="@+id/dv_image"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="0.84"
-        android:src="@drawable/ic_launcher" />
+        android:layout_weight="0.84" />
 
     <EditText
         android:id="@+id/dv_describe"
@@ -27,6 +26,6 @@
         android:id="@+id/dv_done"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Button" />
+        android:text="Done" />
 
 </LinearLayout>
