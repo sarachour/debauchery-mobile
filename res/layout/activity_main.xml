@@ -7,8 +7,10 @@
     tools:context="com.debauchery.MainActivity"
     tools:ignore="MergeRootFrame" >
 
+   
+
     <Button
-        android:id="@+id/Button01"
+        android:id="@+id/main_describe"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Describe Drawing" />
@@ -36,5 +38,5 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Playback" />
-
+    
 </LinearLayout>
