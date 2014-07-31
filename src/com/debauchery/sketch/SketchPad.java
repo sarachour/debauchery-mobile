@@ -27,7 +27,6 @@ public class SketchPad extends SurfaceView implements SurfaceHolder.Callback {
 
     private void init(){
     	paint = new Paint();
-    	this.setDrawingCacheEnabled(true);
         paint.setDither(true);
         paint.setColor(0xFFFFFF00);
         paint.setStyle(Paint.Style.STROKE);
@@ -49,8 +48,10 @@ public class SketchPad extends SurfaceView implements SurfaceHolder.Callback {
         this.init();
     }
     public Bitmap getImage(){
-    	this.buildDrawingCache();
-    	return this.getDrawingCache();
+    	Bitmap bitmap = Bitmap.createBitmap(getWidth(), getHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+        this.drawBuffer(canvas);
+        return bitmap;
     }
     public void setColor(int color){
     	this.color = color;
@@ -95,8 +96,7 @@ public class SketchPad extends SurfaceView implements SurfaceHolder.Callback {
         }
     }
 
-    @Override
-    public void onDraw(Canvas canvas) {
+    public void drawBuffer(Canvas canvas){
     	if(canvas == null){
     		System.out.println("null draw...");
     		return;
@@ -110,6 +110,11 @@ public class SketchPad extends SurfaceView implements SurfaceHolder.Callback {
         for (Path path : paths) {
             if(path != null) canvas.drawPath(path, paint);
         }
+    }
+    @Override
+    public void onDraw(Canvas canvas) {
+    	this.drawBuffer(canvas);
+        
     }
 
     public void clear() {

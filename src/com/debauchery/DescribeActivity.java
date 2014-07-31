@@ -1,9 +1,12 @@
 package com.debauchery;
 
+import java.io.File;
+
 import com.debauchery.sketch.SketchPad;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.View;
@@ -24,11 +27,10 @@ public class DescribeActivity extends ActionBarActivity {
 		Button done = (Button) findViewById(R.id.dv_done);
 		EditText text = (EditText) findViewById(R.id.dv_describe);
 		
-		Bitmap bmp = Globals.loadImage(path);
-		if(bmp != null) {
-			System.out.println("set image");
-			img.setImageBitmap(bmp);
-		}
+		System.out.println(path);
+		File file = new File(path);
+		Uri uri = Uri.fromFile(file);
+		img.setImageURI(uri);
 		
 		done.setOnClickListener(new OnClickListener(){
 

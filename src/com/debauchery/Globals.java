@@ -26,14 +26,11 @@ public class Globals {
 
        // Use the compress method on the BitMap object to write image to the OutputStream
             bitmapImage.compress(Bitmap.CompressFormat.PNG, 100, fos);
+            fos.flush();
             fos.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return mypath.getAbsolutePath();
+        return mypath.getPath();
     }
-	public static Bitmap loadImage(String path){
-		Bitmap bmp = BitmapFactory.decodeFile(path);
-		return bmp;
-	}
 }

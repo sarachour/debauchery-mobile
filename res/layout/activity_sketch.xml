@@ -25,4 +25,10 @@
         android:layout_height="wrap_content"
         android:text="Button" />
 
+    <ImageView
+        android:id="@+id/cv_debug"
+        android:layout_width="100dp"
+        android:layout_height="68dp"
+        android:src="@drawable/abc_ab_bottom_solid_dark_holo" />
+
 </LinearLayout>
