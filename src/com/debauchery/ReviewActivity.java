@@ -5,17 +5,24 @@ import java.io.File;
 import com.debauchery.data.CardStack;
 import com.debauchery.data.CardStack.Card;
 import com.debauchery.data.CardStack.ImageCard;
+import com.debauchery.data.CardStack.TextCard;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.DragEvent;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.View.OnDragListener;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
+import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
@@ -28,62 +35,44 @@ public class ReviewActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_review);
 		
-		final SeekBar seek = (SeekBar) findViewById(R.id.rv_seek);
-		
+		final LinearLayout lay = (LinearLayout) findViewById(R.id.rv_display_layout);
 		final Button done = (Button) findViewById(R.id.rv_done);
 		
-		seek.setMax(cards.getNumPlayers());
-		seek.setOnSeekBarChangeListener(new OnSeekBarChangeListener(){
+		lay.removeAllViews();
+		for(int j=0; j < cards.getNumPlayers(); j++){
+			Card c = cards.get(j);
+			FrameLayout v = new FrameLayout(this);
+			v.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
+			v.setTag(j);
+			v.setBackgroundColor(Color.GREEN);
+			v.setPadding(10, 10, 10, 10);
 			
-
-			@Override
-			public void onProgressChanged(SeekBar arg0, int arg1, boolean arg2) {
-				// TODO Auto-generated method stub
-				// TODO Auto-generated method stub
-				final ImageView img = (ImageView) findViewById(R.id.rv_sketch);
-				final TextView txt = (TextView) findViewById(R.id.rv_prompt);
-				final SeekBar seek = (SeekBar) findViewById(R.id.rv_seek);
-				int idx = seek.getProgress();
-				System.out.println(idx);
-				if(idx == cards.getNumPlayers()){
-					Card curr = cards.get(idx);
-					String prompt = curr.getData();
-					txt.setText(prompt);
-					img.setImageURI(null);
-				}
-				else{
-					String imgpath;
-					String prompt;
-					int pidx = idx+1;
-					Card curr = cards.get(idx);
-					Card next = cards.get(pidx);
-					if(curr instanceof ImageCard){
-						imgpath = curr.getData();
-						prompt = next.getData();
-					}
-					else {
-						imgpath = next.getData();
-						prompt = curr.getData();
-					}
-					File file = new File(imgpath);
-					Uri uri = Uri.fromFile(file);
-					img.setImageURI(uri);
-					
-					txt.setText(prompt);
-				}
+			if(c.getType().equals("text")){
+				TextView text = new TextView(this);
+				text.setText(c.getData());
+				v.addView(text);
 			}
+			else if(c.getType().equals("image")){
+				ImageView img = new ImageView(this);
+				File file = new File(c.getData());
+				Uri uri = Uri.fromFile(file);
+				img.setImageURI(uri);
+				v.addView(img);
+			}
+			else{
+				System.out.println(j+" unknown:["+c.getType()+"]");
+			}
+			lay.addView(v);
+		}
+		
+		done.setOnClickListener(new OnClickListener(){
 
 			@Override
-			public void onStartTrackingTouch(SeekBar arg0) {
+			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
 				
 			}
-
-			@Override
-			public void onStopTrackingTouch(SeekBar arg0) {
-				// TODO Auto-generated method stub
-				
-			}
+			
 		});
 	}
 }

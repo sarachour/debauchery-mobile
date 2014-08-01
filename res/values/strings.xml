@@ -2,7 +2,13 @@
 <resources>
 
     <string name="app_name">Debauchery</string>
-    <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="action_review_prompt">Review</string>
+    <string name="action_done">Done</string>
+    <string name="action_start">Start</string>
+    <string name="default_nplayers">3</string>
+    <string name="default_prompt">Kobe Bryant</string>
+    <string name="label_ask_initial_prompt">Please choose a starting phrase:</string>
+    <string name="label_ask_nplayers">How many players?</string>
 
 </resources>

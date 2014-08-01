@@ -6,26 +6,27 @@
     android:orientation="vertical"
     tools:context=".DescribeActivity" >
 
+    <EditText
+        android:id="@+id/dv_describe"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.37"
+        android:ems="10"
+        android:text="@string/default_prompt" >
+
+        <requestFocus />
+    </EditText>
+
     <ImageView
         android:id="@+id/dv_image"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0.84" />
 
-    <EditText
-        android:id="@+id/dv_describe"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.37"
-        android:ems="10" >
-
-        <requestFocus />
-    </EditText>
-
     <Button
         android:id="@+id/dv_done"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Done" />
+        android:text="@string/action_done" />
 
 </LinearLayout>

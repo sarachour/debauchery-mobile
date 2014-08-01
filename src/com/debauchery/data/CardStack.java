@@ -18,6 +18,9 @@ public class CardStack implements Parcelable {
 			this.data = data;
 			this.type = type;
 		}
+		public String getType(){
+			return type;
+		}
 		public String getData(){	
 			return data;
 		}

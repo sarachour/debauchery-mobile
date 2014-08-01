@@ -27,7 +27,6 @@ public class DescribeActivity extends ActionBarActivity {
 		
 		ImageView img = (ImageView) findViewById(R.id.dv_image);
 		Button done = (Button) findViewById(R.id.dv_done);
-		EditText text = (EditText) findViewById(R.id.dv_describe);
 		
 		System.out.println(path);
 		File file = new File(path);

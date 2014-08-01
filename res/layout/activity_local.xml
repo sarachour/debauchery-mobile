@@ -10,20 +10,21 @@
         android:id="@+id/lv_label_1"
         android:layout_width="249dp"
         android:layout_height="wrap_content"
-        android:text="Please choose a word or phrase:" />
+        android:text="@string/label_ask_initial_prompt" />
 
     <EditText
         android:id="@+id/lv_prompt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0.11"
-        android:ems="10" />
+        android:ems="10"
+        android:text="@string/default_prompt" />
 
     <TextView
         android:id="@+id/lv_label_2"
         android:layout_width="249dp"
         android:layout_height="wrap_content"
-        android:text="How many people are playing?" />
+        android:text="@string/label_ask_nplayers" />
 
     <EditText
         android:id="@+id/lv_nplayers"
@@ -31,28 +32,12 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="number"
-        android:text="2" />
+        android:text="@string/default_nplayers" />
 
     <Button
         android:id="@+id/lv_start"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Start" />
-
-    <EditText
-        android:id="@+id/dv_describe"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.37"
-        android:ems="10" >
-
-        <requestFocus />
-    </EditText>
-
-    <Button
-        android:id="@+id/dv_done"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Done" />
+        android:text="@string/action_start" />
 
 </LinearLayout>

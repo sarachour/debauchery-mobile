@@ -858,10 +858,11 @@ containing a value of this type.
         public static final int abc_split_action_bar_is_narrow=0x7f060002;
     }
     public static final class color {
-        public static final int abc_search_url_text_holo=0x7f070003;
+        public static final int abc_search_url_text_holo=0x7f070004;
         public static final int abc_search_url_text_normal=0x7f070000;
         public static final int abc_search_url_text_pressed=0x7f070002;
         public static final int abc_search_url_text_selected=0x7f070001;
+        public static final int inset_color=0x7f070003;
     }
     public static final class dimen {
         /**  Default height of an action bar. 
@@ -1106,9 +1107,9 @@ containing a value of this type.
         public static final int dialog=0x7f05000e;
         public static final int disableHome=0x7f050008;
         public static final int dropdown=0x7f05000f;
-        public static final int dv_describe=0x7f05003e;
+        public static final int dv_describe=0x7f05003d;
         public static final int dv_done=0x7f05003f;
-        public static final int dv_image=0x7f05003d;
+        public static final int dv_image=0x7f05003e;
         public static final int edit_query=0x7f050030;
         public static final int end=0x7f050013;
         public static final int expand_activities_button=0x7f050026;
@@ -1135,10 +1136,10 @@ containing a value of this type.
         public static final int progress_circular=0x7f050018;
         public static final int progress_horizontal=0x7f050019;
         public static final int radio=0x7f05002f;
+        public static final int rv_display=0x7f05004a;
+        public static final int rv_display_layout=0x7f05004b;
         public static final int rv_done=0x7f05004c;
-        public static final int rv_prompt=0x7f05004a;
-        public static final int rv_seek=0x7f050049;
-        public static final int rv_sketch=0x7f05004b;
+        public static final int rv_label_1=0x7f050049;
         public static final int search_badge=0x7f050032;
         public static final int search_bar=0x7f050031;
         public static final int search_button=0x7f050033;
@@ -1263,9 +1264,15 @@ containing a value of this type.
         /**  Description of a share target (both in the list of such or the default share button) in a ShareActionProvider (share UI). [CHAR LIMIT=NONE] 
          */
         public static final int abc_shareactionprovider_share_with_application=0x7f0a000b;
-        public static final int action_settings=0x7f0a000f;
+        public static final int action_done=0x7f0a0010;
+        public static final int action_review_prompt=0x7f0a000f;
+        public static final int action_settings=0x7f0a000e;
+        public static final int action_start=0x7f0a0011;
         public static final int app_name=0x7f0a000d;
-        public static final int hello_world=0x7f0a000e;
+        public static final int default_nplayers=0x7f0a0012;
+        public static final int default_prompt=0x7f0a0013;
+        public static final int label_ask_initial_prompt=0x7f0a0014;
+        public static final int label_ask_nplayers=0x7f0a0015;
     }
     public static final class style {
         /** 
@@ -1294,6 +1301,7 @@ containing a value of this type.
  All customizations that are NOT specific to a particular API-level can go here. 
          */
         public static final int AppTheme=0x7f0b008c;
+        public static final int InsetStyle=0x7f0b008d;
         /**  Mimic text appearance in select_dialog_item.xml 
          */
         public static final int TextAppearance_AppCompat_Base_CompactMenu_Dialog=0x7f0b0063;

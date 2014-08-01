@@ -16,5 +16,11 @@
     <style name="AppTheme" parent="AppBaseTheme">
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>
+    <style name="InsetStyle" parent="AppTheme">
+        <item name="android:colorBackground">@color/inset_color</item>
+        <item name="android:windowBackground">@color/inset_color</item>
+        <item name="android:background">@color/inset_color</item>
+    </style>
+    <color name="inset_color">#FF444444</color>
 
 </resources>
