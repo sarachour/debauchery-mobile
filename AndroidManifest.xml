@@ -22,10 +22,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.debauchery.DrawActivity"></activity>
-        <activity android:name="com.debauchery.DescribeActivity"></activity>
-        <activity android:name="com.debauchery.LocalGameActivity"></activity>
-        <activity android:name="com.debauchery.ReviewActivity"></activity>
+        <activity android:name="com.debauchery.DrawActivity" android:noHistory="true"></activity>
+        <activity android:name="com.debauchery.DescribeActivity" android:noHistory="true"></activity>
+        <activity android:name="com.debauchery.LocalGameActivity" android:noHistory="true"></activity>
+        <activity android:name="com.debauchery.ReviewActivity" android:noHistory="true"></activity>
     </application>
 
 </manifest>

@@ -17,7 +17,6 @@
 
     <com.debauchery.sketch.SketchPad
         android:id="@+id/cv_canv"
-        style="@style/InsetStyle"
         android:layout_width="match_parent"
         android:layout_height="242dp" />
 

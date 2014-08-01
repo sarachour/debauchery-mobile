@@ -41,10 +41,9 @@ public class ReviewActivity extends Activity {
 		lay.removeAllViews();
 		for(int j=0; j < cards.getNumPlayers(); j++){
 			Card c = cards.get(j);
-			FrameLayout v = new FrameLayout(this);
-			v.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
+			LinearLayout v = new LinearLayout(this, null, R.style.CardStyle);
+			v.setOrientation(LinearLayout.HORIZONTAL);
 			v.setTag(j);
-			v.setBackgroundColor(Color.GREEN);
 			v.setPadding(10, 10, 10, 10);
 			
 			if(c.getType().equals("text")){
