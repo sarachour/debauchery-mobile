@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/cardv_card_img"
+    style="@style/ReviewWedgeStyle"
+    android:orientation="horizontal" >
+
+    <ImageView
+        android:id="@+id/cardv_img"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="15dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/abc_list_focused_holo" />
+
+</RelativeLayout>

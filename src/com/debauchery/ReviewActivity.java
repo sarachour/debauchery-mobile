@@ -12,6 +12,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.TypedValue;
 import android.view.DragEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -23,6 +24,7 @@ import android.widget.FrameLayout;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
@@ -37,31 +39,31 @@ public class ReviewActivity extends Activity {
 		
 		final LinearLayout lay = (LinearLayout) findViewById(R.id.rv_display_layout);
 		final Button done = (Button) findViewById(R.id.rv_done);
+		final int height = (int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 150, getResources().getDisplayMetrics());
+
 		
-		lay.removeAllViews();
+		//lay.removeAllViews();
 		for(int j=0; j < cards.getNumPlayers(); j++){
 			Card c = cards.get(j);
-			LinearLayout v = new LinearLayout(this, null, R.style.CardStyle);
-			v.setOrientation(LinearLayout.HORIZONTAL);
-			v.setTag(j);
-			v.setPadding(10, 10, 10, 10);
-			
 			if(c.getType().equals("text")){
-				TextView text = new TextView(this);
-				text.setText(c.getData());
-				v.addView(text);
+				View v = getLayoutInflater().inflate(R.layout.comp_card_txt, null);
+				TextView txt = (TextView) v.findViewById(R.id.cardv_txt);
+				v.setTag(j);
+				txt.setText(c.getData());
+				lay.addView(v);
 			}
 			else if(c.getType().equals("image")){
-				ImageView img = new ImageView(this);
+				View v = getLayoutInflater().inflate(R.layout.comp_card_img, null);
+				ImageView img = (ImageView) v.findViewById(R.id.cardv_img);
+				v.setTag(j);
 				File file = new File(c.getData());
 				Uri uri = Uri.fromFile(file);
 				img.setImageURI(uri);
-				v.addView(img);
+				lay.addView(v);
 			}
 			else{
 				System.out.println(j+" unknown:["+c.getType()+"]");
 			}
-			lay.addView(v);
 		}
 		
 		done.setOnClickListener(new OnClickListener(){

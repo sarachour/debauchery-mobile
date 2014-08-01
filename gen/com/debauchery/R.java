@@ -1094,10 +1094,14 @@ containing a value of this type.
         public static final int action_menu_divider=0x7f050016;
         public static final int action_menu_presenter=0x7f050017;
         public static final int action_mode_close_button=0x7f050024;
-        public static final int action_settings=0x7f050051;
+        public static final int action_settings=0x7f050055;
         public static final int activity_chooser_view_content=0x7f050025;
         public static final int always=0x7f05000b;
         public static final int beginning=0x7f050011;
+        public static final int cardv_card_img=0x7f050051;
+        public static final int cardv_card_txt=0x7f050053;
+        public static final int cardv_img=0x7f050052;
+        public static final int cardv_txt=0x7f050054;
         public static final int checkbox=0x7f05002d;
         public static final int collapseActionView=0x7f05000d;
         public static final int container=0x7f050045;
@@ -1221,7 +1225,9 @@ containing a value of this type.
         public static final int activity_main=0x7f03001a;
         public static final int activity_review=0x7f03001b;
         public static final int activity_sketch=0x7f03001c;
-        public static final int support_simple_spinner_dropdown_item=0x7f03001d;
+        public static final int comp_card_img=0x7f03001d;
+        public static final int comp_card_txt=0x7f03001e;
+        public static final int support_simple_spinner_dropdown_item=0x7f03001f;
     }
     public static final class menu {
         public static final int main=0x7f0c0000;
@@ -1306,6 +1312,7 @@ containing a value of this type.
         public static final int AppTheme=0x7f0b008c;
         public static final int CardStyle=0x7f0b008e;
         public static final int InsetStyle=0x7f0b008d;
+        public static final int ReviewWedgeStyle=0x7f0b008f;
         /**  Mimic text appearance in select_dialog_item.xml 
          */
         public static final int TextAppearance_AppCompat_Base_CompactMenu_Dialog=0x7f0b0063;
