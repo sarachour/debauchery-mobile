@@ -24,6 +24,8 @@
         </activity>
         <activity android:name="com.debauchery.DrawActivity"></activity>
         <activity android:name="com.debauchery.DescribeActivity"></activity>
+        <activity android:name="com.debauchery.LocalGameActivity"></activity>
+        <activity android:name="com.debauchery.ReviewActivity"></activity>
     </application>
 
 </manifest>

@@ -2,6 +2,7 @@ package com.debauchery;
 
 import java.io.File;
 
+import com.debauchery.data.CardStack;
 import com.debauchery.sketch.SketchPad;
 
 import android.content.Intent;
@@ -16,10 +17,11 @@ import android.widget.EditText;
 import android.widget.ImageView;
 
 public class DescribeActivity extends ActionBarActivity {
+	CardStack cards;
 	protected void onCreate(Bundle savedInstanceState) {
 		Intent i = getIntent();
 		String path = i.getStringExtra("picture");
-		
+		cards = (CardStack) i.getParcelableExtra("stack");
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_describe);
 		
@@ -37,11 +39,19 @@ public class DescribeActivity extends ActionBarActivity {
 			@Override
 			public void onClick(View v) {
 				EditText text = (EditText) findViewById(R.id.dv_describe);
-				// TODO Auto-generated method stub
-				Intent i = new Intent(getApplicationContext(), DrawActivity.class);
 				String textf = text.getText().toString();
-				i.putExtra("prompt", textf);
-				startActivity(i);
+				cards.addTextCard(textf);
+				if(cards.isEnd()){
+					Intent i = new Intent(getApplicationContext(), ReviewActivity.class);
+					i.putExtra("stack", cards);
+					startActivity(i);
+				}
+				else{
+					Intent i = new Intent(getApplicationContext(), DrawActivity.class);
+					i.putExtra("prompt", textf);
+					i.putExtra("stack", cards);
+					startActivity(i);
+				}
 			}
 			
 		});

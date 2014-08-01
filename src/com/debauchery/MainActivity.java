@@ -16,24 +16,13 @@ public class MainActivity extends ActionBarActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
-		final Button draw = (Button) findViewById(R.id.main_draw);
-		final Button describe = (Button) findViewById(R.id.main_describe);
+		final Button local = (Button) findViewById(R.id.main_local);
 		
-		draw.setOnClickListener(new OnClickListener(){
+		local.setOnClickListener(new OnClickListener(){
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Intent i = new Intent(getApplicationContext(), DrawActivity.class);
-				i.putExtra("prompt", "a blue walrus");
-				startActivity(i);
-			}
-		});
-		describe.setOnClickListener(new OnClickListener(){
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				Intent i = new Intent(getApplicationContext(), DescribeActivity.class);
-				i.putExtra("picture", "a blue walrus");
+				Intent i = new Intent(getApplicationContext(), LocalGameActivity.class);
 				startActivity(i);
 			}
 		});

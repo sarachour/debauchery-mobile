@@ -7,25 +7,11 @@
     tools:context="com.debauchery.MainActivity"
     tools:ignore="MergeRootFrame" >
 
-   
-
     <Button
-        android:id="@+id/main_describe"
+        android:id="@+id/main_local"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Describe Drawing" />
-
-    <Button
-        android:id="@+id/main_draw"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Draw Description" />
-
-    <Button
-        android:id="@+id/main_host"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Host Game" />
+        android:text="Local Game" />
 
     <Button
         android:id="@+id/main_join"
@@ -34,9 +20,9 @@
         android:text="Join Game" />
 
     <Button
-        android:id="@+id/main_playback"
+        android:id="@+id/main_host"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Playback" />
+        android:text="Host Game" />
     
 </LinearLayout>
