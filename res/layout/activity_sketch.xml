@@ -1,6 +1,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/describe_view"
+    style="@style/CardStyle"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -10,14 +11,15 @@
         android:id="@+id/cv_prompt"
         android:layout_width="match_parent"
         android:layout_height="45dp"
-        android:layout_weight="0.07"
+        android:layout_weight="0.20"
         android:text="@string/default_prompt"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <com.debauchery.sketch.SketchPad
         android:id="@+id/cv_canv"
+        style="@style/InsetStyle"
         android:layout_width="match_parent"
-        android:layout_height="334dp" />
+        android:layout_height="242dp" />
 
     <Button
         android:id="@+id/cv_done"

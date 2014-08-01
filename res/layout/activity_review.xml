@@ -1,6 +1,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/describe_view"
+    android:id="@+id/review_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -16,10 +16,10 @@
 
     <ScrollView
         android:id="@+id/rv_display"
+        style="@style/InsetStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="0.05"
-        android:background="@style/InsetStyle" >
+        android:layout_weight="0.05" >
 
         <LinearLayout
             android:id="@+id/rv_display_layout"
