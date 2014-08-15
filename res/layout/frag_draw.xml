@@ -16,7 +16,8 @@
     <SlidingDrawer
         android:id="@+id/slidingDrawer1"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="247dp"
+        android:layout_gravity="bottom"
         android:content="@+id/content"
         android:handle="@+id/fd_show_controls" >
 

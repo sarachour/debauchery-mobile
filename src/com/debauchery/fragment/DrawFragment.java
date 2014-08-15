@@ -18,7 +18,6 @@ import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
 
 public class DrawFragment extends Fragment {
-	DrawControlsFragment controls;
 	SketchPad sketchpad;
 	View view;
 	public DrawFragment() {
@@ -78,8 +77,9 @@ public class DrawFragment extends Fragment {
 			@Override
 			public void onProgressChanged(SeekBar arg0, int arg1, boolean arg2) {
 				// TODO Auto-generated method stub
-				sketchpad.setThickness(arg1);
-				label.setText(""+arg1);
+				int actual = (int) (((float) arg1)/100.0*50);
+				sketchpad.setThickness(actual);
+				label.setText(""+actual);
 			}
 
 			@Override
@@ -98,12 +98,12 @@ public class DrawFragment extends Fragment {
 			
 		});
 		color.setOnColorChangedListener(new OnColorChangedListener(){
-
+			View swatch = (View) view.findViewById(R.id.fdc_colorpicker_swatch);
 			@Override
 			public void colorChanged(int color) {
 				// TODO Auto-generated method stub
-				System.out.println(color);
 				sketchpad.setColor(color);
+				swatch.setBackgroundColor(color);
 			}
 			
 		});
@@ -118,8 +118,6 @@ public class DrawFragment extends Fragment {
 		view = v;
 		sketchpad = (SketchPad) v.findViewById(R.id.fd_sketchpad);
 		setupControls();
-		System.out.println("CONTROLS");
-		System.out.println(controls);
 		return v;
 	}
 }
