@@ -1,5 +1,6 @@
 package com.debauchery;
 
+import fragment.DrawFragment;
 import android.support.v7.app.ActionBarActivity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -26,6 +27,17 @@ public class MainActivity extends ActionBarActivity {
 				startActivity(i);
 			}
 		});
+		
+		final Button join = (Button) findViewById(R.id.main_join);
+		join.setOnClickListener(new OnClickListener(){
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Intent i = new Intent(getApplicationContext(), DrawFragment.class);
+				startActivity(i);
+			}
+		});
+		
 	}
 
 	@Override

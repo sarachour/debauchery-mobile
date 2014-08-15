@@ -1078,11 +1078,25 @@ containing a value of this type.
         public static final int abc_textfield_searchview_holo_light=0x7f020054;
         public static final int abc_textfield_searchview_right_holo_dark=0x7f020055;
         public static final int abc_textfield_searchview_right_holo_light=0x7f020056;
-        public static final int card_shape=0x7f020057;
-        public static final int ic_launcher=0x7f020058;
-        public static final int inset_shape=0x7f020059;
+        public static final int brush=0x7f020057;
+        public static final int card_shape=0x7f020058;
+        public static final int clear=0x7f020059;
+        public static final int fill=0x7f02005a;
+        public static final int ic_launcher=0x7f02005b;
+        public static final int inset_shape=0x7f02005c;
+        public static final int redo=0x7f02005d;
+        public static final int undo=0x7f02005e;
     }
     public static final class id {
+        public static final int FrameLayout1=0x7f050055;
+        public static final int ImageButton01=0x7f050060;
+        public static final int ImageButton02=0x7f05005f;
+        public static final int ImageButton03=0x7f05005e;
+        public static final int ImageButton04=0x7f05005c;
+        public static final int ImageButton05=0x7f05005d;
+        public static final int RelativeLayout1=0x7f05005a;
+        public static final int TextView01=0x7f050061;
+        public static final int TextView02=0x7f05005b;
         public static final int action_bar=0x7f05001c;
         public static final int action_bar_activity_content=0x7f050015;
         public static final int action_bar_container=0x7f05001b;
@@ -1094,7 +1108,7 @@ containing a value of this type.
         public static final int action_menu_divider=0x7f050016;
         public static final int action_menu_presenter=0x7f050017;
         public static final int action_mode_close_button=0x7f050024;
-        public static final int action_settings=0x7f050055;
+        public static final int action_settings=0x7f050064;
         public static final int activity_chooser_view_content=0x7f050025;
         public static final int always=0x7f05000b;
         public static final int beginning=0x7f050011;
@@ -1105,6 +1119,7 @@ containing a value of this type.
         public static final int checkbox=0x7f05002d;
         public static final int collapseActionView=0x7f05000d;
         public static final int container=0x7f050045;
+        public static final int content=0x7f050057;
         public static final int cv_canv=0x7f05004f;
         public static final int cv_done=0x7f050050;
         public static final int cv_prompt=0x7f05004e;
@@ -1120,6 +1135,8 @@ containing a value of this type.
         public static final int end=0x7f050013;
         public static final int expand_activities_button=0x7f050026;
         public static final int expanded_menu=0x7f05002c;
+        public static final int fragment1=0x7f050059;
+        public static final int handle=0x7f050058;
         public static final int home=0x7f050014;
         public static final int homeAsUp=0x7f050005;
         public static final int icon=0x7f05002a;
@@ -1157,13 +1174,16 @@ containing a value of this type.
         public static final int search_plate=0x7f050036;
         public static final int search_src_text=0x7f050037;
         public static final int search_voice_btn=0x7f05003b;
+        public static final int seekBar1=0x7f050062;
         public static final int shortcut=0x7f05002e;
         public static final int showCustom=0x7f050007;
         public static final int showHome=0x7f050004;
         public static final int showTitle=0x7f050006;
+        public static final int slidingDrawer1=0x7f050056;
         public static final int split_action_bar=0x7f05001e;
         public static final int submit_area=0x7f050039;
         public static final int tabMode=0x7f050002;
+        public static final int textView1=0x7f050063;
         public static final int title=0x7f05002b;
         public static final int top_action_bar=0x7f050020;
         public static final int up=0x7f050021;
@@ -1227,7 +1247,9 @@ containing a value of this type.
         public static final int activity_sketch=0x7f03001c;
         public static final int comp_card_img=0x7f03001d;
         public static final int comp_card_txt=0x7f03001e;
-        public static final int support_simple_spinner_dropdown_item=0x7f03001f;
+        public static final int frag_draw=0x7f03001f;
+        public static final int frag_draw_controls=0x7f030020;
+        public static final int support_simple_spinner_dropdown_item=0x7f030021;
     }
     public static final class menu {
         public static final int main=0x7f0c0000;
@@ -1313,6 +1335,7 @@ containing a value of this type.
         public static final int CardStyle=0x7f0b008e;
         public static final int InsetStyle=0x7f0b008d;
         public static final int ReviewWedgeStyle=0x7f0b008f;
+        public static final int SubHeaderWhiteTextStyle=0x7f0b0090;
         /**  Mimic text appearance in select_dialog_item.xml 
          */
         public static final int TextAppearance_AppCompat_Base_CompactMenu_Dialog=0x7f0b0063;
@@ -1363,6 +1386,7 @@ containing a value of this type.
         public static final int TextAppearance_AppCompat_Widget_PopupMenu_Small=0x7f0b002f;
         public static final int TextAppearance_Widget_AppCompat_Base_ExpandedMenu_Item=0x7f0b0062;
         public static final int TextAppearance_Widget_AppCompat_ExpandedMenu_Item=0x7f0b0028;
+        public static final int TextStyle=0x7f0b0092;
         /**  Themes in the "Theme.AppCompat" family will contain an action bar by default.
          If Holo themes are available on the current platform version they will be used.
          A limited Holo-styled action bar will be provided on platform versions older
@@ -1421,6 +1445,7 @@ containing a value of this type.
         /**  Base platform-dependent theme providing a light-themed activity. 
          */
         public static final int Theme_Base_Light=0x7f0b007f;
+        public static final int WhiteTextStyle=0x7f0b0091;
         /**  Styles in here can be extended for customisation in your application. Each utilises
          one of the Base styles. If Holo themes are available on the current platform version
          they will be used instead of the compat styles. 
