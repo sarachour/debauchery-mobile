@@ -1,4 +1,4 @@
-package fragment;
+package com.debauchery.fragment;
 
 import com.debauchery.R;
 import com.debauchery.R.layout;
@@ -10,9 +10,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 public class DrawFragment extends Fragment {
-	
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-        Bundle savedInstanceState) {
+	public DrawFragment(){
+		
+	}
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.frag_draw, container, false);
     }

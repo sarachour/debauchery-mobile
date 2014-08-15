@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.graphics.LinearGradient;
 import android.graphics.Paint;
 import android.graphics.Shader;
+import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -22,22 +23,8 @@ public class ColorPickerView extends View {
 	private int[] mMainColors = new int[65536];
 	private OnColorChangedListener mListener;
 
-	ColorPickerView(Context c, OnColorChangedListener l, int color,
-			int defaultColor) {
-		super(c);
-		mListener = l;
-		mDefaultColor = defaultColor;
-
-		// Get the current hue from the current color and update the main
-		// color field
-		float[] hsv = new float[3];
-		Color.colorToHSV(color, hsv);
-		mCurrentHue = hsv[0];
-		updateMainColors();
-
-		mCurrentColor = color;
-
-		// Initialize the colors of the hue slider bar
+	private void init() {
+		
 		int index = 0;
 		for (float i = 0; i < 256; i += 256 / 42) // Red (#f00) to pink
 		// (#f0f)
@@ -80,6 +67,23 @@ public class ColorPickerView extends View {
 		mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
 		mPaint.setTextAlign(Paint.Align.CENTER);
 		mPaint.setTextSize(12);
+		
+	}
+
+	public ColorPickerView(Context context, AttributeSet attrs) {
+		super(context, attrs);
+		this.init();
+		/*
+		 * mListener = l; mDefaultColor = defaultColor;
+		 * 
+		 * // Get the current hue from the current color and update the main //
+		 * color field float[] hsv = new float[3]; Color.colorToHSV(color, hsv);
+		 * mCurrentHue = hsv[0]; updateMainColors();
+		 * 
+		 * mCurrentColor = color;
+		 */
+		// Initialize the colors of the hue slider bar
+
 	}
 
 	// Get the current selected color from the hue bar
@@ -206,15 +210,13 @@ public class ColorPickerView extends View {
 		else
 			mPaint.setColor(Color.BLACK);
 		canvas.drawText("Pick", 202, 340, mPaint);
+		
 	}
 
-	@Override
-	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-		setMeasuredDimension(276, 366);
-	}
 
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
+		
 		if (event.getAction() != MotionEvent.ACTION_DOWN)
 			return true;
 		float x = event.getX();
@@ -261,7 +263,7 @@ public class ColorPickerView extends View {
 		// listener with the default color
 		if (x > 138 && x < 266 && y > 316 && y < 356)
 			mListener.colorChanged("", mDefaultColor);
-
+		 
 		return true;
 	}
 }

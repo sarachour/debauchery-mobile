@@ -54,7 +54,7 @@
                 android:src="@drawable/redo" />
 
             <ImageButton
-                android:id="@+id/ImageButton01"
+                android:id="@+id/cv_sel_prompt"
                 android:layout_width="wrap_content"
                 android:layout_height="54dp"
                 android:layout_weight="0.08"
@@ -82,6 +82,11 @@
             android:layout_margin="10dp"
             android:text="Pen Color"
             android:textAppearance="@style/SubHeaderWhiteTextStyle" />
+
+        <com.debauchery.sketch.ColorPickerView
+            android:id="@+id/colorPickerView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
 </LinearLayout>
 

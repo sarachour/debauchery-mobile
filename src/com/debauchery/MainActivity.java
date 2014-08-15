@@ -1,6 +1,5 @@
 package com.debauchery;
 
-import fragment.DrawFragment;
 import android.support.v7.app.ActionBarActivity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -33,7 +32,7 @@ public class MainActivity extends ActionBarActivity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Intent i = new Intent(getApplicationContext(), DrawFragment.class);
+				Intent i = new Intent(getApplicationContext(), DrawActivity.class);
 				startActivity(i);
 			}
 		});
