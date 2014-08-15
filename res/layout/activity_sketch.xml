@@ -16,6 +16,15 @@
         android:paddingTop="5dp" >
 
         <ImageButton
+            android:id="@+id/cv_sel_prompt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:cropToPadding="false"
+            android:padding="0dp"
+            android:src="@drawable/inset_shape" />
+
+        <ImageButton
             android:id="@+id/cv_sel_draw"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -24,14 +33,6 @@
             android:scaleType="center"
             android:src="@drawable/card_shape" />
 
-        <ImageButton
-            android:id="@+id/cv_sel_prompt"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:cropToPadding="false"
-            android:padding="0dp"
-            android:src="@drawable/inset_shape" />
     </LinearLayout>
 
     <ViewSwitcher
@@ -69,7 +70,7 @@
             android:padding="12dp" >
 
             <fragment
-                android:id="@+id/cv_sketchpad"
+                android:id="@+id/fd_sketchpad"
                 android:name="com.debauchery.fragment.DrawFragment"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

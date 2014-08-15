@@ -9,7 +9,7 @@
     tools:context=".DrawFragment" >
 
     <com.debauchery.sketch.SketchPad
-        android:id="@+id/cv_sketchpad"
+        android:id="@+id/fd_sketchpad"
         android:layout_width="fill_parent"
         android:layout_height="match_parent" />
 
@@ -18,10 +18,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:content="@+id/content"
-        android:handle="@+id/handle" >
+        android:handle="@+id/fd_show_controls" >
 
         <Button
-            android:id="@+id/handle"
+            android:id="@+id/fd_show_controls"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Handle" />
@@ -32,11 +32,10 @@
             android:layout_height="match_parent"
             android:orientation="vertical" >
 
-            <fragment
-                android:id="@+id/fragment1"
-                android:name="com.debauchery.fragment.DrawControlsFragment"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+            <include
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                layout="@layout/frag_draw_controls" />
 
         </LinearLayout>
     </SlidingDrawer>

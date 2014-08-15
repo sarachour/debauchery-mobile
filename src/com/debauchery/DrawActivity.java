@@ -80,7 +80,7 @@ public class DrawActivity extends ActionBarActivity {
 			@Override
 			public void onClick(View v) {
 				//update
-				SketchPad canv =  (SketchPad) findViewById(R.id.cv_sketchpad);
+				SketchPad canv =  (SketchPad) findViewById(R.id.fd_sketchpad);
 				Bitmap img = canv.getImage();
 				String path = Globals.saveInternal(getApplicationContext(), Globals.IMAGE_PATH, cards.getImageName(), img);
 				
