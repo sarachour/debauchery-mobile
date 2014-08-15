@@ -5,11 +5,40 @@
     style="@style/InsetStyle"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="0dp"
     tools:context=".DrawFragment" >
 
     <com.debauchery.sketch.SketchPad
         android:id="@+id/cv_sketchpad"
         android:layout_width="fill_parent"
         android:layout_height="match_parent" />
+
+    <SlidingDrawer
+        android:id="@+id/slidingDrawer1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:content="@+id/content"
+        android:handle="@+id/handle" >
+
+        <Button
+            android:id="@+id/handle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Handle" />
+
+        <LinearLayout
+            android:id="@+id/content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+
+            <fragment
+                android:id="@+id/fragment1"
+                android:name="com.debauchery.fragment.DrawControlsFragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </LinearLayout>
+    </SlidingDrawer>
 
 </FrameLayout>

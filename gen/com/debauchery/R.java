@@ -1089,13 +1089,13 @@ containing a value of this type.
     }
     public static final class id {
         public static final int FrameLayout1=0x7f05005a;
-        public static final int ImageButton02=0x7f050060;
-        public static final int ImageButton03=0x7f05005f;
-        public static final int ImageButton04=0x7f05005d;
-        public static final int ImageButton05=0x7f05005e;
-        public static final int RelativeLayout1=0x7f05005b;
-        public static final int TextView01=0x7f050061;
-        public static final int TextView02=0x7f05005c;
+        public static final int ImageButton02=0x7f050064;
+        public static final int ImageButton03=0x7f050063;
+        public static final int ImageButton04=0x7f050061;
+        public static final int ImageButton05=0x7f050062;
+        public static final int RelativeLayout1=0x7f05005f;
+        public static final int TextView01=0x7f050065;
+        public static final int TextView02=0x7f050060;
         public static final int action_bar=0x7f05001c;
         public static final int action_bar_activity_content=0x7f050015;
         public static final int action_bar_container=0x7f05001b;
@@ -1107,7 +1107,7 @@ containing a value of this type.
         public static final int action_menu_divider=0x7f050016;
         public static final int action_menu_presenter=0x7f050017;
         public static final int action_mode_close_button=0x7f050024;
-        public static final int action_settings=0x7f050065;
+        public static final int action_settings=0x7f050069;
         public static final int activity_chooser_view_content=0x7f050025;
         public static final int always=0x7f05000b;
         public static final int beginning=0x7f050011;
@@ -1117,8 +1117,9 @@ containing a value of this type.
         public static final int cardv_txt=0x7f050059;
         public static final int checkbox=0x7f05002d;
         public static final int collapseActionView=0x7f05000d;
-        public static final int colorPickerView1=0x7f050064;
+        public static final int colorPickerView1=0x7f050068;
         public static final int container=0x7f050045;
+        public static final int content=0x7f05005c;
         public static final int cv_done=0x7f050055;
         public static final int cv_prompt=0x7f050052;
         public static final int cv_prompt_container=0x7f050051;
@@ -1139,6 +1140,8 @@ containing a value of this type.
         public static final int end=0x7f050013;
         public static final int expand_activities_button=0x7f050026;
         public static final int expanded_menu=0x7f05002c;
+        public static final int fragment1=0x7f05005e;
+        public static final int handle=0x7f05005d;
         public static final int home=0x7f050014;
         public static final int homeAsUp=0x7f050005;
         public static final int icon=0x7f05002a;
@@ -1176,15 +1179,16 @@ containing a value of this type.
         public static final int search_plate=0x7f050036;
         public static final int search_src_text=0x7f050037;
         public static final int search_voice_btn=0x7f05003b;
-        public static final int seekBar1=0x7f050062;
+        public static final int seekBar1=0x7f050066;
         public static final int shortcut=0x7f05002e;
         public static final int showCustom=0x7f050007;
         public static final int showHome=0x7f050004;
         public static final int showTitle=0x7f050006;
+        public static final int slidingDrawer1=0x7f05005b;
         public static final int split_action_bar=0x7f05001e;
         public static final int submit_area=0x7f050039;
         public static final int tabMode=0x7f050002;
-        public static final int textView1=0x7f050063;
+        public static final int textView1=0x7f050067;
         public static final int title=0x7f05002b;
         public static final int top_action_bar=0x7f050020;
         public static final int up=0x7f050021;
