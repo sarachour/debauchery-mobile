@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import com.debauchery.data.CardStack;
 import com.debauchery.sketch.SketchPad;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.Intent;
@@ -81,6 +82,16 @@ public class DrawActivity extends ActionBarActivity {
 			public void onClick(View v) {
 				//update
 				SketchPad canv =  (SketchPad) findViewById(R.id.fd_sketchpad);
+				
+				
+				if(canv.getWidth() <= 0 || canv.getHeight() <= 0){
+					new AlertDialog.Builder(v.getContext())
+				    .setTitle("No Drawing Found")
+				    .setMessage("Please draw something.")
+				    .setIcon(android.R.drawable.ic_dialog_alert)
+				     .show();
+					return;
+				}
 				Bitmap img = canv.getImage();
 				String path = Globals.saveInternal(getApplicationContext(), Globals.IMAGE_PATH, cards.getImageName(), img);
 				

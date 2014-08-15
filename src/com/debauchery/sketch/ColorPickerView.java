@@ -21,6 +21,7 @@ public class ColorPickerView extends View {
 	private Paint mPaint;
 	private Paint mCenterPaint;
 	private final int[] mColors;
+	private int[] mShades; //inner wheel with shades
 	private OnColorChangedListener mListener;
 	
 	public void setOnColorChangedListener(OnColorChangedListener l){
@@ -86,6 +87,7 @@ public class ColorPickerView extends View {
 	private static final int CENTER_X = 100;
 	private static final int CENTER_Y = 100;
 	private static final int CENTER_RADIUS = 32;
+	private static final int CENTER_INNER_RADIUS = 22;
 
 	private int ave(int s, int d, float p) {
 		return s + java.lang.Math.round(p * (d - s));
@@ -112,7 +114,10 @@ public class ColorPickerView extends View {
 
 		return Color.argb(a, r, g, b);
 	}
-
+	private void inspectColor(int color){
+		mCenterPaint.setColor(color);
+		
+	}
 	private static final float PI = 3.1415926f;
 
 	@Override
@@ -141,7 +146,8 @@ public class ColorPickerView extends View {
 				if (unit < 0) {
 					unit += 1;
 				}
-				mCenterPaint.setColor(interpColor(mColors, unit));
+				int color = interpColor(mColors, unit);
+				this.inspectColor(color);
 				invalidate();
 			}
 			break;
