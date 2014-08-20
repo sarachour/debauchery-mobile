@@ -15,6 +15,8 @@ public final class R {
         public static final int abc_slide_in_top=0x7f040003;
         public static final int abc_slide_out_bottom=0x7f040004;
         public static final int abc_slide_out_top=0x7f040005;
+        public static final int slide_in_right=0x7f040006;
+        public static final int slide_out_left=0x7f040007;
     }
     public static final class attr {
         /**  Custom divider drawable to use for elements in the action bar. 
@@ -1086,6 +1088,7 @@ containing a value of this type.
         public static final int inset_shape=0x7f02005c;
         public static final int redo=0x7f02005d;
         public static final int undo=0x7f02005e;
+        public static final int up=0x7f02005f;
     }
     public static final class id {
         public static final int FrameLayout1=0x7f05005a;

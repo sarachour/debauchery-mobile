@@ -21,11 +21,12 @@
         android:content="@+id/content"
         android:handle="@+id/fd_show_controls" >
 
-        <Button
+        <ImageButton
             android:id="@+id/fd_show_controls"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Handle" />
+            style="@style/InsetStyle"
+            android:layout_width="50dp"
+            android:layout_height="30dp"
+            android:src="@drawable/up" />
 
         <LinearLayout
             android:id="@+id/content"
@@ -36,7 +37,8 @@
             <include
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                layout="@layout/frag_draw_controls" />
+                layout="@layout/frag_draw_controls"
+                android:background="@drawable/up" />
 
         </LinearLayout>
     </SlidingDrawer>

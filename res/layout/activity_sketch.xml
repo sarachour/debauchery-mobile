@@ -81,8 +81,10 @@
 
     <Button
         android:id="@+id/cv_done"
+        style="@style/AppBaseTheme"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/action_done" />
+        android:text="@string/action_done"
+        android:textAppearance="@style/SubHeaderWhiteTextStyle" />
 
 </LinearLayout>
