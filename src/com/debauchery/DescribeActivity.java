@@ -7,6 +7,7 @@ import com.debauchery.gesture.OnSwipeTouchListener;
 import com.debauchery.gesture.TwoPanelFactory;
 import com.debauchery.sketch.SketchPad;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -52,6 +53,14 @@ public class DescribeActivity extends ActionBarActivity {
 			public void onClick(View v) {
 				EditText text = (EditText) findViewById(R.id.dv_describe);
 				String textf = text.getText().toString();
+				if(textf.length() == 0){
+					new AlertDialog.Builder(v.getContext())
+				    .setTitle("No Text Found")
+				    .setMessage("Please describe the drawing.")
+				    .setIcon(android.R.drawable.ic_dialog_alert)
+				     .show();
+					return;
+				}
 				cards.addTextCard(textf);
 				if(cards.isEnd()){
 					Intent i = new Intent(getApplicationContext(), ReviewActivity.class);
