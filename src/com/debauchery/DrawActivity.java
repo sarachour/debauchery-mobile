@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 
 import com.debauchery.data.CardStack;
 import com.debauchery.gesture.OnSwipeTouchListener;
+import com.debauchery.gesture.TwoPanelFactory;
 import com.debauchery.sketch.SketchPad;
 
 import android.app.AlertDialog;
@@ -40,103 +41,12 @@ public class DrawActivity extends ActionBarActivity {
 		that = this;
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_sketch);
-		ImageButton sel_prompt = (ImageButton) findViewById(R.id.cv_sel_prompt);
-		View prompt_view = (View) findViewById(R.id.cv_prompt_container);
-		ImageButton sel_draw = (ImageButton) findViewById(R.id.cv_sel_draw);
-		View canv_view = (View) findViewById(R.id.cv_sketch_container);
-		ViewSwitcher switcher = (ViewSwitcher) findViewById(R.id.cv_switcher);
-	
+		
 		final TextView prompt =  (TextView) findViewById(R.id.cv_prompt);
 		final Button done = (Button) findViewById(R.id.cv_done);
 		
 		
 		  
-		sel_draw.setOnClickListener(new OnClickListener(){
-			ViewSwitcher switcher = (ViewSwitcher) findViewById(R.id.cv_switcher);
-			Animation slide_in_right = AnimationUtils.loadAnimation(that,
-				    R.anim.slide_in_right);
-			Animation slide_out_left = AnimationUtils.loadAnimation(that,
-			    R.anim.slide_out_left);
-				  
-			@Override
-			//in right out left
-			public void onClick(View arg0) {
-				// TODO Auto-generated method stub
-				if(switcher.getNextView().getId() == R.id.cv_sketch_container){
-					switcher.setInAnimation(slide_in_right);
-					switcher.setOutAnimation(slide_out_left);
-					switcher.showNext();
-				}
-				
-				
-			}
-			
-		});
-		sel_prompt.setOnClickListener(new OnClickListener(){
-			ViewSwitcher switcher = (ViewSwitcher) findViewById(R.id.cv_switcher);
-			Animation slide_in_left = AnimationUtils.loadAnimation(that,
-				    android.R.anim.slide_in_left);
-			Animation slide_out_right = AnimationUtils.loadAnimation(that,
-			    android.R.anim.slide_out_right);
-		
-			@Override
-			public void onClick(View arg0) {
-				// TODO Auto-generated method stub
-				//in left, out right
-				if(switcher.getNextView().getId() == R.id.cv_prompt_container){
-					switcher.setInAnimation(slide_in_left);
-					switcher.setOutAnimation(slide_out_right);
-					switcher.showNext();
-				}
-					
-			}
-			
-		});
-		prompt_view.setOnTouchListener(new OnSwipeTouchListener(this) {
-			ViewSwitcher switcher = (ViewSwitcher) findViewById(R.id.cv_switcher);
-			Animation slide_in_right = AnimationUtils.loadAnimation(that,
-				    R.anim.slide_in_right);
-			Animation slide_out_left = AnimationUtils.loadAnimation(that,
-			    R.anim.slide_out_left);
-		
-		    public void onSwipeRight() {
-		       
-		    }
-		    public void onSwipeLeft() {
-		    	switcher.setInAnimation(slide_in_right);
-				switcher.setOutAnimation(slide_out_left);
-		    	switcher.showNext();
-		    }
-
-			@Override
-			public void onSwipeTop() {}
-			@Override
-			public void onSwipeBottom() {}
-		});
-		
-		canv_view.setOnTouchListener(new OnSwipeTouchListener(this) {
-			ViewSwitcher switcher = (ViewSwitcher) findViewById(R.id.cv_switcher);
-			Animation slide_in_left = AnimationUtils.loadAnimation(that,
-				    android.R.anim.slide_in_left);
-			Animation slide_out_right = AnimationUtils.loadAnimation(that,
-			    android.R.anim.slide_out_right);
-		
-		    public void onSwipeRight() {
-		       
-		    }
-		    public void onSwipeLeft() {
-		    	switcher.setInAnimation(slide_in_left);
-				switcher.setOutAnimation(slide_out_right);
-		    	switcher.showNext();
-		    }
-
-			@Override
-			public void onSwipeTop() {}
-			@Override
-			public void onSwipeBottom() {}
-		});
-		
-		
 		//update text
 		prompt.setText(promptText);
 		
@@ -178,5 +88,8 @@ public class DrawActivity extends ActionBarActivity {
 			}
 			
 		});
+		
+		TwoPanelFactory.setupButtons(this, R.id.cv_switcher, R.id.cv_sel_prompt, 
+										   R.id.cv_prompt_container, R.id.cv_sel_draw, R.id.cv_sketch_container);
 	}
 }

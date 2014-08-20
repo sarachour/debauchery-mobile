@@ -7,23 +7,74 @@
     android:orientation="vertical"
     tools:context=".DescribeActivity" >
 
-    <EditText
-        android:id="@+id/dv_describe"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.37"
-        android:ems="10"
-        android:text="@string/default_prompt" >
+        android:layout_height="wrap_content" >
 
-        <requestFocus />
-    </EditText>
+        <ImageButton
+            android:id="@+id/dv_sel_show"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:cropToPadding="false"
+            android:padding="0dp"
+            android:src="@drawable/inset_shape" />
 
-    <ImageView
-        android:id="@+id/dv_image"
-        style="@style/InsetStyle"
+        <ImageButton
+            android:id="@+id/dv_sel_describe"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:padding="0dp"
+            android:scaleType="center"
+            android:src="@drawable/card_shape" />
+    </LinearLayout>
+
+    <ViewSwitcher
+        android:id="@+id/dv_switcher"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.84" />
+        android:layout_height="match_parent"
+        android:layout_marginTop="0dp"
+        android:layout_weight="0.80"
+        android:padding="0dp" >
+
+        <LinearLayout android:id="@+id/dv_show_container" style="@style/InsetStyle" android:layout_width="match_parent" android:layout_height="match_parent" android:layout_weight="0.20" android:orientation="vertical" android:padding="12dp">
+
+            <ImageView
+                android:id="@+id/dv_show"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/abc_ab_share_pack_holo_light" />
+
+        </LinearLayout><LinearLayout
+            android:id="@+id/dv_describe_container"
+            style="@style/CardStyle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.20"
+            android:orientation="vertical"
+            android:padding="24dp" >
+
+            <EditText
+                android:id="@+id/dv_describe"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="Describe what you saw here."
+                android:inputType="textMultiLine|textAutoCorrect" 
+				android:imeOptions="actionNext" >
+                <requestFocus />
+            </EditText>
+
+            <EditText
+                android:id="@+id/editText1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:ems="10" />
+
+        </LinearLayout>
+
+        
+    </ViewSwitcher>
 
     <Button
         android:id="@+id/dv_done"

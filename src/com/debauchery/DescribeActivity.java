@@ -3,6 +3,8 @@ package com.debauchery;
 import java.io.File;
 
 import com.debauchery.data.CardStack;
+import com.debauchery.gesture.OnSwipeTouchListener;
+import com.debauchery.gesture.TwoPanelFactory;
 import com.debauchery.sketch.SketchPad;
 
 import android.content.Intent;
@@ -12,12 +14,20 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.ViewSwitcher;
 
 public class DescribeActivity extends ActionBarActivity {
 	CardStack cards;
+	ActionBarActivity that;
+	
+	
 	protected void onCreate(Bundle savedInstanceState) {
 		Intent i = getIntent();
 		String path = i.getStringExtra("picture");
@@ -25,14 +35,17 @@ public class DescribeActivity extends ActionBarActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_describe);
 		
-		ImageView img = (ImageView) findViewById(R.id.dv_image);
-		Button done = (Button) findViewById(R.id.dv_done);
+		
+		final EditText prompt =  (EditText) findViewById(R.id.dv_describe);
+		final Button done = (Button) findViewById(R.id.dv_done);
+		final ImageView img = (ImageView) findViewById(R.id.dv_show);
 		
 		System.out.println(path);
 		File file = new File(path);
 		Uri uri = Uri.fromFile(file);
 		img.setImageURI(uri);
 		
+		that = this;
 		done.setOnClickListener(new OnClickListener(){
 
 			@Override
@@ -54,5 +67,11 @@ public class DescribeActivity extends ActionBarActivity {
 			}
 			
 		});
+		TwoPanelFactory.setupButtons(this, 
+				R.id.dv_switcher, 
+				R.id.dv_sel_show, 
+				R.id.dv_show_container, 
+				R.id.dv_sel_describe, 
+				R.id.dv_describe_container);
 	}
 }
