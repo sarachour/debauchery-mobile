@@ -5,10 +5,14 @@
     <string name="action_settings">Settings</string>
     <string name="action_review_prompt">Review</string>
     <string name="action_done">Done</string>
-    <string name="action_start">Start</string>
-    <string name="default_nplayers">3</string>
+    <string name="action_start_drawing">Drawing</string>
+    <string name="action_start_description">Description</string><string name="action_start">Start Game</string><string name="default_nplayers">3</string>
     <string name="default_prompt">Kobe Bryant</string>
     <string name="label_ask_initial_prompt">Please choose a starting phrase:</string>
     <string name="label_ask_nplayers">How many players?</string>
+    <string name="label_ask_startmode">Do you want to start with a drawing or description?</string>
+    
+    <string name="label_local_welcome">Welcome to Circle mode!</string>
+    
 
 </resources>

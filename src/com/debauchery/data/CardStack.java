@@ -65,10 +65,12 @@ public class CardStack implements Parcelable {
 	List<Card> cards;
 	int nplayers;
 	int curr;
+	private int startMode;
 	public CardStack(Parcel p){
 		cards = new ArrayList<Card>();
 		this.nplayers = p.readInt();
 		this.curr = p.readInt();
+		this.startMode = DESCRIBING;
 		p.readTypedList(cards, Card.CREATOR);
 	}
 	public CardStack(int nplayers){
@@ -110,6 +112,11 @@ public class CardStack implements Parcelable {
             return new CardStack[size];
         }
     };
+	public static final int DRAWING = 0;
+	public static final int DESCRIBING = 	1;
+	public void setStartMode(int mode){
+		this.startMode = mode;
+	}
 	@Override
 	public void writeToParcel(Parcel arg0, int arg1) {
 		arg0.writeInt(this.nplayers);
