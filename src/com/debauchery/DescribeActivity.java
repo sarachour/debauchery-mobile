@@ -13,6 +13,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.animation.Animation;
@@ -22,12 +23,11 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.TextView.OnEditorActionListener;
 import android.widget.ViewSwitcher;
 
 public class DescribeActivity extends ActionBarActivity {
 	CardStack cards;
-	ActionBarActivity that;
-	
 	
 	protected void onCreate(Bundle savedInstanceState) {
 		Intent i = getIntent();
@@ -37,7 +37,7 @@ public class DescribeActivity extends ActionBarActivity {
 		setContentView(R.layout.activity_describe);
 		
 		
-		final EditText prompt =  (EditText) findViewById(R.id.dv_describe);
+		final EditText edit =  (EditText) findViewById(R.id.dv_describe);
 		final Button done = (Button) findViewById(R.id.dv_done);
 		final ImageView img = (ImageView) findViewById(R.id.dv_show);
 		
@@ -46,7 +46,7 @@ public class DescribeActivity extends ActionBarActivity {
 		Uri uri = Uri.fromFile(file);
 		img.setImageURI(uri);
 		
-		that = this;
+		
 		done.setOnClickListener(new OnClickListener(){
 
 			@Override

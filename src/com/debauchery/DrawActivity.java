@@ -32,13 +32,11 @@ import android.widget.ViewSwitcher;
 
 public class DrawActivity extends ActionBarActivity {
 	CardStack cards;
-	DrawActivity that;
-
 	protected void onCreate(Bundle savedInstanceState) {
 		Intent i = getIntent();
 		String promptText = i.getStringExtra("prompt");
 		cards = (CardStack) i.getParcelableExtra("stack");
-		that = this;
+
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_sketch);
 		
