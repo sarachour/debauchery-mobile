@@ -11,7 +11,7 @@ public class ImageCard extends Card {
 	List<Action> data;
 	ImageCard(Parcel p){
 		super(p);
-		p.readTypedList(this.data, SketchPad.CREATOR);
+		p.readTypedList(this.data, Action.CREATOR);
 	}
 	ImageCard(List<Action> data) {
 		super("image");

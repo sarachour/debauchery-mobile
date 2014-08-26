@@ -1,6 +1,5 @@
 package com.debauchery.sketch;
 
-import android.app.Notification.Action;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.os.Parcel;
