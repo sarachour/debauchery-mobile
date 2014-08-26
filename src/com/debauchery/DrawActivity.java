@@ -2,10 +2,12 @@ package com.debauchery;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.util.List;
 
 import com.debauchery.data.CardStack;
 import com.debauchery.gesture.OnSwipeTouchListener;
 import com.debauchery.gesture.TwoPanelFactory;
+import com.debauchery.sketch.Action;
 import com.debauchery.sketch.SketchPad;
 
 import android.app.AlertDialog;
@@ -34,19 +36,11 @@ public class DrawActivity extends ActionBarActivity {
 	CardStack cards;
 	protected void onCreate(Bundle savedInstanceState) {
 		Intent i = getIntent();
-		String promptText = i.getStringExtra("prompt");
 		cards = (CardStack) i.getParcelableExtra("stack");
 
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_sketch);
-		
-		final TextView prompt =  (TextView) findViewById(R.id.cv_prompt);
-		final Button done = (Button) findViewById(R.id.cv_done);
-		
-		
-		  
-		//update text
-		prompt.setText(promptText);
+		setContentView(R.layout.slide_act_sketch);
+		final Button done = (Button) findViewById(R.id.sa_sketch_done);
 		
 	
 		//update done
@@ -55,10 +49,10 @@ public class DrawActivity extends ActionBarActivity {
 			@Override
 			public void onClick(View v) {
 				//update
-				SketchPad canv =  (SketchPad) findViewById(R.id.fd_sketchpad);
+				SketchPad sk =  (SketchPad) findViewById(R.id.fd_sketchpad);
+				List<Action> actions = sk.getActions();
 				
-				
-				if(canv.getWidth() <= 0 || canv.getHeight() <= 0){
+				if(actions.size() == 0){
 					new AlertDialog.Builder(v.getContext())
 				    .setTitle("No Drawing Found")
 				    .setMessage("Please draw something.")
@@ -66,6 +60,8 @@ public class DrawActivity extends ActionBarActivity {
 				     .show();
 					return;
 				}
+				cards.addImageCard(actions);
+				/*
 				Bitmap img = canv.getImage();
 				String path = Globals.saveInternal(getApplicationContext(), Globals.IMAGE_PATH, cards.getImageName(), img);
 				
@@ -83,11 +79,10 @@ public class DrawActivity extends ActionBarActivity {
 					i.putExtra("stack", cards);
 					startActivity(i);
 				}
+				*/
 			}
 			
 		});
 		
-		TwoPanelFactory.setupButtons(this, R.id.cv_switcher, R.id.cv_sel_prompt, 
-										   R.id.cv_prompt_container, R.id.cv_sel_draw, R.id.cv_sketch_container);
 	}
 }

@@ -2,10 +2,8 @@ package com.debauchery;
 
 import java.io.File;
 
+import com.debauchery.data.Card;
 import com.debauchery.data.CardStack;
-import com.debauchery.data.CardStack.Card;
-import com.debauchery.data.CardStack.ImageCard;
-import com.debauchery.data.CardStack.TextCard;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -43,22 +41,23 @@ public class ReviewActivity extends Activity {
 
 		
 		//lay.removeAllViews();
+		
 		for(int j=0; j < cards.getNumPlayers(); j++){
 			Card c = cards.get(j);
 			if(c.getType().equals("text")){
 				View v = getLayoutInflater().inflate(R.layout.comp_card_txt, null);
 				TextView txt = (TextView) v.findViewById(R.id.cardv_txt);
 				v.setTag(j);
-				txt.setText(c.getData());
+				//txt.setText(c.getData());
 				lay.addView(v);
 			}
 			else if(c.getType().equals("image")){
 				View v = getLayoutInflater().inflate(R.layout.comp_card_img, null);
 				ImageView img = (ImageView) v.findViewById(R.id.cardv_img);
 				v.setTag(j);
-				File file = new File(c.getData());
-				Uri uri = Uri.fromFile(file);
-				img.setImageURI(uri);
+				//File file = new File(c.getData());
+				//Uri uri = Uri.fromFile(file);
+				//img.setImageURI(uri);
 				lay.addView(v);
 			}
 			else{

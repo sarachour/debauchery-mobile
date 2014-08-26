@@ -28,32 +28,34 @@ import android.widget.ViewSwitcher;
 
 public class DescribeActivity extends ActionBarActivity {
 	CardStack cards;
-	
+	String description;
 	protected void onCreate(Bundle savedInstanceState) {
 		Intent i = getIntent();
 		String path = i.getStringExtra("picture");
 		cards = (CardStack) i.getParcelableExtra("stack");
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_describe);
+		setContentView(R.layout.slide_act_describe);
 		
 		
-		final EditText edit =  (EditText) findViewById(R.id.dv_describe);
-		final Button done = (Button) findViewById(R.id.dv_done);
-		final ImageView img = (ImageView) findViewById(R.id.dv_show);
-		
-		System.out.println(path);
-		File file = new File(path);
-		Uri uri = Uri.fromFile(file);
-		img.setImageURI(uri);
+		final EditText edit =  (EditText) findViewById(R.id.sa_describe);
+		final Button done = (Button) findViewById(R.id.sa_describe_done);
 		
 		
+		edit.setOnEditorActionListener(new OnEditorActionListener(){
+
+			@Override
+			public boolean onEditorAction(TextView arg0, int arg1, KeyEvent arg2) {
+				// TODO Auto-generated method stub
+				description = arg0.getText().toString();
+				return true;
+			}
+			
+		});
 		done.setOnClickListener(new OnClickListener(){
 
 			@Override
 			public void onClick(View v) {
-				EditText text = (EditText) findViewById(R.id.dv_describe);
-				String textf = text.getText().toString();
-				if(textf.length() == 0){
+				if(description.length() == 0){
 					new AlertDialog.Builder(v.getContext())
 				    .setTitle("No Text Found")
 				    .setMessage("Please describe the drawing.")
@@ -61,26 +63,19 @@ public class DescribeActivity extends ActionBarActivity {
 				     .show();
 					return;
 				}
-				cards.addTextCard(textf);
+				cards.addTextCard(description);
 				if(cards.isEnd()){
 					Intent i = new Intent(getApplicationContext(), ReviewActivity.class);
 					i.putExtra("stack", cards);
 					startActivity(i);
 				}
 				else{
-					Intent i = new Intent(getApplicationContext(), DrawActivity.class);
-					i.putExtra("prompt", textf);
+					Intent i = new Intent(getApplicationContext(), PromptActivity.class);
 					i.putExtra("stack", cards);
 					startActivity(i);
 				}
 			}
 			
 		});
-		TwoPanelFactory.setupButtons(this, 
-				R.id.dv_switcher, 
-				R.id.dv_sel_show, 
-				R.id.dv_show_container, 
-				R.id.dv_sel_describe, 
-				R.id.dv_describe_container);
 	}
 }

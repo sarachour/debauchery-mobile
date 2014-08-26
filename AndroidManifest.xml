@@ -26,6 +26,8 @@
         <activity android:name="com.debauchery.DescribeActivity" android:noHistory="true"></activity>
         <activity android:name="com.debauchery.LocalGameActivity" android:noHistory="true"></activity>
         <activity android:name="com.debauchery.ReviewActivity" android:noHistory="true"></activity>
+        <activity android:name="com.debauchery.PromptActivity"></activity>
+        <activity android:name="com.debauchery.ShowActivity"></activity>
     </application>
 
 </manifest>

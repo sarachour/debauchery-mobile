@@ -3,65 +3,12 @@ package com.debauchery.data;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.debauchery.sketch.Action;
+
 import android.os.Parcel;
 import android.os.Parcelable;
 
 public class CardStack implements Parcelable {
-	public static class Card implements Parcelable {
-		String data;
-		String type;
-		Card(Parcel p){
-			this.type = p.readString();
-			this.data = p.readString();
-		}
-		Card(String type, String data){
-			this.data = data;
-			this.type = type;
-		}
-		public String getType(){
-			return type;
-		}
-		public String getData(){	
-			return data;
-		}
-		@Override
-		public int describeContents() {
-			// TODO Auto-generated method stub
-			return 0;
-		}
-		@Override
-		public void writeToParcel(Parcel dest, int flags) {
-			// TODO Auto-generated method stub
-			dest.writeString(this.type);
-			dest.writeString(this.data);
-			
-		}
-		public static final Parcelable.Creator<Card> CREATOR = new Parcelable.Creator<Card>() {
-	        public Card createFromParcel(Parcel in) {
-	            return new Card(in);
-	        }
-
-	        public Card[] newArray(int size) {
-	            return new Card[size];
-	        }
-	    };
-	}
-	public class TextCard extends Card {
-
-		TextCard(String data) {
-			super("text", data);
-			// TODO Auto-generated constructor stub
-		}
-		
-	}
-	public class ImageCard extends Card {
-
-		ImageCard(String data) {
-			super("image", data);
-			// TODO Auto-generated constructor stub
-		}
-		
-	}
 	List<Card> cards;
 	int nplayers;
 	int curr;
@@ -78,8 +25,8 @@ public class CardStack implements Parcelable {
 		this.nplayers = nplayers;
 		this.curr = 0;
 	}
-	public void addImageCard(String path){
-		cards.add(new ImageCard(path));
+	public void addImageCard(List<Action> actions){
+		cards.add(new ImageCard(actions));
 		curr++;
 	}
 	public void addTextCard(String data){

@@ -34,7 +34,10 @@ public class LocalGameActivity extends Activity {
 		SeekBar nplayers_bar = (SeekBar) findViewById(R.id.lv_nplayers);
 		ToggleButton start_mode_but = (ToggleButton) findViewById(R.id.lv_start_mode);
 		TextView nplayers_label = (TextView) findViewById(R.id.lv_nplayers_prompt);
-		nplayers_label.setText(nplayers_bar.getProgress()+"");
+		
+		nPlayers = nplayers_bar.getProgress();
+		nplayers_label.setText(nPlayers+"");
+		
 		nplayers_bar.setOnSeekBarChangeListener(new OnSeekBarChangeListener(){
 			TextView label = (TextView) findViewById(R.id.lv_nplayers_prompt);
 			@Override
