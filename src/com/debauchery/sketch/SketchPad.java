@@ -6,7 +6,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Stack;
 
-import android.app.Notification.Action;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
