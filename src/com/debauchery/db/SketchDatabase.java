@@ -31,8 +31,6 @@ public class SketchDatabase {
 	private static final String ALPHA = "Alpha";
     private static final String DATABASE_NAME = "Game";
     private static final String TABLE_NAME = "Drawings";
-    private int IDX=0;
-    private int TIDX=0;
     
 	//Store data
 	int turn;
@@ -81,11 +79,9 @@ public class SketchDatabase {
 			    thickness + ","+
 			    alpha + ");");
 	}
-	public void start(int tidx){
-		TIDX = tidx;
-		IDX=0;
+	public void start(){
 	}
-	private void stroke(Stroke s){
+	private void stroke(Stroke s, int TIDX, int IDX){
 		SQLiteDatabase wdb = dbo.getWritableDatabase();
 		int color = s.color;
 		int thickness = s.thickness;
@@ -95,32 +91,32 @@ public class SketchDatabase {
 			Coord c = path.get(i);
 			put_entry(wdb,TIDX, IDX, i, Stroke.STROKE_ID, c.x, c.y, color, thickness, alpha);
 		}
-		IDX++;
 		wdb.close();
 	}
-	private void fill(FillRect s){
+	private void fill(FillRect s, int TIDX, int IDX){
 		SQLiteDatabase wdb = dbo.getWritableDatabase(); 
 		int color = s.color;
 		int alpha = 255;
 		int w = s.w;
 		//use thickness and alpha as width and height
 		put_entry(wdb,TIDX, IDX, 1, FillRect.FILL_ID, s.x, s.y, color, s.w, s.h);
-		IDX++;
 		wdb.close();
 	}
-	public void save(SketchPadData d){
+	public void save(SketchPadData d, int turn){
+		String deleteTurn = "DELETE FROM " + TABLE_NAME + " WHERE " + TURN + " = " + turn;
+		
+		SQLiteDatabase wdb = dbo.getWritableDatabase();
+		wdb.execSQL(deleteTurn);
 		for(int i=0; i < d.actions.size(); i++){
 			Action a = d.actions.get(i);
 		
 			if(a.getType() == Stroke.STROKE_ID){
-				System.out.println("insert stroke");
 				Stroke ast = (Stroke) a;
-				this.stroke(ast);
+				this.stroke(ast, turn, i);
 			}
 			else if(a.getType() == FillRect.FILL_ID){
-				System.out.println("insert fill");
 				FillRect fst = (FillRect) a;
-				this.fill(fst);
+				this.fill(fst, turn, i);
 			}
 		}
 	}
@@ -160,7 +156,6 @@ public class SketchDatabase {
 					int col = cursor.getInt(color_index);
 					dat.setColor(col);
 					dat.fill((int)x, (int)y, w, h);
-					System.out.println("add fill");
 				}
 				else if (type == Stroke.STROKE_ID){
 					float x = cursor.getFloat(x_index);
@@ -173,11 +168,9 @@ public class SketchDatabase {
 						dat.setThickness(thick);
 						dat.setAlpha(alph);
 						dat.start(x, y);
-						System.out.println("add stroke");
 					}
 					else{
 						dat.add(x, y);
-						System.out.println("add point");
 					}
 					
 				}

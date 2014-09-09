@@ -45,10 +45,18 @@ public class DrawActivity extends ActionBarActivity {
 	SketchPad sketchpad;
 	SketchDatabase sdb;
 	
+	private void loadSketchFromDatabase(){
+		sdb = new SketchDatabase(this);
+		System.out.println("loading data");
+		sketchpad.loadData(sdb.get(0));
+	}
+	private void saveSketchToDatabase(){
+		sdb.save(sketchpad.getData(),0);
+	}
 	@Override
 	public void onRestoreInstanceState(Bundle savedInstanceState){
 		super.onRestoreInstanceState(savedInstanceState);
-		System.out.println("loading state");
+		loadSketchFromDatabase();
 	}
 	@Override
 	public void onSaveInstanceState(Bundle savedInstanceState) {
@@ -56,10 +64,7 @@ public class DrawActivity extends ActionBarActivity {
 		super.onSaveInstanceState(savedInstanceState);
 		System.out.println("Saving state..");
 	    // Save the user's current game state
-		savedInstanceState.putInt(Globals.STATE_PHASE, Globals.DRAW_PHASE);
-		sdb.save(sketchpad.getData());
-
-	    
+		saveSketchToDatabase();
 	}
 	
 	protected void onCreate(Bundle savedInstanceState) {
@@ -74,10 +79,7 @@ public class DrawActivity extends ActionBarActivity {
 		final Button done = (Button) findViewById(R.id.sa_sketch_done);
 		sketchpad =  (SketchPad) findViewById(R.id.fd_sketchpad);
 		
-		System.out.println("initialized data");
-		sdb = new SketchDatabase(this);
-		System.out.println("loading data");
-		sketchpad.loadData(sdb.get(0));
+		loadSketchFromDatabase();
 		
 		
 		//update done
@@ -94,7 +96,8 @@ public class DrawActivity extends ActionBarActivity {
 				     .show();
 					return;
 				}
-				sdb.save(sketchpad.getData());
+				saveSketchToDatabase();
+				
 				/*
 				Bitmap img = canv.getImage();
 				String path = Globals.saveInternal(getApplicationContext(), Globals.IMAGE_PATH, cards.getImageName(), img);

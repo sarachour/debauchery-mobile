@@ -5,7 +5,7 @@ import android.graphics.Paint;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class Action implements Parcelable{
+public class Action implements Parcelable {
 	int id =-1;
 	public Action(Parcel p){
 		
