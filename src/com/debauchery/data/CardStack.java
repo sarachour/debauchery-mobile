@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.debauchery.sketch.Action;
+import com.debauchery.sketch.SketchPadData;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -25,8 +26,8 @@ public class CardStack implements Parcelable {
 		this.nplayers = nplayers;
 		this.curr = 0;
 	}
-	public void addImageCard(List<Action> actions){
-		cards.add(new ImageCard(actions));
+	public void addImageCard(SketchPadData sketchPadData){
+		cards.add(new ImageCard(sketchPadData));
 		curr++;
 	}
 	public void addTextCard(String data){

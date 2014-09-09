@@ -8,7 +8,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class SketchPath implements Parcelable{
-	List<Coord> path = new LinkedList<Coord>();
+	public List<Coord> path = new LinkedList<Coord>();
 	Path gpath = new Path();
 	public SketchPath(float x, float y){
 		path.add(new Coord(x,y));

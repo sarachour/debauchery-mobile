@@ -6,16 +6,18 @@ import android.os.Parcel;
 
 import com.debauchery.sketch.Action;
 import com.debauchery.sketch.SketchPad;
+import com.debauchery.sketch.SketchPadData;
 
 public class ImageCard extends Card {
-	List<Action> data;
+	SketchPadData data;
 	ImageCard(Parcel p){
 		super(p);
-		p.readTypedList(this.data, Action.CREATOR);
+		this.data = p.readParcelable(SketchPadData.class.getClassLoader());
 	}
-	ImageCard(List<Action> data) {
-		super("image");
-		this.data = data;
+	public ImageCard(SketchPadData sketchPadData) {
+		super("draw");
+		// TODO Auto-generated constructor stub
+		this.data = sketchPadData;
 	}
 	
 }

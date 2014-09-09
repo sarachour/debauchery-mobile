@@ -29,6 +29,11 @@ import android.widget.TextView;
 
 public class ReviewActivity extends Activity {
 	CardStack cards;
+	@Override
+	public void onRestoreInstanceState(Bundle savedInstanceState){
+		super.onRestoreInstanceState(savedInstanceState);
+		System.out.println("loading state");
+	}
 	protected void onCreate(Bundle savedInstanceState) {
 		Intent i = getIntent();
 		cards = (CardStack) i.getParcelableExtra("stack");

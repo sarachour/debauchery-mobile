@@ -5,17 +5,21 @@ import java.io.FileOutputStream;
 import java.util.List;
 
 import com.debauchery.data.CardStack;
+import com.debauchery.db.SketchDatabase;
 import com.debauchery.gesture.OnSwipeTouchListener;
 import com.debauchery.gesture.TwoPanelFactory;
 import com.debauchery.sketch.Action;
 import com.debauchery.sketch.SketchPad;
+import com.debauchery.sketch.SketchPadData;
 
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.os.Parcel;
 import android.support.v7.app.ActionBarActivity;
 import android.view.GestureDetector;
 import android.view.GestureDetector.SimpleOnGestureListener;
@@ -34,25 +38,55 @@ import android.widget.ViewSwitcher;
 
 public class DrawActivity extends ActionBarActivity {
 	CardStack cards;
+	SharedPreferences preferences;
+	SharedPreferences.Editor prefEditor;
+	String STATE_STACK = "stack";
+	String STATE_SKETCH = "sketch";
+	SketchPad sketchpad;
+	SketchDatabase sdb;
+	
+	@Override
+	public void onRestoreInstanceState(Bundle savedInstanceState){
+		super.onRestoreInstanceState(savedInstanceState);
+		System.out.println("loading state");
+	}
+	@Override
+	public void onSaveInstanceState(Bundle savedInstanceState) {
+		
+		super.onSaveInstanceState(savedInstanceState);
+		System.out.println("Saving state..");
+	    // Save the user's current game state
+		savedInstanceState.putInt(Globals.STATE_PHASE, Globals.DRAW_PHASE);
+		sdb.save(sketchpad.getData());
+
+	    
+	}
+	
 	protected void onCreate(Bundle savedInstanceState) {
 		Intent i = getIntent();
-		cards = (CardStack) i.getParcelableExtra("stack");
-
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.slide_act_sketch);
-		final Button done = (Button) findViewById(R.id.sa_sketch_done);
 		
-	
+		preferences = this.getPreferences(Context.MODE_PRIVATE);
+		prefEditor = preferences.edit();
+		prefEditor.putInt(Globals.STATE_PHASE, Globals.DRAW_PHASE);
+		
+		final Button done = (Button) findViewById(R.id.sa_sketch_done);
+		sketchpad =  (SketchPad) findViewById(R.id.fd_sketchpad);
+		
+		System.out.println("initialized data");
+		sdb = new SketchDatabase(this);
+		System.out.println("loading data");
+		sketchpad.loadData(sdb.get(0));
+		
+		
 		//update done
 		done.setOnClickListener(new OnClickListener(){
 
 			@Override
 			public void onClick(View v) {
-				//update
-				SketchPad sk =  (SketchPad) findViewById(R.id.fd_sketchpad);
-				List<Action> actions = sk.getActions();
 				
-				if(actions.size() == 0){
+				if(sketchpad.getData().size() == 0){
 					new AlertDialog.Builder(v.getContext())
 				    .setTitle("No Drawing Found")
 				    .setMessage("Please draw something.")
@@ -60,7 +94,7 @@ public class DrawActivity extends ActionBarActivity {
 				     .show();
 					return;
 				}
-				cards.addImageCard(actions);
+				sdb.save(sketchpad.getData());
 				/*
 				Bitmap img = canv.getImage();
 				String path = Globals.saveInternal(getApplicationContext(), Globals.IMAGE_PATH, cards.getImageName(), img);

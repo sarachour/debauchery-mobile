@@ -13,41 +13,34 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
-public class SketchPad extends SurfaceView implements SurfaceHolder.Callback {
-	public static int FILL_ACTION = 0;
-	public static int STROKE_ACTION = 0;
-	
-	
-    private Stack<Action> actions = new Stack<Action>();
-    private Stack<Action> unactions = new Stack<Action>();
+public class SketchPad extends SurfaceView implements SurfaceHolder.Callback {    
     private Path path;
     private Paint paint;
     private Renderer renderer;
     private static final int ACTION_DOWN = 1;
     private static final int ACTION_MOVE = 2;
     private static final int ACTION_UP = 3;
-    private int color;
-    private int alpha;
-    private int thickness;
+   
     
-    private SketchPath currentPath = null;
-
+    
+    SketchPadData dat;
+    
     private void init(){
+    	dat = new SketchPadData();
     	paint = new Paint();
         paint.setDither(true);
-        paint.setColor(0xFFFFFF00);
+        paint.setColor(dat.color);
         paint.setStyle(Paint.Style.STROKE);
         paint.setStrokeJoin(Paint.Join.ROUND);
         paint.setStrokeCap(Paint.Cap.ROUND);
-        paint.setStrokeWidth(3);
-        this.thickness = 3;
-        this.alpha = 255;
-        this.color = Color.BLACK;
+        paint.setStrokeWidth(dat.thickness);
+        
         //this.setBackgroundColor(Color.WHITE); //set white color
         getHolder().addCallback(this);
     }
@@ -62,44 +55,21 @@ public class SketchPad extends SurfaceView implements SurfaceHolder.Callback {
     }
     public SketchPad(Context context, AttributeSet attrs, Parcel p){
     	super(context, attrs);
-    	List<Action> act = new LinkedList<Action>();
-    	p.readTypedList(act, Action.CREATOR);
-    	this.actions.addAll(act);
+    	this.dat = new SketchPadData(p);
     }
-    /*
-    public Bitmap getImage(){
-    	Bitmap bitmap = Bitmap.createBitmap(getWidth(), getHeight(), Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(bitmap);
-        this.drawBuffer(canvas);
-        return bitmap;
+    public void loadData(SketchPadData d){
+    	this.dat = d;
     }
-    */
-    public void undo(){
-    	if(actions.size() > 0)
-    		unactions.push(actions.pop());
+    public SketchPadData getData(){
+    	return dat;
     }
-    public void redo(){
-    	if(unactions.size() > 0)
-    		actions.push(unactions.pop());
-    }
-    public void setThickness(int thickness){
-    	this.thickness = thickness;
-    }
-    public void setColor(int color){
-    	this.color = color;
-    }
-    public void setAlpha(int alpha){
-    	this.alpha = alpha;
-    }
-    public void fill(){
-    	this.actions.push(new FillRect(this.color,0,0,getWidth(),getHeight()));
-    }
+
+    
+    
     @Override
     public boolean onTouchEvent(MotionEvent event) {
 
-        
-        // handle touch event
-        paint.setStrokeWidth(this.thickness);
+     
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 handleAction(ACTION_DOWN, event.getX(), event.getY());
@@ -117,34 +87,18 @@ public class SketchPad extends SurfaceView implements SurfaceHolder.Callback {
     public void handleAction(int action, float x, float y) {
         synchronized (renderer.getSurfaceHolder()) {
             if (action == ACTION_DOWN) {
-            	if(currentPath != null){
-            		actions.push(new Stroke(currentPath, this.color, this.thickness));
-            	}
-            	currentPath = new SketchPath(x,y);
-                
-                actions.push(new Stroke(currentPath, this.color, this.thickness));
+            	dat.start(x,y);
+            	
             } else if (action == ACTION_MOVE) {
-                currentPath.add(x, y);
+            	dat.add(x,y);
             } else if (action == ACTION_UP) {
-                currentPath.add(x, y);
+                dat.add(x,y);
             }
         }
     }
     
     public void drawBuffer(Canvas canvas){
-    	if(canvas == null){
-    		System.out.println("null draw...");
-    		return;
-    	}
-    	paint.setStyle(Paint.Style.FILL_AND_STROKE);
-     	paint.setColor(Color.WHITE);
-        canvas.drawRect(0, 0, this.getWidth(), this.getHeight(), paint);
-        paint.setStyle(Paint.Style.STROKE);
-        paint.setAlpha(alpha);
-        paint.setColor(color);
-        for (Action act : actions) {
-            if(path != null) act.draw(canvas, paint);;
-        }
+    	dat.draw(this, canvas, paint);
     }
     
     @Override
@@ -156,8 +110,7 @@ public class SketchPad extends SurfaceView implements SurfaceHolder.Callback {
     
 
     public void clear() {
-    	actions.clear();
-    	unactions.clear();
+    	this.dat.clear();
 
     }
 
@@ -182,8 +135,24 @@ public class SketchPad extends SurfaceView implements SurfaceHolder.Callback {
             }
         }
     }
-	public List<Action> getActions() {
-		// TODO Auto-generated method stub
-		return actions;
+	public void fill() {
+		this.dat.fill(0,0,getWidth(),getHeight());
+		
+	}
+	public void redo() {
+		this.dat.redo();
+		
+	}
+	public void undo() {
+		this.dat.undo();
+		
+	}
+	public void setThickness(int actual) {
+		this.dat.setThickness(actual);
+		
+	}
+	public void setColor(int color) {
+		this.dat.setColor(color);
+		
 	}
 }

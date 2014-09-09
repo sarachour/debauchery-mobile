@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
+    <string name="preferences_file">prefs.cfg</string>
     <string name="app_name">Debauchery</string>
     <string name="action_settings">Settings</string>
     <string name="action_review_prompt">Review</string>

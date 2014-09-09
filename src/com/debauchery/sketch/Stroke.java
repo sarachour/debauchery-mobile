@@ -5,16 +5,18 @@ import android.graphics.Paint;
 import android.os.Parcel;
 
 public class Stroke extends Action{
-	final static int STROKE_ID = 0;
-	SketchPath path;
-	int color;
-	int thickness;
+	public final static int STROKE_ID = 0;
+	public SketchPath path;
+	public int color;
+	public int thickness;
 	public Stroke(SketchPath p, int color, int thickness){
+		super(STROKE_ID);
 		this.path = p;
 		this.color = color;
 		this.thickness = thickness;
 	}
 	public Stroke(Parcel p){
+		super(p);
 		this.color = p.readInt();
 		this.thickness = p.readInt();
 		this.path = new SketchPath(p);

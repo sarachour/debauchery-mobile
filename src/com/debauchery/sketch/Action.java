@@ -6,11 +6,15 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class Action implements Parcelable{
+	int id =-1;
 	public Action(Parcel p){
 		
 	}
-	public Action(){
-		
+	public Action(int id){
+		this.id = id;
+	}
+	public int getType(){
+		return id;
 	}
 	public void draw(Canvas c, Paint p){
 		
@@ -28,9 +32,9 @@ public class Action implements Parcelable{
 	public static final Parcelable.Creator<Action> CREATOR = new Parcelable.Creator<Action>() {
         public Action createFromParcel(Parcel in) {
         	int id = in.readInt();
-        	if(id == SketchPad.FILL_ACTION)
+        	if(id == FillRect.FILL_ID)
         		return new FillRect(in);
-        	else if(id == SketchPad.STROKE_ACTION)
+        	else if(id == Stroke.STROKE_ID)
         		return new Stroke(in);
         	else
         		return null;

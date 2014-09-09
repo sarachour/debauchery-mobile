@@ -18,5 +18,10 @@ public class PromptActivity extends ActionBarActivity {
 		final TextView prompt =  (TextView) findViewById(R.id.sv_prompt);
 		
 	}
+	@Override
+	public void onRestoreInstanceState(Bundle savedInstanceState){
+		super.onRestoreInstanceState(savedInstanceState);
+		System.out.println("loading state");
+	}
 
 }
