@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Stack;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -26,8 +28,26 @@ public class SketchPad extends SurfaceView implements SurfaceHolder.Callback {
     private static final int ACTION_DOWN = 1;
     private static final int ACTION_MOVE = 2;
     private static final int ACTION_UP = 3;
-   private boolean locked = false;
+    private boolean locked = false;
     
+    class Animate extends TimerTask{
+    	SketchPadData data;
+    	SketchPad pad;
+    	int i;
+    	public Animate(SketchPad p, SketchPadData d){
+    		this.data =d;
+    		this.pad = p;
+    		this.pad.loadData(new SketchPadData());
+    		this.i = 0;
+    	}
+        //This task will repeat every five seconds
+        public void run(){
+            if(i < data.size()){
+            	this.pad.dat.actions.push(data.actions.get(i));
+            	i+=1;
+            }
+        }
+    }
     
     SketchPadData dat;
     public void lock(){
@@ -35,6 +55,11 @@ public class SketchPad extends SurfaceView implements SurfaceHolder.Callback {
     }
     public void unlock(){
     	locked = false;
+    }
+    public void playback(SketchPadData d, int repeat){
+    	Timer timer = new Timer();
+        timer.scheduleAtFixedRate(new Animate(this,d), d.size()*repeat, repeat);
+    	
     }
     private void init(){
     	dat = new SketchPadData();

@@ -27,7 +27,7 @@ public class ShowActivity  extends ActionBarActivity {
 		
 		final SketchPad img =  (SketchPad) findViewById(R.id.sv_sketchpad);
 		img.lock();
-		img.loadData(db.getLastSketch());
+		img.playback(db.getLastSketch(), 100);
 		
 		
 	}
