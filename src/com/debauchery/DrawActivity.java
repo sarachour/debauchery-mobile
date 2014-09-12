@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.util.List;
 
 import com.debauchery.data.CardStack;
+import com.debauchery.db.PersistantStateDatabase;
 import com.debauchery.db.SketchDatabase;
 import com.debauchery.gesture.OnSwipeTouchListener;
 import com.debauchery.gesture.TwoPanelFactory;
@@ -37,21 +38,14 @@ import android.widget.TextView;
 import android.widget.ViewSwitcher;
 
 public class DrawActivity extends ActionBarActivity {
-	CardStack cards;
-	SharedPreferences preferences;
-	SharedPreferences.Editor prefEditor;
-	String STATE_STACK = "stack";
-	String STATE_SKETCH = "sketch";
+	PersistantStateDatabase db;
 	SketchPad sketchpad;
-	SketchDatabase sdb;
 	
 	private void loadSketchFromDatabase(){
-		sdb = new SketchDatabase(this);
-		System.out.println("loading data");
-		sketchpad.loadData(sdb.get(0));
+		sketchpad.loadData(db.getSketch());
 	}
 	private void saveSketchToDatabase(){
-		sdb.save(sketchpad.getData(),0);
+		db.saveSketch(sketchpad.getData());
 	}
 	@Override
 	public void onRestoreInstanceState(Bundle savedInstanceState){
@@ -68,21 +62,17 @@ public class DrawActivity extends ActionBarActivity {
 	}
 	
 	protected void onCreate(Bundle savedInstanceState) {
-		Intent i = getIntent();
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.slide_act_sketch);
 		
-		preferences = this.getPreferences(Context.MODE_PRIVATE);
-		prefEditor = preferences.edit();
-		prefEditor.putInt(Globals.STATE_PHASE, Globals.DRAW_PHASE);
+		db = new PersistantStateDatabase(this);
+		db.init(db.getTurn(), Globals.DRAW_PHASE);
 		
 		final Button done = (Button) findViewById(R.id.sa_sketch_done);
 		sketchpad =  (SketchPad) findViewById(R.id.fd_sketchpad);
 		
 		loadSketchFromDatabase();
 		
-		
-		//update done
 		done.setOnClickListener(new OnClickListener(){
 
 			@Override
@@ -97,26 +87,10 @@ public class DrawActivity extends ActionBarActivity {
 					return;
 				}
 				saveSketchToDatabase();
+				Intent i = new Intent(getApplicationContext(), ShowActivity.class);
+				db.init(db.getTurn()+1, Globals.SHOW_PHASE);
+				startActivity(i);
 				
-				/*
-				Bitmap img = canv.getImage();
-				String path = Globals.saveInternal(getApplicationContext(), Globals.IMAGE_PATH, cards.getImageName(), img);
-				
-				cards.addImageCard(path);
-				System.out.println(path);
-				
-				if(cards.isEnd()){
-					Intent i = new Intent(getApplicationContext(), ReviewActivity.class);
-					i.putExtra("stack", cards);
-					startActivity(i);
-				}
-				else{
-					Intent i = new Intent(getApplicationContext(), DescribeActivity.class);
-					i.putExtra("picture", path);
-					i.putExtra("stack", cards);
-					startActivity(i);
-				}
-				*/
 			}
 			
 		});

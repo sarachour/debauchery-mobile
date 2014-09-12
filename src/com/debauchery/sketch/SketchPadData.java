@@ -70,9 +70,7 @@ public class SketchPadData implements Parcelable{
     	this.actions.push(new FillRect(this.color,x,y,w,h));
     }
     public void close(){
-    	if(currentPath != null){
-    		actions.push(new Stroke(currentPath, this.color, this.thickness));
-    	}
+    	
     }
     public void start(float x, float y){
     	currentPath = new SketchPath(x,y);

@@ -11,22 +11,24 @@ import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.debauchery.data.CardStack;
+import com.debauchery.db.PersistantStateDatabase;
+import com.debauchery.sketch.SketchPad;
 
 public class ShowActivity  extends ActionBarActivity {
 	CardStack cards;
+	PersistantStateDatabase db;
 	protected void onCreate(Bundle savedInstanceState) {
 		Intent i = getIntent();
-		cards = (CardStack) i.getParcelableExtra("stack");
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.slide_act_describe);
+		setContentView(R.layout.slide_view_show);
 		
+		db = new PersistantStateDatabase(this);
+		db.init(db.getTurn(), Globals.SHOW_PHASE);
 		
-		final ImageView img =  (ImageView) findViewById(R.id.sv_show);
-		String path = "";
-		System.out.println(path);
-		File file = new File(path);
-		Uri uri = Uri.fromFile(file);
-		img.setImageURI(uri);
+		final SketchPad img =  (SketchPad) findViewById(R.id.sv_sketchpad);
+		img.lock();
+		img.loadData(db.getLastSketch());
+		
 		
 	}
 }

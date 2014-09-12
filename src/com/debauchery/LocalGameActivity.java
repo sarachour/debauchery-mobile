@@ -3,6 +3,7 @@ package com.debauchery;
 import java.io.File;
 
 import com.debauchery.data.CardStack;
+import com.debauchery.db.PersistantStateDatabase;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -23,9 +24,11 @@ import android.widget.ToggleButton;
 public class LocalGameActivity extends Activity {
 	int nPlayers = 0;
 	boolean startDraw = false;
+	PersistantStateDatabase db;
 	protected void onCreate(Bundle savedInstanceState) {
 		Intent i = getIntent();
-		String path = i.getStringExtra("picture");
+		
+		db = new PersistantStateDatabase(this);
 		
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_local);
@@ -77,20 +80,25 @@ public class LocalGameActivity extends Activity {
 				
 				CardStack c = new CardStack(nPlayers);
 				if(startDraw)
-					c.setStartMode(CardStack.DRAWING);
+					db.startWithDraw(true);
 				else
-					c.setStartMode(CardStack.DESCRIBING);
+					db.startWithDraw(false);
+				
 				if(c.isEnd()){
+					db.init(0, -1);
 					Intent i = new Intent(getApplicationContext(), ReviewActivity.class);
-					i.putExtra("stack", c);
 					startActivity(i);
 				}
 				else{
 					Intent i;
-					if(startDraw)
+					if(startDraw){
+						db.init(0, Globals.DRAW_PHASE);
 						i = new Intent(getApplicationContext(), DrawActivity.class);
-					else
+					}
+					else {
+						db.init(0, Globals.DESCRIBE_PHASE);
 						i = new Intent(getApplicationContext(), DescribeActivity.class);
+					}
 					
 					i.putExtra("stack", c);
 					startActivity(i);

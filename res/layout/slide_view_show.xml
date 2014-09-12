@@ -7,11 +7,9 @@
     android:orientation="vertical"
     tools:context=".DescribeActivity" >
 
-    <ImageView
-        android:id="@+id/sv_show"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="0.20"
-        android:src="@drawable/abc_ab_share_pack_holo_light" />
+    <com.debauchery.sketch.SketchPad
+        android:id="@+id/sv_sketchpad"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent" />
 
 </LinearLayout>

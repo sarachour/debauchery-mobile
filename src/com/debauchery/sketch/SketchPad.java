@@ -26,11 +26,16 @@ public class SketchPad extends SurfaceView implements SurfaceHolder.Callback {
     private static final int ACTION_DOWN = 1;
     private static final int ACTION_MOVE = 2;
     private static final int ACTION_UP = 3;
-   
+   private boolean locked = false;
     
     
     SketchPadData dat;
-    
+    public void lock(){
+    	locked = true;
+    }
+    public void unlock(){
+    	locked = false;
+    }
     private void init(){
     	dat = new SketchPadData();
     	paint = new Paint();
@@ -68,7 +73,7 @@ public class SketchPad extends SurfaceView implements SurfaceHolder.Callback {
     
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-
+    	if(locked) return false;
      
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
@@ -136,22 +141,27 @@ public class SketchPad extends SurfaceView implements SurfaceHolder.Callback {
         }
     }
 	public void fill() {
+		if(locked) return;
 		this.dat.fill(0,0,getWidth(),getHeight());
 		
 	}
 	public void redo() {
+		if(locked) return;
 		this.dat.redo();
 		
 	}
 	public void undo() {
+		if(locked) return;
 		this.dat.undo();
 		
 	}
 	public void setThickness(int actual) {
+		if(locked) return;
 		this.dat.setThickness(actual);
 		
 	}
 	public void setColor(int color) {
+		if(locked) return;
 		this.dat.setColor(color);
 		
 	}

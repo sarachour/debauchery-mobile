@@ -79,6 +79,7 @@ public class SketchDatabase {
 			    thickness + ","+
 			    alpha + ");");
 	}
+	
 	public void start(){
 	}
 	private void stroke(Stroke s, int TIDX, int IDX){
@@ -103,10 +104,13 @@ public class SketchDatabase {
 		wdb.close();
 	}
 	public void save(SketchPadData d, int turn){
-		String deleteTurn = "DELETE FROM " + TABLE_NAME + " WHERE " + TURN + " = " + turn;
+		//String deleteTurn = "DELETE FROM " + TABLE_NAME + " WHERE " + TURN + " = " + turn;
+		//wdb.execSQL(deleteTurn);
 		
 		SQLiteDatabase wdb = dbo.getWritableDatabase();
-		wdb.execSQL(deleteTurn);
+		int ndel = wdb.delete(TABLE_NAME, TURN+"="+turn, null);
+		
+		System.out.println("saving: "+d.actions.size()+",deleted: "+ndel);
 		for(int i=0; i < d.actions.size(); i++){
 			Action a = d.actions.get(i);
 		
@@ -139,14 +143,20 @@ public class SketchDatabase {
 		int i_index = cursor.getColumnIndex(INDEX);
 		
 		int lidx = -1;
+		int i=0;
+		boolean stroking = false;
 		if (cursor.moveToFirst()) {
 			cursor.moveToFirst();
 			do {
 				int type = cursor.getInt(type_index);
 				int idx = cursor.getInt(i_index);
-				System.out.println(type + "," + idx);
 				boolean newe = false;
-				if(idx != lidx) newe = true;
+				if(idx != lidx){
+					newe = true;
+					if(stroking) dat.close();
+					stroking = false;
+					i++;
+				}
 				lidx = idx;
 				if(type == FillRect.FILL_ID){
 					float x = cursor.getFloat(x_index);
@@ -168,6 +178,8 @@ public class SketchDatabase {
 						dat.setThickness(thick);
 						dat.setAlpha(alph);
 						dat.start(x, y);
+						stroking = true;
+						
 					}
 					else{
 						dat.add(x, y);
@@ -175,9 +187,11 @@ public class SketchDatabase {
 					
 				}
 				
+				
 			} while(cursor.moveToNext());
-			
+			if(stroking) dat.close();
 		}
+		System.out.println("load "+i);
 		return dat;
 	}
 }
