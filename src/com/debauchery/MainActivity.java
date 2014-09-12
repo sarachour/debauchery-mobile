@@ -18,6 +18,8 @@ public class MainActivity extends ActionBarActivity {
 		db.loadPrefs(this);
 		int phase = db.getPhase();
 		System.out.println("PHASE:"+phase);
+		return false;
+		/*
 		Intent i;
 		switch(phase){
 			case Globals.DRAW_PHASE:
@@ -43,7 +45,9 @@ public class MainActivity extends ActionBarActivity {
 			default:
 				return false;
 		}
+		
 		return true;
+		*/
 	}
 	protected void createMainActivity(){
 		setContentView(R.layout.activity_main);
@@ -63,9 +67,7 @@ public class MainActivity extends ActionBarActivity {
 		join.setOnClickListener(new OnClickListener(){
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				Intent i = new Intent(getApplicationContext(), DrawActivity.class);
-				startActivity(i);
+				
 			}
 		});	
 	}

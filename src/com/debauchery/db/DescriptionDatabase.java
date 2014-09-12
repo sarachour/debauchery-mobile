@@ -10,7 +10,7 @@ public class DescriptionDatabase {
 		private static final int DATABASE_VERSION = 2;
 		private static final String TURN = "Turn";
 		private static final String DESCRIPTION = "Desc";
-		private static final String DATABASE_NAME = "DescriptionDatabase";
+		private static final String DATABASE_NAME = "DebaucheryGameDescriptions";
 	    private static final String TABLE_NAME = "Descriptions";
 		DescriptionDatabaseOpenHelper dbo;
 		public class DescriptionDatabaseOpenHelper extends SQLiteOpenHelper {
@@ -50,7 +50,7 @@ public class DescriptionDatabase {
 		public String get(int turn){
 			String query = "Select * FROM " + TABLE_NAME + " WHERE " + TURN + " = " + turn;
 			
-			SQLiteDatabase wdb = dbo.getWritableDatabase();
+			SQLiteDatabase wdb = dbo.getReadableDatabase();
 			
 			Cursor cursor = wdb.rawQuery(query, null);
 			int desc_index = cursor.getColumnIndex(DESCRIPTION);

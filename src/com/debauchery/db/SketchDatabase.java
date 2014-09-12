@@ -33,7 +33,7 @@ public class SketchDatabase {
 	private static final String COLOR = "Color";
 	private static final String THICKNESS = "Thickness";
 	private static final String ALPHA = "Alpha";
-    private static final String DATABASE_NAME = "SketchDatabase";
+    private static final String DATABASE_NAME = "DebaucheryGameDrawings";
     private static final String TABLE_NAME = "Drawings";
     
 	//Store data

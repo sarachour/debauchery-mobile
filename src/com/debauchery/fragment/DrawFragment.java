@@ -1,123 +1,51 @@
 package com.debauchery.fragment;
 
+import com.debauchery.Globals;
 import com.debauchery.R;
-import com.debauchery.R.layout;
-import com.debauchery.sketch.ColorPickerView.OnColorChangedListener;
+import com.debauchery.fragment.iface.FragmentActionInterface;
+import com.debauchery.fragment.iface.FragmentTurnInterface;
 import com.debauchery.sketch.SketchPad;
-import com.debauchery.sketch.ColorPickerView;
 
-import android.app.Fragment;
-import android.os.Bundle;
-import android.view.LayoutInflater;
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.Intent;
+import android.support.v4.view.ViewPager;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.ViewGroup;
-import android.widget.ImageButton;
-import android.widget.SeekBar;
-import android.widget.SeekBar.OnSeekBarChangeListener;
-import android.widget.TextView;
 
-public class DrawFragment extends Fragment {
+public class DrawFragment extends FragmentActionInterface implements FragmentTurnInterface{
 	SketchPad sketchpad;
-	View view;
-	public DrawFragment() {
-
+	int turn;
+	public DrawFragment(int turn) {
+		super(R.layout.slide_act_sketch);
+		this.turn = turn;
+		// TODO Auto-generated constructor stub
 	}
-
-	public SketchPad getSketchpad() {
-		return sketchpad;
-	}
-
-	private void setupControls() {
-		ImageButton fill = (ImageButton) view.findViewById(R.id.fdc_fill);
-		ImageButton redo = (ImageButton) view.findViewById(R.id.fdc_redo);
-		ImageButton undo = (ImageButton) view.findViewById(R.id.fdc_undo);
-		ImageButton clear = (ImageButton) view.findViewById(R.id.fdc_clear);
-		SeekBar thickness = (SeekBar) view.findViewById(R.id.fdc_thickness);
-		ColorPickerView color = (ColorPickerView) view.findViewById(R.id.fdc_colorpicker);
-		
-		fill.setOnClickListener(new OnClickListener(){
-
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				sketchpad.fill();
-			}
-			
-		});
-		redo.setOnClickListener(new OnClickListener(){
-
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				sketchpad.redo();
-			}
-			
-		});
-		undo.setOnClickListener(new OnClickListener(){
-
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				sketchpad.undo();
-			}
-			
-		});
-		clear.setOnClickListener(new OnClickListener(){
-
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				sketchpad.clear();
-			}
-			
-		});
-		thickness.setOnSeekBarChangeListener(new OnSeekBarChangeListener(){
-			TextView label = (TextView) view.findViewById(R.id.fdc_thickness_label);
-			@Override
-			public void onProgressChanged(SeekBar arg0, int arg1, boolean arg2) {
-				// TODO Auto-generated method stub
-				int actual = (int) (((float) arg1)/100.0*50);
-				sketchpad.setThickness(actual);
-				label.setText(""+actual);
-			}
-
-			@Override
-			public void onStartTrackingTouch(SeekBar arg0) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void onStopTrackingTouch(SeekBar arg0) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			
-			
-		});
-		color.setOnColorChangedListener(new OnColorChangedListener(){
-			View swatch = (View) view.findViewById(R.id.fdc_colorpicker_swatch);
-			@Override
-			public void colorChanged(int color) {
-				// TODO Auto-generated method stub
-				sketchpad.setColor(color);
-				swatch.setBackgroundColor(color);
-			}
-			
-		});
-		
+	@Override
+	public void setTurn(int turn) {
+		this.turn = turn;
 		
 	}
-
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-		// Inflate the layout for this fragment
-		View v = inflater.inflate(R.layout.frag_draw, container, false);
-		view = v;
-		sketchpad = (SketchPad) v.findViewById(R.id.fd_sketchpad);
-		setupControls();
-		return v;
+	@Override
+	public void create() {
+		System.out.println("DRAW: create");
+		// TODO Auto-generated method stub
+		sketchpad =  (SketchPad) this.find(R.id.fd_sketchpad);
+		sketchpad.loadData(db.getSketch(turn));
 	}
+
+	@Override
+	public void save() {
+		System.out.println("SKETCH: save");
+		sketchpad =  (SketchPad) this.find(R.id.fd_sketchpad);
+		db.saveSketch(turn,sketchpad.getData());
+	}
+	
+	@Override
+	public void load() {
+		// TODO Auto-generated method stub
+		sketchpad =  (SketchPad) this.find(R.id.fd_sketchpad);
+		sketchpad.loadData(db.getSketch(turn));
+	}
+
+
 }

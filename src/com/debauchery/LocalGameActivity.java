@@ -1,102 +1,83 @@
 package com.debauchery;
 
-import java.io.File;
-
-import com.debauchery.data.CardStack;
 import com.debauchery.db.PersistantStateDatabase;
+import com.debauchery.fragment.LocalGameStateMachine;
+import com.debauchery.fragment.LocalGameStateMachine.LocalGameSettingsAdapter;
+import com.debauchery.fragment.LocalSettingsFragment.SettingsFinishedListener;
+import com.debauchery.fragment.iface.FragmentInterface;
+import com.debauchery.sketch.SketchPad;
 
-import android.app.Activity;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.Button;
-import android.widget.CompoundButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.SeekBar;
-import android.widget.SeekBar.OnSeekBarChangeListener;
-import android.widget.TextView;
-import android.widget.ToggleButton;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBar.Tab;
+import android.support.v7.app.ActionBarActivity;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.widget.ViewFlipper;
 
-public class LocalGameActivity extends Activity {
-	int nPlayers = 0;
-	boolean startDraw = false;
+public class LocalGameActivity extends ActionBarActivity implements SettingsFinishedListener {
+	FragmentInterface virt;
+	ViewPager views;
+	private LocalGameSettingsAdapter settings;
+	private LocalGameStateMachine game;
 	PersistantStateDatabase db;
+	
 	protected void onCreate(Bundle savedInstanceState) {
-		Intent i = getIntent();
-		
-		db = new PersistantStateDatabase(this);
-		
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_local);
+		db = new PersistantStateDatabase(this);
+		setContentView(R.layout.activity_local_game);
+		views = (ViewPager) this.findViewById(R.id.lg_flipper);
+		settings = new LocalGameSettingsAdapter(getSupportFragmentManager(), this);
+		game = new LocalGameStateMachine(getSupportFragmentManager());
+		views.setAdapter(settings);
+		//this.virt.load(this);
 		
-		Button start = (Button) findViewById(R.id.lv_start);
-		SeekBar nplayers_bar = (SeekBar) findViewById(R.id.lv_nplayers);
-		ToggleButton start_mode_but = (ToggleButton) findViewById(R.id.lv_start_mode);
-		TextView nplayers_label = (TextView) findViewById(R.id.lv_nplayers_prompt);
 		
-		nPlayers = nplayers_bar.getProgress();
-		nplayers_label.setText(nPlayers+"");
-		
-		nplayers_bar.setOnSeekBarChangeListener(new OnSeekBarChangeListener(){
-			TextView label = (TextView) findViewById(R.id.lv_nplayers_prompt);
-			@Override
-			public void onProgressChanged(SeekBar arg0, int arg1, boolean arg2) {
-				// TODO Auto-generated method stub
-				nPlayers = arg1;
-				label.setText(""+nPlayers);
-				
-			}
-
-			@Override
-			public void onStartTrackingTouch(SeekBar arg0) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void onStopTrackingTouch(SeekBar arg0) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-		});
-		start_mode_but.setOnCheckedChangeListener(new OnCheckedChangeListener(){
-
-			@Override
-			public void onCheckedChanged(CompoundButton arg0, boolean arg1) {
-				// TODO Auto-generated method stub
-				startDraw = arg1;
-			}
-			
-		});
-		start.setOnClickListener(new OnClickListener(){
-
-			@Override
-			public void onClick(View v) {
-				
-				if(nPlayers == 0){
-					db.init(0, -1);
-					Intent i = new Intent(getApplicationContext(), ReviewActivity.class);
-					startActivity(i);
-				}
-				else{
-					Intent i;
-					if(startDraw){
-						db.init(0, Globals.DRAW_PHASE);
-						i = new Intent(getApplicationContext(), DrawActivity.class);
-					}
-					else {
-						db.init(0, Globals.DESCRIBE_PHASE);
-						i = new Intent(getApplicationContext(), DescribeActivity.class);
-					}
-					startActivity(i);
-				}
-			}
-			
-		});
 	}
+	public boolean onCreateOptionsMenu(Menu menu) {
+	    // Inflate the menu items for use in the action bar
+	    MenuInflater inflater = getMenuInflater();
+	    inflater.inflate(R.menu.action, menu);
+	    return super.onCreateOptionsMenu(menu);
+	}
+	public boolean onOptionsItemSelected(MenuItem item) {
+	    // Handle presses on the action bar items
+	    switch (item.getItemId()) {
+	        case R.id.action_prev:
+	        	if(game.index() == 0){
+	        		views.removeAllViews();
+	        		views.setAdapter(settings);
+	        	}
+	        	else
+	        		game.prev(views);
+	            return true;
+	        case R.id.action_next:
+	        		game.next(views);
+	            return true;
+	        default:
+	            return super.onOptionsItemSelected(item);
+	    }
+	}
+	@Override
+	public void onRestoreInstanceState(Bundle savedInstanceState){
+		super.onRestoreInstanceState(savedInstanceState);
+	}
+	@Override
+	public void onSaveInstanceState(Bundle savedInstanceState) {
+		
+		super.onSaveInstanceState(savedInstanceState);
+		System.out.println("Saving state..");
+	}
+	@Override
+	public void trigger(int nplayers, boolean hasDrawing) {
+		// TODO Auto-generated method stub
+		System.out.println("settings finished");
+		game.init(views,nplayers,hasDrawing);
+		views.removeAllViews();
+		views.setAdapter(game);
+	}
+	
 }

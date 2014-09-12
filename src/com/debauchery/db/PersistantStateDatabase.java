@@ -12,47 +12,46 @@ public class PersistantStateDatabase {
 	public final static String  STATE_PHASE_INDEX = "phase";
 	public final static String  STATE_START_WITH_DRAW_INDEX = "turn0draw";
 	
-	int turn; //current turn
-	int phase; //current phase
 	boolean startedWithDrawing;
 	SketchDatabase sketchDB; //sketches
 	DescriptionDatabase descDB; //descriptions
 	SharedPreferences pref;
+	public static PersistantStateDatabase DB;
+	int TURN;
+	int PHASE;
 	public PersistantStateDatabase(Activity c){
 		sketchDB = new SketchDatabase(c);
 		descDB = new DescriptionDatabase(c);
-		this.loadPrefs(c);
-		
+		DB = this;
+		pref = c.getSharedPreferences("game_state",Context.MODE_PRIVATE);
 	}
 	public void loadPrefs(Activity c){
-		pref = c.getSharedPreferences("game_state",Context.MODE_PRIVATE);
-		turn = pref.getInt(STATE_TURN_INDEX, -1);
-		phase = pref.getInt(STATE_PHASE_INDEX, -1);
-		System.out.println("loaded: "+turn+","+phase);
+		TURN = pref.getInt(STATE_TURN_INDEX, -1);
+		PHASE = pref.getInt(STATE_PHASE_INDEX, -1);
 	}
-	public void saveSketch(SketchPadData sk){
+	public void saveSketch(int turn, SketchPadData sk){
 		sketchDB.save(sk, turn);
 	}
-	public SketchPadData getSketch(){
+	public SketchPadData getSketch(int turn){
 		return sketchDB.get(turn);
 	}
-	public SketchPadData getLastSketch(){
+	public SketchPadData getLastSketch(int turn){
 		return sketchDB.get(turn-1);
 	}
-	public void saveDescription(String s){
+	public void saveDescription(int turn, String s){
 		descDB.save(s, turn);
 	}
-	public String getDescription(){
+	public String getDescription(int turn){
 		return descDB.get(turn);
 	}
-	public String getLastDescription(){
+	public String getLastDescription(int turn){
 		return descDB.get(turn-1);
 	}
 	public int getTurn(){
-		return turn;
+		return TURN;
 	}
 	public int getPhase(){
-		return phase;
+		return PHASE;
 	}
 	public void init(int turn, int phase){
 		SharedPreferences.Editor wpref = pref.edit();

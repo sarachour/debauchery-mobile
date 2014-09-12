@@ -23,12 +23,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.debauchery.DrawActivity" android:noHistory="true"></activity>
-        <activity android:name="com.debauchery.DescribeActivity" android:noHistory="true"></activity>
         <activity android:name="com.debauchery.LocalGameActivity"></activity>
-        <activity android:name="com.debauchery.ReviewActivity" ></activity>
-        <activity android:name="com.debauchery.PromptActivity" android:noHistory="true"></activity>
-        <activity android:name="com.debauchery.ShowActivity" android:noHistory="true"></activity>
     </application>
 
 </manifest>
