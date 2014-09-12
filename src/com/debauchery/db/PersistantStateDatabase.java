@@ -42,7 +42,7 @@ public class PersistantStateDatabase {
 	public void saveDescription(String s){
 		descDB.save(s, turn);
 	}
-	public String getDescription(String s){
+	public String getDescription(){
 		return descDB.get(turn);
 	}
 	public String getLastDescription(){

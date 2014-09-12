@@ -20,11 +20,4 @@
         <requestFocus />
     </EditText>
 
-    <Button
-        android:id="@+id/sa_describe_done"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.20"
-        android:text="@string/action_done" />
-
 </LinearLayout>

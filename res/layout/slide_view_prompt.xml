@@ -1,7 +1,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/describe_view"
-    style="@style/CardStyle"
+    style="@style/AppTheme"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -10,7 +10,7 @@
 
     <TextView
         android:id="@+id/sv_prompt"
-        style="@style/InsetStyle"
+        style="@style/AppTheme"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="0.20"

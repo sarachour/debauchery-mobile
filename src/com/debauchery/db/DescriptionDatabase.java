@@ -10,7 +10,7 @@ public class DescriptionDatabase {
 		private static final int DATABASE_VERSION = 2;
 		private static final String TURN = "Turn";
 		private static final String DESCRIPTION = "Desc";
-		private static final String DATABASE_NAME = "Game";
+		private static final String DATABASE_NAME = "DescriptionDatabase";
 	    private static final String TABLE_NAME = "Descriptions";
 		DescriptionDatabaseOpenHelper dbo;
 		public class DescriptionDatabaseOpenHelper extends SQLiteOpenHelper {
@@ -32,7 +32,7 @@ public class DescriptionDatabase {
 			@Override
 			public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 				db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
-			      onCreate(db);
+			    onCreate(db);
 			}
 		}
 		public DescriptionDatabase(Context c){
@@ -42,9 +42,10 @@ public class DescriptionDatabase {
 			String deleteTurn = "DELETE FROM " + TABLE_NAME + " WHERE " + TURN + " = " + turn;
 			SQLiteDatabase wdb = dbo.getWritableDatabase();
 			wdb.execSQL(deleteTurn);
+			wdb.delete(TABLE_NAME, TURN+"="+turn, null);
 			wdb.execSQL("INSERT INTO "+TABLE_NAME+" VALUES(" +
 				    turn + "," +
-				    desc + ");");
+				    "\""+desc + "\")");
 		}
 		public String get(int turn){
 			String query = "Select * FROM " + TABLE_NAME + " WHERE " + TURN + " = " + turn;
