@@ -26,10 +26,11 @@ public class DescribeFragment extends FragmentActionInterface implements Fragmen
 	@Override
 	public void create() {
 		// TODO Auto-generated method stub
+		System.out.println("DESCRIBE: create");
+		/*
 		final EditText edit =  (EditText) find(R.id.sa_describe);
 		description = db.getDescription(turn);
 		edit.setText(description);
-		System.out.println("DESCRIBE: create");
 		if(turn == 0){
 			edit.setHint("Please describe what you want the next person to draw.");
 		}
@@ -42,7 +43,8 @@ public class DescribeFragment extends FragmentActionInterface implements Fragmen
 				return false;
 			}
 			
-		});
+		})
+		*/;
 	}
 	
 	@Override

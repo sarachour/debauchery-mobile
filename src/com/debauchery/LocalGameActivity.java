@@ -28,7 +28,7 @@ public class LocalGameActivity extends ActionBarActivity implements SettingsFini
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		db = new PersistantStateDatabase(this);
-		setContentView(R.layout.activity_local_game);
+		setContentView(R.layout.activity_local);
 		views = (ViewPager) this.findViewById(R.id.lg_flipper);
 		settings = new LocalGameSettingsAdapter(getSupportFragmentManager(), this);
 		game = new LocalGameStateMachine(getSupportFragmentManager());

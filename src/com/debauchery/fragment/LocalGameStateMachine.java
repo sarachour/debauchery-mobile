@@ -47,9 +47,9 @@ public class LocalGameStateMachine extends FragmentStatePagerAdapter {
 		
 	}
 	final int DRAW=0;
-	final int DESCRIBE=1;
-	final int PROMPT=2;
-	final int SHOW=3;
+	final int DESCRIBE=2;
+	final int PROMPT=3;
+	final int SHOW=1;
 	DrawFragment drawFragment;
 	DescribeFragment describeFragment;
 	PromptFragment promptFragment;
