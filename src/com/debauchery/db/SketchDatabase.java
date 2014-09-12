@@ -17,7 +17,11 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-
+/*
+ * TODO: Split into Style, Stroke, Fill, Action, tables in database.
+ * 
+ * 
+ */
 public class SketchDatabase {
 	private static final int DATABASE_VERSION = 2;
 	private static final String TURN = "Turn";

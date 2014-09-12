@@ -21,12 +21,14 @@ public class PersistantStateDatabase {
 	public PersistantStateDatabase(Activity c){
 		sketchDB = new SketchDatabase(c);
 		descDB = new DescriptionDatabase(c);
-		pref = c.getPreferences(Activity.MODE_PRIVATE);
-		if(pref.contains(STATE_TURN_INDEX)) turn = pref.getInt(STATE_TURN_INDEX, 0);
-		else turn = -1;
-		if(pref.contains(STATE_PHASE_INDEX)) phase = pref.getInt(STATE_PHASE_INDEX, Globals.DESCRIBE_PHASE);
-		else phase = -1;
+		this.loadPrefs(c);
 		
+	}
+	public void loadPrefs(Activity c){
+		pref = c.getSharedPreferences("game_state",Context.MODE_PRIVATE);
+		turn = pref.getInt(STATE_TURN_INDEX, -1);
+		phase = pref.getInt(STATE_PHASE_INDEX, -1);
+		System.out.println("loaded: "+turn+","+phase);
 	}
 	public void saveSketch(SketchPadData sk){
 		sketchDB.save(sk, turn);
@@ -54,22 +56,16 @@ public class PersistantStateDatabase {
 	}
 	public void init(int turn, int phase){
 		SharedPreferences.Editor wpref = pref.edit();
-		wpref.putInt(STATE_TURN_INDEX, turn);
-		wpref.putInt(STATE_PHASE_INDEX, phase);
+		System.out.println("set:"+turn+","+phase);
+		wpref.putInt(STATE_TURN_INDEX, turn).commit();
+		wpref.putInt(STATE_PHASE_INDEX, phase).commit();
 		if(turn == 0){
 			if(phase == Globals.DRAW_PHASE)
-				wpref.putBoolean(STATE_START_WITH_DRAW_INDEX, true);
+				wpref.putBoolean(STATE_START_WITH_DRAW_INDEX, true).commit();
 			else
-				wpref.putBoolean(STATE_START_WITH_DRAW_INDEX, false);
-			wpref.commit();
+				wpref.putBoolean(STATE_START_WITH_DRAW_INDEX, false).commit();
 		}
 	}
-	public void startWithDraw(boolean b) {
-		// TODO Auto-generated method stub
-		SharedPreferences.Editor wpref = pref.edit();
-		wpref.putBoolean(STATE_START_WITH_DRAW_INDEX, b);
-		wpref.commit();
-		
-	}
+	
 	
 }

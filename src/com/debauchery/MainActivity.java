@@ -14,39 +14,8 @@ import android.widget.Button;
 
 public class MainActivity extends ActionBarActivity {
 	PersistantStateDatabase db;
-	@Override
-	public void onRestoreInstanceState(Bundle savedInstanceState){
-		super.onRestoreInstanceState(savedInstanceState);
-		System.out.println("loading state");
-	}
-	protected void createView(){
-		setContentView(R.layout.activity_main);
-		
-		final Button local = (Button) findViewById(R.id.main_local);
-		
-		local.setOnClickListener(new OnClickListener(){
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				Intent i = new Intent(getApplicationContext(), LocalGameActivity.class);
-				startActivity(i);
-			}
-		});
-		
-		final Button join = (Button) findViewById(R.id.main_join);
-		join.setOnClickListener(new OnClickListener(){
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				Intent i = new Intent(getApplicationContext(), DrawActivity.class);
-				startActivity(i);
-			}
-		});	
-	}
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		db = new PersistantStateDatabase(this);
+	protected boolean loadSuspendedActivity(){
+		db.loadPrefs(this);
 		int phase = db.getPhase();
 		System.out.println("PHASE:"+phase);
 		Intent i;
@@ -72,7 +41,54 @@ public class MainActivity extends ActionBarActivity {
 				startActivity(i);
 				break;
 			default:
-				createView();
+				return false;
+		}
+		return true;
+	}
+	protected void createMainActivity(){
+		setContentView(R.layout.activity_main);
+		
+		final Button local = (Button) findViewById(R.id.main_local);
+		
+		local.setOnClickListener(new OnClickListener(){
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Intent i = new Intent(getApplicationContext(), LocalGameActivity.class);
+				startActivity(i);
+			}
+		});
+		
+		final Button join = (Button) findViewById(R.id.main_join);
+		join.setOnClickListener(new OnClickListener(){
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Intent i = new Intent(getApplicationContext(), DrawActivity.class);
+				startActivity(i);
+			}
+		});	
+	}
+	@Override
+	public void onRestoreInstanceState(Bundle savedInstanceState){
+		System.out.println("MAIN RESTORE");
+		super.onRestoreInstanceState(savedInstanceState);
+	}
+	@Override
+	protected void onRestart (){
+		super.onRestart();
+		System.out.println("MAIN RESTART");
+		if(!this.loadSuspendedActivity()){
+			this.createMainActivity();
+		}
+	}
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		System.out.println("MAIN CREATE");
+		db = new PersistantStateDatabase(this);
+		if(!this.loadSuspendedActivity()){
+			this.createMainActivity();
 		}
 			
 	}

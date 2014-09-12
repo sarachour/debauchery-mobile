@@ -78,13 +78,7 @@ public class LocalGameActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				
-				CardStack c = new CardStack(nPlayers);
-				if(startDraw)
-					db.startWithDraw(true);
-				else
-					db.startWithDraw(false);
-				
-				if(c.isEnd()){
+				if(nPlayers == 0){
 					db.init(0, -1);
 					Intent i = new Intent(getApplicationContext(), ReviewActivity.class);
 					startActivity(i);
@@ -99,8 +93,6 @@ public class LocalGameActivity extends Activity {
 						db.init(0, Globals.DESCRIBE_PHASE);
 						i = new Intent(getApplicationContext(), DescribeActivity.class);
 					}
-					
-					i.putExtra("stack", c);
 					startActivity(i);
 				}
 			}
