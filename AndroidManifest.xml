@@ -25,10 +25,10 @@
         </activity>
         <activity android:name="com.debauchery.DrawActivity" android:noHistory="true"></activity>
         <activity android:name="com.debauchery.DescribeActivity" android:noHistory="true"></activity>
-        <activity android:name="com.debauchery.LocalGameActivity" android:noHistory="true"></activity>
-        <activity android:name="com.debauchery.ReviewActivity" android:noHistory="true"></activity>
-        <activity android:name="com.debauchery.PromptActivity"></activity>
-        <activity android:name="com.debauchery.ShowActivity"></activity>
+        <activity android:name="com.debauchery.LocalGameActivity"></activity>
+        <activity android:name="com.debauchery.ReviewActivity" ></activity>
+        <activity android:name="com.debauchery.PromptActivity" android:noHistory="true"></activity>
+        <activity android:name="com.debauchery.ShowActivity" android:noHistory="true"></activity>
     </application>
 
 </manifest>

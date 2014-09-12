@@ -16,13 +16,4 @@
         android:layout_weight="0.20"
         tools:layout="@layout/frag_draw" />
 
-    <Button
-        android:id="@+id/sa_sketch_done"
-        style="@drawable/inset_shape"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.20"
-        android:text="@string/action_done"
-        android:textAppearance="@style/SubHeaderWhiteTextStyle" />
-
 </LinearLayout>
