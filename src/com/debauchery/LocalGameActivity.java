@@ -2,12 +2,13 @@ package com.debauchery;
 
 import com.debauchery.db.PersistantStateDatabase;
 import com.debauchery.fragment.LocalGameStateMachine;
-import com.debauchery.fragment.LocalGameStateMachine.LocalGameSettingsAdapter;
+import com.debauchery.fragment.LocalGameStateMachine.LocalGameSettings;
 import com.debauchery.fragment.LocalSettingsFragment.SettingsFinishedListener;
 import com.debauchery.fragment.iface.FragmentInterface;
 import com.debauchery.sketch.SketchPad;
 
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
@@ -18,21 +19,21 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.ViewFlipper;
 
-public class LocalGameActivity extends ActionBarActivity implements SettingsFinishedListener {
+public class LocalGameActivity extends FragmentActivity implements SettingsFinishedListener {
 	FragmentInterface virt;
 	ViewPager views;
-	private LocalGameSettingsAdapter settings;
+	private LocalGameSettings settings;
 	private LocalGameStateMachine game;
 	PersistantStateDatabase db;
 	
 	protected void onCreate(Bundle savedInstanceState) {
+		int container = R.id.lg_frag_container;
 		super.onCreate(savedInstanceState);
 		db = new PersistantStateDatabase(this);
 		setContentView(R.layout.activity_local);
-		views = (ViewPager) this.findViewById(R.id.lg_flipper);
-		settings = new LocalGameSettingsAdapter(getSupportFragmentManager(), this);
-		game = new LocalGameStateMachine(getSupportFragmentManager());
-		views.setAdapter(settings);
+		settings = new LocalGameSettings(getSupportFragmentManager(), container, this);
+		game = new LocalGameStateMachine(getSupportFragmentManager(), container);
+		//views.setAdapter(settings);
 		//this.virt.load(this);
 		
 		
@@ -49,13 +50,13 @@ public class LocalGameActivity extends ActionBarActivity implements SettingsFini
 	        case R.id.action_prev:
 	        	if(game.index() == 0){
 	        		views.removeAllViews();
-	        		views.setAdapter(settings);
+	        		//views.setAdapter(settings);
 	        	}
 	        	else
-	        		game.prev(views);
+	        		game.prev();
 	            return true;
 	        case R.id.action_next:
-	        		game.next(views);
+	        		game.next();
 	            return true;
 	        default:
 	            return super.onOptionsItemSelected(item);
@@ -75,9 +76,9 @@ public class LocalGameActivity extends ActionBarActivity implements SettingsFini
 	public void trigger(int nplayers, boolean hasDrawing) {
 		// TODO Auto-generated method stub
 		System.out.println("settings finished");
-		game.init(views,nplayers,hasDrawing);
+		game.init(nplayers,hasDrawing);
 		views.removeAllViews();
-		views.setAdapter(game);
+		//views.setAdapter(game);
 	}
 	
 }

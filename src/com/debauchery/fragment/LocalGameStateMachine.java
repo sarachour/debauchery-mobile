@@ -17,56 +17,42 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class LocalGameStateMachine extends FragmentStatePagerAdapter {
+public class LocalGameStateMachine {
 	int nstates;
 	int nplayers;
 	boolean startWithDrawing=false;
-	FragmentInterface currentFragment = null;
+	
 	PersistantStateDatabase db;
 	int idx;
 	
-	public static class LocalGameSettingsAdapter extends FragmentStatePagerAdapter{
-		SettingsFinishedListener listener;
-		public LocalGameSettingsAdapter(FragmentManager fm, SettingsFinishedListener sel) {
-			super(fm);
-			this.listener = sel;
+	public static class LocalGameSettings {
+		public LocalGameSettings(FragmentManager fm, int parent_id, SettingsFinishedListener sel) {
+			LocalSettingsFragment ls = new LocalSettingsFragment(sel);
+			fm.beginTransaction().replace(parent_id,ls).commit();	
 			// TODO Auto-generated constructor stub
 		}
-
-		@Override
-		public Fragment getItem(int arg0) {
-			// TODO Auto-generated method stub
-			return new LocalSettingsFragment(listener);
-			
-		}
-
-		@Override
-		public int getCount() {
-			return 1;
-		}
+		
 		
 	}
 	final int DRAW=0;
 	final int DESCRIBE=2;
 	final int PROMPT=3;
 	final int SHOW=1;
-	DrawFragment drawFragment;
-	DescribeFragment describeFragment;
-	PromptFragment promptFragment;
-	ShowFragment showFragment;
-	FragmentTurnInterface current;
-	
-	public LocalGameStateMachine(FragmentManager supportFragmentManager) {
-		super(supportFragmentManager);
+	FragmentInterface currentFragment = null;
+	FragmentManager sp;
+	int parent_id;
+	public LocalGameStateMachine(FragmentManager supportFragmentManager, int sp_id) {
+		sp = supportFragmentManager;
+		this.parent_id = sp_id;
 		
 	}
-	public void init(ViewPager p, int nplayers, boolean startWithDrawing){
+	public void init(int nplayers, boolean startWithDrawing){
 		this.nplayers = nplayers;
 		this.startWithDrawing = startWithDrawing;
 		this.nstates = nplayers*2 + nplayers;
 		System.out.println("states:"+this.nstates+",players:"+this.nplayers);
 		idx = 0;
-		this.set(p);
+		this.set();
 	}
 	private int getTurn(int i){
 
@@ -108,52 +94,47 @@ public class LocalGameStateMachine extends FragmentStatePagerAdapter {
 			
 			
 	}
-	@Override
-	public int getCount() {
-		// TODO Auto-generated method stub
-		return 4;
-	}
-	@Override
-	public Fragment getItem(int i) {
+	public Fragment getItem(int i, int t) {
 		System.out.println("getting item.");
 		
 		switch(i){
 			case DRAW:
-				drawFragment= new DrawFragment(0); return drawFragment;
+				currentFragment= new DrawFragment(t); return currentFragment;
 			case DESCRIBE:
-				describeFragment=  new DescribeFragment(0); return describeFragment;
+				currentFragment=  new DescribeFragment(t); return currentFragment;
 			case PROMPT:
-				promptFragment=  new PromptFragment(0); return promptFragment;
+				currentFragment=  new PromptFragment(t); return currentFragment;
 			case SHOW:
-				showFragment=  new ShowFragment(0); return showFragment;
+				currentFragment=  new ShowFragment(t); return currentFragment;
 			default:
 				return null;
 		}
 		
 	}
+	
 	public int index(){
 		return idx;
 	}
-	public void prev(ViewPager pager){
-		((FragmentInterface) this.getItem(idx)).save();
-
+	public void prev(){
 		idx--;
 		System.out.println("count:"+idx);
-		this.set(pager);
+		this.set();
 	}
-	private void set(final ViewPager pager){
+	private void set(){
 		final int viewstate = this.getState(idx);
 		final int turn = this.getTurn(idx);
 		
-		pager.setCurrentItem(viewstate);
+		if(currentFragment != null)
+			currentFragment.save();
+		sp.beginTransaction().replace(parent_id, this.getItem(viewstate, turn)).commit();	
 		
 		System.out.println("idx:"+idx+" turn:"+turn+" view:"+viewstate);
 		
 	}
-	public void next(ViewPager pager){
+	public void next(){
 		//save current
 		idx++;//increment index
-		this.set(pager);
+		this.set();
 		
 	}
 	
