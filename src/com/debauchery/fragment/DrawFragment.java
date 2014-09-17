@@ -2,7 +2,7 @@ package com.debauchery.fragment;
 
 import com.debauchery.Globals;
 import com.debauchery.R;
-import com.debauchery.fragment.iface.FragmentActionInterface;
+import com.debauchery.fragment.iface.FragmentInterface;
 import com.debauchery.fragment.iface.FragmentTurnInterface;
 import com.debauchery.sketch.SketchPad;
 
@@ -12,7 +12,7 @@ import android.content.Intent;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 
-public class DrawFragment extends FragmentActionInterface implements FragmentTurnInterface{
+public class DrawFragment extends FragmentInterface implements FragmentTurnInterface{
 	SketchPad sketchpad;
 	int turn;
 	public DrawFragment(int turn) {

@@ -77,7 +77,6 @@ public class LocalGameActivity extends FragmentActivity implements SettingsFinis
 		// TODO Auto-generated method stub
 		System.out.println("settings finished");
 		game.init(nplayers,hasDrawing);
-		views.removeAllViews();
 		//views.setAdapter(game);
 	}
 	

@@ -2,9 +2,8 @@ package com.debauchery.fragment;
 
 import com.debauchery.Globals;
 import com.debauchery.R;
-import com.debauchery.ReviewActivity;
 import com.debauchery.db.PersistantStateDatabase;
-import com.debauchery.fragment.iface.FragmentActionInterface;
+import com.debauchery.fragment.iface.FragmentInterface;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -23,7 +22,7 @@ import android.widget.ToggleButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 
-public class LocalSettingsFragment extends FragmentActionInterface{
+public class LocalSettingsFragment extends FragmentInterface{
 	public interface SettingsFinishedListener{
 		public void trigger(int nPlayers, boolean startWithDraw);
 	}

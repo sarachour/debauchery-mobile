@@ -1,27 +1,12 @@
 package com.debauchery.fragment.iface;
 
-import com.debauchery.Globals;
-import com.debauchery.R;
 import com.debauchery.db.PersistantStateDatabase;
 
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.CompoundButton;
-import android.widget.SeekBar;
-import android.widget.TextView;
-import android.widget.ToggleButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
-import android.widget.SeekBar.OnSeekBarChangeListener;
 
 public abstract class FragmentInterface extends Fragment {
 	protected PersistantStateDatabase db;

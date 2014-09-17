@@ -3,7 +3,7 @@ package com.debauchery.fragment;
 import com.debauchery.Globals;
 import com.debauchery.R;
 import com.debauchery.db.PersistantStateDatabase;
-import com.debauchery.fragment.iface.FragmentActionInterface;
+import com.debauchery.fragment.iface.FragmentInterface;
 import com.debauchery.fragment.iface.FragmentTurnInterface;
 
 import android.app.Activity;
@@ -14,7 +14,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
 
-public class DescribeFragment extends FragmentActionInterface implements FragmentTurnInterface{
+public class DescribeFragment extends FragmentInterface implements FragmentTurnInterface{
 	String description="";
 	int turn;
 	public DescribeFragment(int turn) {
@@ -23,7 +23,6 @@ public class DescribeFragment extends FragmentActionInterface implements Fragmen
 		// TODO Auto-generated constructor stub
 	}
 
-	@Override
 	public void create() {
 		// TODO Auto-generated method stub
 		System.out.println("DESCRIBE: create");
@@ -47,14 +46,12 @@ public class DescribeFragment extends FragmentActionInterface implements Fragmen
 		*/;
 	}
 	
-	@Override
 	public void save() {
 		System.out.println("DESCRIBE: save "+turn+","+description);
 		// TODO Auto-generated method stub
 		db.saveDescription(turn,description);
 	}
 
-	@Override
 	public void load() {
 		// TODO Auto-generated method stub
 		final EditText edit =  (EditText) find(R.id.sa_describe);

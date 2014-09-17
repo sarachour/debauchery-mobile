@@ -3,8 +3,8 @@ package com.debauchery.fragment;
 import com.debauchery.Globals;
 import com.debauchery.R;
 import com.debauchery.db.PersistantStateDatabase;
+import com.debauchery.fragment.iface.FragmentInterface;
 import com.debauchery.fragment.iface.FragmentTurnInterface;
-import com.debauchery.fragment.iface.FragmentViewInterface;
 import com.debauchery.sketch.SketchPad;
 
 import android.app.Activity;
@@ -12,7 +12,7 @@ import android.content.Intent;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class ShowFragment extends FragmentViewInterface implements FragmentTurnInterface {
+public class ShowFragment extends FragmentInterface implements FragmentTurnInterface {
 	int turn;
 	public ShowFragment(int turn) {
 		super(R.layout.slide_view_show);
