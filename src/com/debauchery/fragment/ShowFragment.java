@@ -14,6 +14,7 @@ import android.view.MenuItem;
 
 public class ShowFragment extends FragmentInterface implements FragmentTurnInterface {
 	int turn;
+	private static ShowFragment INSTANCE = null;
 	public ShowFragment(int turn) {
 		super(R.layout.slide_view_show);
 		this.turn = turn;
@@ -44,5 +45,12 @@ public class ShowFragment extends FragmentInterface implements FragmentTurnInter
 	@Override
 	public void setTurn(int turn) {
 		this.turn = turn;
+	}
+
+	public static ShowFragment instance(int t) {
+		// TODO Auto-generated method stub
+		if(INSTANCE == null) INSTANCE = new ShowFragment(t);
+		else INSTANCE.setTurn(t);
+		return INSTANCE;
 	}
 }

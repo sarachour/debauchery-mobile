@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 public class PromptFragment extends FragmentInterface implements FragmentTurnInterface{
+	private static PromptFragment INSTANCE;
 	int turn;
 	public PromptFragment(int turn) {
 		super(R.layout.slide_view_prompt);
@@ -46,5 +47,10 @@ public class PromptFragment extends FragmentInterface implements FragmentTurnInt
 		System.out.println("PROMPT:"+pr);
 		prompt.setText(pr);
 	}
-	
+	public static PromptFragment instance(int t) {
+		// TODO Auto-generated method stub
+		if(INSTANCE == null) INSTANCE = new PromptFragment(t);
+		else INSTANCE.setTurn(t);
+		return INSTANCE;
+	}
 }

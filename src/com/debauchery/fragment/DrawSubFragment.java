@@ -6,8 +6,8 @@ import com.debauchery.sketch.ColorPickerView.OnColorChangedListener;
 import com.debauchery.sketch.SketchPad;
 import com.debauchery.sketch.ColorPickerView;
 
-import android.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -20,8 +20,8 @@ import android.widget.TextView;
 public class DrawSubFragment extends Fragment {
 	SketchPad sketchpad;
 	View view;
-	public DrawSubFragment() {
-
+	public DrawSubFragment(SketchPad sk) {
+		this.sketchpad = sk;
 	}
 
 	public SketchPad getSketchpad() {
@@ -114,9 +114,8 @@ public class DrawSubFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		// Inflate the layout for this fragment
-		View v = inflater.inflate(R.layout.frag_draw, container, false);
+		View v = inflater.inflate(R.layout.frag_draw_controls, container, false);
 		view = v;
-		sketchpad = (SketchPad) v.findViewById(R.id.fd_sketchpad);
 		setupControls();
 		return v;
 	}

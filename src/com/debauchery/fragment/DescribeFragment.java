@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
 
 public class DescribeFragment extends FragmentInterface implements FragmentTurnInterface{
+	private static DescribeFragment INSTANCE;
 	String description="";
 	int turn;
 	public DescribeFragment(int turn) {
@@ -47,7 +48,6 @@ public class DescribeFragment extends FragmentInterface implements FragmentTurnI
 	}
 	
 	public void save() {
-		System.out.println("DESCRIBE: save "+turn+","+description);
 		// TODO Auto-generated method stub
 		db.saveDescription(turn,description);
 	}
@@ -66,6 +66,11 @@ public class DescribeFragment extends FragmentInterface implements FragmentTurnI
 		
 	}
     
-	
+	public static DescribeFragment instance(int t) {
+		// TODO Auto-generated method stub
+		if(INSTANCE == null) INSTANCE = new DescribeFragment(t);
+		else INSTANCE.setTurn(t);
+		return INSTANCE;
+	}
 
 }

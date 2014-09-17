@@ -71,7 +71,7 @@ public class LocalGameStateMachine {
 		//the first card
 		//past the review cards
 		if(i >= nplayers*2+nplayers){
-			return SHOW;
+			i = nplayers*2 + nplayers-1;
 		}
 		
 		boolean onView;
@@ -80,7 +80,13 @@ public class LocalGameStateMachine {
 			else onView = true;
 		}
 		else{
-			onView = false;
+			onView = true;
+		}
+		if(onView){
+			System.out.println("on viewing phase");
+		}
+		else{
+			System.out.println("on acting phase");
 		}
 		int turn = getTurn(st);
 		if((startWithDrawing && turn%2==0) || (!startWithDrawing && turn%2==1)){
@@ -103,7 +109,7 @@ public class LocalGameStateMachine {
 			case DESCRIBE:
 				currentFragment=  new DescribeFragment(t); return currentFragment;
 			case PROMPT:
-				currentFragment=  new PromptFragment(t); return currentFragment;
+				currentFragment= new PromptFragment(t); return currentFragment;
 			case SHOW:
 				currentFragment=  new ShowFragment(t); return currentFragment;
 			default:
@@ -126,7 +132,6 @@ public class LocalGameStateMachine {
 		
 		if(currentFragment != null)
 			currentFragment.save();
-		if(currentFragment != null) sp.beginTransaction().remove(currentFragment).commit();
 		sp.beginTransaction().replace(parent_id, this.getItem(viewstate, turn)).commit();	
 		
 		System.out.println("idx:"+idx+" turn:"+turn+" view:"+viewstate);
