@@ -28,7 +28,9 @@ public class PromptFragment extends FragmentInterface implements FragmentTurnInt
 	public void create() {
 		// TODO Auto-generated method stub
 		final TextView prompt =  (TextView) find(R.id.sv_prompt);
-		prompt.setText(db.getDescription(turn));
+		String pr = db.getDescription(turn);
+		System.out.println("PROMPT:"+pr);
+		prompt.setText(pr);
 	}
 
 	@Override
@@ -39,6 +41,10 @@ public class PromptFragment extends FragmentInterface implements FragmentTurnInt
 	@Override
 	public void load() {
 		// TODO Auto-generated method stub
+		final TextView prompt =  (TextView) find(R.id.sv_prompt);
+		String pr = db.getDescription(turn);
+		System.out.println("PROMPT:"+pr);
+		prompt.setText(pr);
 	}
 	
 }

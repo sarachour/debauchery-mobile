@@ -5,13 +5,13 @@
         android:id="@+id/action_next"
         android:orderInCategory="200"
         android:icon="@drawable/right"
-        android:title="Next"
-        app:showAsAction="ifRoom"/>
+        android:title="next"
+        android:showAsAction="ifRoom"/>
 
      <item
         android:id="@+id/action_prev"
         android:orderInCategory="100"
         android:icon="@drawable/left"
-        android:title="Back"
-        app:showAsAction="ifRoom"/>
+        android:title="prev"
+        android:showAsAction="ifRoom"/>
 </menu>

@@ -126,6 +126,7 @@ public class LocalGameStateMachine {
 		
 		if(currentFragment != null)
 			currentFragment.save();
+		if(currentFragment != null) sp.beginTransaction().remove(currentFragment).commit();
 		sp.beginTransaction().replace(parent_id, this.getItem(viewstate, turn)).commit();	
 		
 		System.out.println("idx:"+idx+" turn:"+turn+" view:"+viewstate);

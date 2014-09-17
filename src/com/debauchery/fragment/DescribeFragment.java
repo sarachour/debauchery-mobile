@@ -26,7 +26,7 @@ public class DescribeFragment extends FragmentInterface implements FragmentTurnI
 	public void create() {
 		// TODO Auto-generated method stub
 		System.out.println("DESCRIBE: create");
-		/*
+		
 		final EditText edit =  (EditText) find(R.id.sa_describe);
 		description = db.getDescription(turn);
 		edit.setText(description);
@@ -42,8 +42,8 @@ public class DescribeFragment extends FragmentInterface implements FragmentTurnI
 				return false;
 			}
 			
-		})
-		*/;
+		});
+		
 	}
 	
 	public void save() {
