@@ -44,9 +44,9 @@ public class LocalGameStateManager {
 		}
 	}
 	final int DRAW=0;
+	final int SHOW=1;
 	final int DESCRIBE=2;
 	final int PROMPT=3;
-	final int SHOW=1;
 	final int PASS=4;
 	final int DONE=5;
 	final String INDEX_KEY = "LOCALGAMESTATE_INDEX";
@@ -57,6 +57,8 @@ public class LocalGameStateManager {
 	FragmentManager sp;
 	GameStateChangedListener listener = null;
 	int parent_id;
+	int curr_turn=-1;
+	int curr_state=-1;
 	public LocalGameStateManager(FragmentManager supportFragmentManager, int sp_id) {
 		sp = supportFragmentManager;
 		this.parent_id = sp_id;
@@ -159,15 +161,17 @@ public class LocalGameStateManager {
 		return idx;
 	}
 	public void prev(){
-		idx--;
+		if(idx >= 0) idx--;
 		System.out.println("count:"+idx);
 		this.set();
 	}
 	private void set(){
 		final int viewstate = this.getState(idx);
 		final int turn = this.getTurn(idx);
-		
-		
+		if(viewstate == curr_state && turn == curr_turn)
+			return;
+		curr_state = viewstate;
+		curr_turn = turn;
 		if(currentFragment != null)
 			currentFragment.save();
 		sp.beginTransaction().replace(parent_id, this.getItem(viewstate, turn)).commit();	
@@ -177,7 +181,7 @@ public class LocalGameStateManager {
 	}
 	public void next(){
 		//save current
-		idx++;//increment index
+		if(idx < nstates) idx++;//increment index
 		this.set();
 		
 	}
