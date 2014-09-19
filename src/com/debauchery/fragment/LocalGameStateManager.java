@@ -4,7 +4,7 @@ import com.debauchery.R;
 import com.debauchery.fragment.LocalSettingsFragment.SettingsFinishedListener;
 import com.debauchery.fragment.iface.FragmentInterface;
 import com.debauchery.fragment.iface.FragmentTurnInterface;
-import com.debauchery.state.PersistantStateDatabase;
+import com.debauchery.state.Databases;
 import com.debauchery.state.Preferences;
 
 import android.content.Context;
@@ -47,7 +47,8 @@ public class LocalGameStateManager {
 	final int DESCRIBE=2;
 	final int PROMPT=3;
 	final int SHOW=1;
-	
+	final int PASS=4;
+	final int DONE=5;
 	final String INDEX_KEY = "LOCALGAMESTATE_INDEX";
 	final String SDRAW_KEY = "LOCALGAMESTATE_SDRAW";
 	final String NPLAYERS_KEY = "LOCALGAMESTATE_NPLAYERS";
@@ -87,7 +88,9 @@ public class LocalGameStateManager {
 		this.set();
 	}
 	private int getTurn(int i){
-
+		if(i < 0){
+			return 0;
+		}
 		if(i < nplayers*2){
 			return i/2;
 		}
@@ -103,7 +106,10 @@ public class LocalGameStateManager {
 		//the first card
 		//past the review cards
 		if(i >= nplayers*2+nplayers){
-			i = nplayers*2 + nplayers-1;
+			return DONE;
+		}
+		else if(i < 0){
+			i=0;
 		}
 		
 		boolean onView;
@@ -139,6 +145,10 @@ public class LocalGameStateManager {
 				currentFragment= new PromptFragment(t); return currentFragment;
 			case SHOW:
 				currentFragment=  new ShowFragment(t); return currentFragment;
+			case PASS:
+				currentFragment=  new PassOverFragment(t); return currentFragment;
+			case DONE:
+				currentFragment=  new DoneFragment(t); return currentFragment;
 			default:
 				return null;
 		}

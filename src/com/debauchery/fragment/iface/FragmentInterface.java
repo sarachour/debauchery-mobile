@@ -1,6 +1,6 @@
 package com.debauchery.fragment.iface;
 
-import com.debauchery.state.PersistantStateDatabase;
+import com.debauchery.state.Databases;
 import com.debauchery.state.Preferences;
 
 import android.os.Bundle;
@@ -10,11 +10,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 public abstract class FragmentInterface extends Fragment {
-	protected PersistantStateDatabase db;
+	protected Databases db;
 	protected Preferences prefs;
 	private int VIEW_ID;
 	public FragmentInterface(int viewid){
-		db = PersistantStateDatabase.DB;
+		db = Databases.DB;
 		prefs = new Preferences();
 		VIEW_ID = viewid;
 	}

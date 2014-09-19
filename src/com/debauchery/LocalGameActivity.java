@@ -6,7 +6,7 @@ import com.debauchery.fragment.LocalGameStateManager.LocalGameSettings;
 import com.debauchery.fragment.LocalSettingsFragment.SettingsFinishedListener;
 import com.debauchery.fragment.iface.FragmentInterface;
 import com.debauchery.sketch.SketchPad;
-import com.debauchery.state.PersistantStateDatabase;
+import com.debauchery.state.Databases;
 import com.debauchery.state.Preferences;
 
 import android.os.Bundle;
@@ -52,7 +52,7 @@ public class LocalGameActivity extends FragmentActivity implements SettingsFinis
 		setContentView(R.layout.activity_local);
 		
 		Preferences.create(this);
-		PersistantStateDatabase.create(this);
+		Databases.create(this);
 		
 		this.prefs = new Preferences();
 		settings = new LocalGameSettings(getSupportFragmentManager(), container, this);

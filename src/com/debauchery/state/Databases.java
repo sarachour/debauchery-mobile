@@ -8,19 +8,19 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 
-public class PersistantStateDatabase {
+public class Databases {
 	
 	boolean startedWithDrawing;
 	SketchDatabase sketchDB; //sketches
 	DescriptionDatabase descDB; //descriptions
-	public static PersistantStateDatabase DB;
-	public PersistantStateDatabase(Activity c){
+	public static Databases DB;
+	public Databases(Activity c){
 		sketchDB = new SketchDatabase(c);
 		descDB = new DescriptionDatabase(c);
 		DB = this;
 	}
 	public static void create(Activity c){
-		DB = new PersistantStateDatabase(c);
+		DB = new Databases(c);
 	}
 	public void saveSketch(int turn, SketchPadData sk){
 		sketchDB.save(sk, turn);

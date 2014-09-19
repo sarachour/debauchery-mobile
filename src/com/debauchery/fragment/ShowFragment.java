@@ -5,7 +5,7 @@ import com.debauchery.R;
 import com.debauchery.fragment.iface.FragmentInterface;
 import com.debauchery.fragment.iface.FragmentTurnInterface;
 import com.debauchery.sketch.SketchPad;
-import com.debauchery.state.PersistantStateDatabase;
+import com.debauchery.state.Databases;
 
 import android.app.Activity;
 import android.content.Intent;
