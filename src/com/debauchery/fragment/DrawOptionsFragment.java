@@ -17,10 +17,10 @@ import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
 
-public class DrawSubFragment extends Fragment {
+public class DrawOptionsFragment extends Fragment {
 	SketchPad sketchpad;
 	View view;
-	public DrawSubFragment(SketchPad sk) {
+	public DrawOptionsFragment(SketchPad sk) {
 		this.sketchpad = sk;
 	}
 

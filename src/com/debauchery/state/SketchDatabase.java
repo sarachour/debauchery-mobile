@@ -1,4 +1,4 @@
-package com.debauchery.db;
+package com.debauchery.state;
 
 import java.util.List;
 
@@ -70,6 +70,10 @@ public class SketchDatabase {
 	}
 	public SketchDatabase(Context c){
 		dbo = new DrawingDatabaseOpenHelper(c);	
+	}
+	public void clear(){
+		SQLiteDatabase wdb = dbo.getWritableDatabase();
+		wdb.delete(TABLE_NAME, "", null);
 	}
 	private void put_entry(SQLiteDatabase wdb, int turn, int index, int pointid, int type, float xcoord, float ycoord, int color, int thickness, int alpha){
 		wdb.execSQL("INSERT INTO "+TABLE_NAME+" VALUES(" +

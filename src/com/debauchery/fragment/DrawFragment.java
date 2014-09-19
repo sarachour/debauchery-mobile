@@ -31,9 +31,9 @@ public class DrawFragment extends FragmentInterface implements FragmentTurnInter
 	public void create() {
 		sketchpad =  (SketchPad) this.find(R.id.fd_sketchpad);
 		// TODO Auto-generated method stub
-		DrawSubFragment ctrls_frag = new DrawSubFragment(sketchpad);
+		DrawOptionsFragment ctrls_frag = new DrawOptionsFragment(sketchpad);
 		this.getFragmentManager().beginTransaction().replace(R.id.fd_controls_menu, ctrls_frag).commit();
-		sketchpad.loadData(db.getSketch(turn));
+		this.load();
 	}
 
 	@Override

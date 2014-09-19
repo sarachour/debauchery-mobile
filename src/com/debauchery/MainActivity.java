@@ -1,7 +1,7 @@
 package com.debauchery;
 
 
-import com.debauchery.db.PersistantStateDatabase;
+import com.debauchery.state.Preferences;
 
 import android.support.v7.app.ActionBarActivity;
 import android.content.Intent;
@@ -13,41 +13,27 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 
 public class MainActivity extends ActionBarActivity {
-	PersistantStateDatabase db;
-	protected boolean loadSuspendedActivity(){
-		db.loadPrefs(this);
-		int phase = db.getPhase();
-		System.out.println("PHASE:"+phase);
-		return false;
-		/*
+	final String GAME_TYPE_KEY = "GAME_KEY";
+	final int LOCAL_GAME=0; 
+	Preferences prefs;
+	MainActivity that;
+	private boolean go(int gtype){
 		Intent i;
-		switch(phase){
-			case Globals.DRAW_PHASE:
-				i = new Intent(getApplicationContext(), DrawActivity.class);
-				startActivity(i);
-				break;
-			case Globals.DESCRIBE_PHASE:
-				i = new Intent(getApplicationContext(), DescribeActivity.class);
-				startActivity(i);
-				break;
-			case Globals.SHOW_PHASE:
-				i = new Intent(getApplicationContext(), ShowActivity.class);
-				startActivity(i);
-				break;
-			case Globals.PROMPT_PHASE:
-				i = new Intent(getApplicationContext(), PromptActivity.class);
-				startActivity(i);
-				break;
-			case Globals.REVIEW_PHASE:
-				i = new Intent(getApplicationContext(), ReviewActivity.class);
+		switch(gtype){
+			case LOCAL_GAME:
+				prefs.put(GAME_TYPE_KEY, LOCAL_GAME);
+				i = new Intent(getApplicationContext(), LocalGameActivity.class);
 				startActivity(i);
 				break;
 			default:
+				prefs.put(GAME_TYPE_KEY, -1);
 				return false;
 		}
-		
 		return true;
-		*/
+	}
+	protected boolean loadSuspendedActivity(){
+		int gtype = prefs.getInt(GAME_TYPE_KEY);
+		return this.go(gtype);
 	}
 	protected void createMainActivity(){
 		setContentView(R.layout.activity_main);
@@ -57,19 +43,10 @@ public class MainActivity extends ActionBarActivity {
 		local.setOnClickListener(new OnClickListener(){
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				Intent i = new Intent(getApplicationContext(), LocalGameActivity.class);
-				startActivity(i);
+				that.go(LOCAL_GAME);
 			}
 		});
 		
-		final Button join = (Button) findViewById(R.id.main_join);
-		join.setOnClickListener(new OnClickListener(){
-			@Override
-			public void onClick(View v) {
-				
-			}
-		});	
 	}
 	@Override
 	public void onRestoreInstanceState(Bundle savedInstanceState){
@@ -87,8 +64,9 @@ public class MainActivity extends ActionBarActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		System.out.println("MAIN CREATE");
-		db = new PersistantStateDatabase(this);
+		this.that = this;
+		Preferences.create(this);
+		this.prefs = new Preferences();
 		if(!this.loadSuspendedActivity()){
 			this.createMainActivity();
 		}

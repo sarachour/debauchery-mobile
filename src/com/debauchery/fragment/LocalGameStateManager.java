@@ -1,11 +1,13 @@
 package com.debauchery.fragment;
 
 import com.debauchery.R;
-import com.debauchery.db.PersistantStateDatabase;
 import com.debauchery.fragment.LocalSettingsFragment.SettingsFinishedListener;
 import com.debauchery.fragment.iface.FragmentInterface;
 import com.debauchery.fragment.iface.FragmentTurnInterface;
+import com.debauchery.state.PersistantStateDatabase;
+import com.debauchery.state.Preferences;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -17,34 +19,47 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class LocalGameStateMachine {
+public class LocalGameStateManager {
 	int nstates;
 	int nplayers;
 	boolean startWithDrawing=false;
-	
-	PersistantStateDatabase db;
+	Preferences prefs;
 	int idx;
 	
+	public static interface GameStateChangedListener {
+		public void onChange(int turn);
+	}
 	public static class LocalGameSettings {
+		LocalSettingsFragment ls;
 		public LocalGameSettings(FragmentManager fm, int parent_id, SettingsFinishedListener sel) {
-			LocalSettingsFragment ls = new LocalSettingsFragment(sel);
+			ls =  new LocalSettingsFragment(sel);
 			fm.beginTransaction().replace(parent_id,ls).commit();	
 			// TODO Auto-generated constructor stub
 		}
-		
-		
+		public void load(){
+			ls.load();
+		}
+		public void save(){
+			
+		}
 	}
 	final int DRAW=0;
 	final int DESCRIBE=2;
 	final int PROMPT=3;
 	final int SHOW=1;
+	
+	final String INDEX_KEY = "LOCALGAMESTATE_INDEX";
+	final String SDRAW_KEY = "LOCALGAMESTATE_SDRAW";
+	final String NPLAYERS_KEY = "LOCALGAMESTATE_NPLAYERS";
+	
 	FragmentInterface currentFragment = null;
 	FragmentManager sp;
+	GameStateChangedListener listener = null;
 	int parent_id;
-	public LocalGameStateMachine(FragmentManager supportFragmentManager, int sp_id) {
+	public LocalGameStateManager(FragmentManager supportFragmentManager, int sp_id) {
 		sp = supportFragmentManager;
 		this.parent_id = sp_id;
-		
+		this.prefs = new Preferences();
 	}
 	public void init(int nplayers, boolean startWithDrawing){
 		this.nplayers = nplayers;
@@ -52,6 +67,23 @@ public class LocalGameStateMachine {
 		this.nstates = nplayers*2 + nplayers;
 		System.out.println("states:"+this.nstates+",players:"+this.nplayers);
 		idx = 0;
+		this.set();
+	}
+	public void setListener(GameStateChangedListener l){
+		this.listener = l;
+	}
+	public void save(){
+		if(currentFragment != null) currentFragment.save();
+		//save state
+		this.prefs.put(INDEX_KEY, idx);
+		this.prefs.put(SDRAW_KEY, startWithDrawing);
+		this.prefs.put(NPLAYERS_KEY, nplayers);
+	}
+	public void load(){
+		//load index, nplayers.
+		idx = this.prefs.getInt(INDEX_KEY);
+		nplayers = this.prefs.getInt(NPLAYERS_KEY);
+		startWithDrawing = this.prefs.getBoolean(SDRAW_KEY);
 		this.set();
 	}
 	private int getTurn(int i){
@@ -82,12 +114,7 @@ public class LocalGameStateMachine {
 		else{
 			onView = true;
 		}
-		if(onView){
-			System.out.println("on viewing phase");
-		}
-		else{
-			System.out.println("on acting phase");
-		}
+		
 		int turn = getTurn(st);
 		if((startWithDrawing && turn%2==0) || (!startWithDrawing && turn%2==1)){
 			if(onView) return SHOW;
@@ -130,10 +157,11 @@ public class LocalGameStateMachine {
 		final int viewstate = this.getState(idx);
 		final int turn = this.getTurn(idx);
 		
+		
 		if(currentFragment != null)
 			currentFragment.save();
 		sp.beginTransaction().replace(parent_id, this.getItem(viewstate, turn)).commit();	
-		
+		if(this.listener != null) this.listener.onChange(turn);
 		System.out.println("idx:"+idx+" turn:"+turn+" view:"+viewstate);
 		
 	}

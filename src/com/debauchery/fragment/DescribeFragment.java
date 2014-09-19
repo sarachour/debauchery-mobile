@@ -2,14 +2,16 @@ package com.debauchery.fragment;
 
 import com.debauchery.Globals;
 import com.debauchery.R;
-import com.debauchery.db.PersistantStateDatabase;
 import com.debauchery.fragment.iface.FragmentInterface;
 import com.debauchery.fragment.iface.FragmentTurnInterface;
+import com.debauchery.state.PersistantStateDatabase;
 
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.view.KeyEvent;
+import android.view.View;
+import android.view.View.OnKeyListener;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
@@ -34,6 +36,17 @@ public class DescribeFragment extends FragmentInterface implements FragmentTurnI
 		if(turn == 0){
 			edit.setHint("Please describe what you want the next person to draw.");
 		}
+		//on key changed
+		edit.setOnKeyListener( new OnKeyListener(){
+			final EditText edit =  (EditText) find(R.id.sa_describe);
+			@Override
+			public boolean onKey(View arg0, int arg1, KeyEvent arg2) {
+				// TODO Auto-generated method stub
+				description = edit.getText().toString();
+				return false;
+			}
+			
+		});
 		edit.setOnEditorActionListener(new OnEditorActionListener(){
 
 			@Override

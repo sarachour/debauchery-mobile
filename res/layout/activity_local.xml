@@ -6,11 +6,29 @@
     android:orientation="vertical"
     tools:context=".DescribeActivity" >
 
+    <TextView
+        android:id="@+id/lg_player_turn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TextView" />
+
+    <Button
+        android:id="@+id/lg_prev"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;" />
+
     <FrameLayout
         android:id="@+id/lg_frag_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
-
+        android:layout_height="match_parent"
+        android:layout_weight="3.44" >
     </FrameLayout>
+
+    <Button
+        android:id="@+id/lg_next"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text=">>>>>>>>>" />
 
 </LinearLayout>

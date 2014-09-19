@@ -2,8 +2,8 @@ package com.debauchery.fragment;
 
 import com.debauchery.Globals;
 import com.debauchery.R;
-import com.debauchery.db.PersistantStateDatabase;
 import com.debauchery.fragment.iface.FragmentInterface;
+import com.debauchery.state.PersistantStateDatabase;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -29,6 +29,10 @@ public class LocalSettingsFragment extends FragmentInterface{
 	int nPlayers = 0;
 	boolean startDraw = false;
 	SettingsFinishedListener listener;
+	final String SDRAW_KEY = "LOCALGAMESETTINGS_SDRAW";
+	final String NPLAYERS_KEY = "LOCALGAMESETTINGS_NPLAYERS";
+	
+	
 	public LocalSettingsFragment(SettingsFinishedListener l){
 		super(R.layout.slide_settings_local);
 		this.listener = l;
@@ -90,6 +94,7 @@ public class LocalSettingsFragment extends FragmentInterface{
 			@Override
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
+				db.clear();
 				listener.trigger(nPlayers, startDraw);
 			}
 			
@@ -98,12 +103,23 @@ public class LocalSettingsFragment extends FragmentInterface{
 	@Override
 	public void save() {
 		// TODO Auto-generated method stub
-		
+		prefs.put(NPLAYERS_KEY, nPlayers);
+		prefs.put(SDRAW_KEY, startDraw);
 	}
 	@Override
 	public void load() {
-		// TODO Auto-generated method stub
+		SeekBar nplayers_bar = (SeekBar) find(R.id.lv_nplayers);
+		ToggleButton start_mode_but = (ToggleButton) find(R.id.lv_start_mode);
+		TextView nplayers_label = (TextView) find(R.id.lv_nplayers_prompt);
 		
+		// TODO Auto-generated method stub
+		startDraw = prefs.getBoolean(SDRAW_KEY);
+		nPlayers = prefs.getInt(NPLAYERS_KEY);
+		
+		nplayers_bar.setProgress(nPlayers);
+		nplayers_label.setText(""+nPlayers);
+		if(startDraw != start_mode_but.isChecked())
+			start_mode_but.toggle();
 	}
 
 }

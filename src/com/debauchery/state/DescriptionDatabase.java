@@ -1,4 +1,4 @@
-package com.debauchery.db;
+package com.debauchery.state;
 
 
 import android.content.Context;
@@ -37,6 +37,10 @@ public class DescriptionDatabase {
 		}
 		public DescriptionDatabase(Context c){
 			dbo = new DescriptionDatabaseOpenHelper(c);	
+		}
+		public void clear(){
+			SQLiteDatabase wdb = dbo.getWritableDatabase();
+			wdb.delete(TABLE_NAME, "", null);
 		}
 		public void save(String desc, int turn){
 			String deleteTurn = "DELETE FROM " + TABLE_NAME + " WHERE " + TURN + " = " + turn;
