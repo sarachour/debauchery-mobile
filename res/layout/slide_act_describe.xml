@@ -6,17 +6,16 @@
     android:orientation="vertical"
     tools:context=".DescribeActivity" >
 
-    <EditText
+    <com.debauchery.view.GameEditText
         android:id="@+id/sa_describe"
-        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="0.20"
+        android:layout_width="match_parent"
         android:ems="10"
         android:hint="Describe what you saw here."
-        android:imeOptions="actionDone"
-        android:inputType="text|textAutoCorrect" >
-
+        android:textColor="#EEEEEE"
+        android:textSize="18sp">
+	
         <requestFocus />
-    </EditText>
+    </com.debauchery.view.GameEditText>
 
 </LinearLayout>

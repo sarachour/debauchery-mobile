@@ -12,17 +12,29 @@
         android:layout_height="wrap_content"
         android:text="&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;" />
 
-    <TextView
-        android:id="@+id/lg_player_turn"
+    <LinearLayout
+        style="@style/CardStyle"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="TextView" />
+        android:layout_height="44dp"
+        android:padding="10dp" >
+
+        <TextView
+            android:id="@+id/lg_player_turn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="TextView" />
+
+    </LinearLayout>
 
     <FrameLayout
         android:id="@+id/lg_frag_container"
+        style="@drawable/inset_shape"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="3.44" >
+        android:layout_weight="3.44"
+        android:background="@drawable/inset_shape"
+        android:padding="10dp" >
+
     </FrameLayout>
 
     <Button

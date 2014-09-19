@@ -193,7 +193,7 @@ public class LocalGameStateManager {
 		curr_turn = turn;
 		if(current != null)
 			current.save();
-		System.out.println(parent);
+		System.out.println(idx+","+curr_state+","+curr_turn);
 		parent.mgr().beginTransaction().replace(
 				parent.gameContainerId(), this.getItem(viewstate, turn)).commit();	
 		parent.change(viewstate, turn);
