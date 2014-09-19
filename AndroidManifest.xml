@@ -24,6 +24,7 @@
             </intent-filter>
         </activity>
         <activity android:name="com.debauchery.LocalGameActivity"></activity>
+        <activity android:name="com.debauchery.MainMenuActivity"></activity>
     </application>
 
 </manifest>

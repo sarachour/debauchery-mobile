@@ -4,6 +4,7 @@ import com.debauchery.Globals;
 import com.debauchery.R;
 import com.debauchery.fragment.iface.FragmentInterface;
 import com.debauchery.fragment.iface.FragmentTurnInterface;
+import com.debauchery.fragment.iface.GameActivityInterface;
 import com.debauchery.state.Databases;
 
 import android.app.Activity;
@@ -20,8 +21,8 @@ public class DescribeFragment extends FragmentInterface implements FragmentTurnI
 	private static DescribeFragment INSTANCE;
 	String description="";
 	int turn;
-	public DescribeFragment(int turn) {
-		super(R.layout.slide_act_describe);
+	public DescribeFragment(GameActivityInterface g, int turn) {
+		super(g, R.layout.slide_act_describe);
 		this.turn = turn;
 		// TODO Auto-generated constructor stub
 	}
@@ -79,9 +80,9 @@ public class DescribeFragment extends FragmentInterface implements FragmentTurnI
 		
 	}
     
-	public static DescribeFragment instance(int t) {
+	public static DescribeFragment instance(GameActivityInterface g, int t) {
 		// TODO Auto-generated method stub
-		if(INSTANCE == null) INSTANCE = new DescribeFragment(t);
+		if(INSTANCE == null) INSTANCE = new DescribeFragment(g, t);
 		else INSTANCE.setTurn(t);
 		return INSTANCE;
 	}

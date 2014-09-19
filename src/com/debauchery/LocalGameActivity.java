@@ -1,16 +1,16 @@
 package com.debauchery;
 
 import com.debauchery.fragment.LocalGameStateManager;
-import com.debauchery.fragment.LocalGameStateManager.GameStateChangedListener;
-import com.debauchery.fragment.LocalGameStateManager.LocalGameSettings;
-import com.debauchery.fragment.LocalSettingsFragment.SettingsFinishedListener;
 import com.debauchery.fragment.iface.FragmentInterface;
+import com.debauchery.fragment.iface.GameActivityInterface;
 import com.debauchery.sketch.SketchPad;
 import com.debauchery.state.Databases;
 import com.debauchery.state.Preferences;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
@@ -25,27 +25,17 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
 
-public class LocalGameActivity extends FragmentActivity implements SettingsFinishedListener, GameStateChangedListener{
-	int container = R.id.lg_frag_container;
-	
+public class LocalGameActivity extends FragmentActivity implements GameActivityInterface{
+	LocalGameStateManager game;
 	private Preferences prefs;
-	private LocalGameSettings settings;
-	private LocalGameStateManager game;
-	final String ONSETTINGS_KEY = "LOCALGAMEACTIVITY_ONSETTINGS";
+	
 	boolean onSettings = true;
 	private void save(){
-		prefs.put(ONSETTINGS_KEY, onSettings);
+		
 	}
 	private void load(){
-		onSettings = prefs.getBoolean(ONSETTINGS_KEY);
-		if(onSettings){
-			settings = new LocalGameSettings(getSupportFragmentManager(), container, this);
-			settings.load();
-		}
-		else{
-			game = new LocalGameStateManager(getSupportFragmentManager(), container);
-			game.load();
-		}
+		game = new LocalGameStateManager(this);
+		game.load();
 	}
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -55,9 +45,9 @@ public class LocalGameActivity extends FragmentActivity implements SettingsFinis
 		Databases.create(this);
 		
 		this.prefs = new Preferences();
-		settings = new LocalGameSettings(getSupportFragmentManager(), container, this);
-		game = new LocalGameStateManager(getSupportFragmentManager(), container);
-		game.setListener(this);
+		
+		this.load();
+		
 		Button next = (Button) this.findViewById(R.id.lg_next);
 		Button prev = (Button) this.findViewById(R.id.lg_prev);
 		
@@ -90,10 +80,6 @@ public class LocalGameActivity extends FragmentActivity implements SettingsFinis
 	    // Handle presses on the action bar items
 	    switch (item.getItemId()) {
 	        case R.id.action_prev:
-	        	if(game.index() == 0){
-	        		//views.setAdapter(settings);
-	        	}
-	        	else
 	        		game.prev();
 	        		return true;
 	        case R.id.action_next:
@@ -110,18 +96,34 @@ public class LocalGameActivity extends FragmentActivity implements SettingsFinis
 	@Override
 	public void onSaveInstanceState(Bundle savedInstanceState) {
 		super.onSaveInstanceState(savedInstanceState);
-		System.out.println("Saving state..");
 	}
+
 	@Override
-	public void trigger(int nplayers, boolean hasDrawing) {
+	public void exit() {
 		// TODO Auto-generated method stub
-		System.out.println("settings finished");
-		game.init(nplayers,hasDrawing);
-		onSettings = false;
-		//views.setAdapter(game);
+		Intent i = new Intent(getApplicationContext(), MainActivity.class);
+		i.putExtra(Globals.GAME_TYPE_KEY, Globals.MAIN_MENU);
+		startActivity(i);
 	}
 	@Override
-	public void onChange(int turn) {
+	public void game(int nplayers, boolean startWithDraw) {
+		// TODO Auto-generated method stub
+		game.init(nplayers,startWithDraw);
+		onSettings = false;
+		game.next();
+	}
+	@Override
+	public FragmentManager mgr() {
+		return this.getSupportFragmentManager();
+	}
+	@Override
+	public int gameContainerId() {
+		// TODO Auto-generated method stub
+		return  R.id.lg_frag_container;
+	}
+	@Override
+	public void change(int type, int turn) {
+		// TODO Auto-generated method stub
 		TextView t = (TextView) this.findViewById(R.id.lg_player_turn);
 		t.setText("Turn "+turn);
 	}

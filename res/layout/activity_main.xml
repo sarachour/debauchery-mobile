@@ -14,15 +14,9 @@
         android:text="Local Game" />
 
     <Button
-        android:id="@+id/main_join"
+        android:id="@+id/main_friends"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Join Game" />
-
-    <Button
-        android:id="@+id/main_host"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Host Game" />
+        android:text="Remote Game" />
     
 </LinearLayout>

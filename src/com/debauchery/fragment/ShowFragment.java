@@ -4,6 +4,7 @@ import com.debauchery.Globals;
 import com.debauchery.R;
 import com.debauchery.fragment.iface.FragmentInterface;
 import com.debauchery.fragment.iface.FragmentTurnInterface;
+import com.debauchery.fragment.iface.GameActivityInterface;
 import com.debauchery.sketch.SketchPad;
 import com.debauchery.state.Databases;
 
@@ -15,8 +16,8 @@ import android.view.MenuItem;
 public class ShowFragment extends FragmentInterface implements FragmentTurnInterface {
 	int turn;
 	private static ShowFragment INSTANCE = null;
-	public ShowFragment(int turn) {
-		super(R.layout.slide_view_show);
+	public ShowFragment(GameActivityInterface g, int turn) {
+		super(g,R.layout.slide_view_show);
 		this.turn = turn;
 		// TODO Auto-generated constructor stub
 	}
@@ -46,9 +47,9 @@ public class ShowFragment extends FragmentInterface implements FragmentTurnInter
 		this.turn = turn;
 	}
 
-	public static ShowFragment instance(int t) {
+	public static ShowFragment instance(GameActivityInterface g, int t) {
 		// TODO Auto-generated method stub
-		if(INSTANCE == null) INSTANCE = new ShowFragment(t);
+		if(INSTANCE == null) INSTANCE = new ShowFragment(g,t);
 		else INSTANCE.setTurn(t);
 		return INSTANCE;
 	}

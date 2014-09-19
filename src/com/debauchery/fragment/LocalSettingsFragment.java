@@ -3,6 +3,7 @@ package com.debauchery.fragment;
 import com.debauchery.Globals;
 import com.debauchery.R;
 import com.debauchery.fragment.iface.FragmentInterface;
+import com.debauchery.fragment.iface.GameActivityInterface;
 import com.debauchery.state.Databases;
 
 import android.app.Activity;
@@ -23,19 +24,15 @@ import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 
 public class LocalSettingsFragment extends FragmentInterface{
-	public interface SettingsFinishedListener{
-		public void trigger(int nPlayers, boolean startWithDraw);
-	}
+	
 	int nPlayers = 0;
 	boolean startDraw = false;
-	SettingsFinishedListener listener;
 	final String SDRAW_KEY = "LOCALGAMESETTINGS_SDRAW";
 	final String NPLAYERS_KEY = "LOCALGAMESETTINGS_NPLAYERS";
 	
 	
-	public LocalSettingsFragment(SettingsFinishedListener l){
-		super(R.layout.slide_settings_local);
-		this.listener = l;
+	public LocalSettingsFragment(GameActivityInterface g){
+		super(g, R.layout.slide_settings_local);
 	}
 	
 	public int getNumberPlayers(){
@@ -95,7 +92,7 @@ public class LocalSettingsFragment extends FragmentInterface{
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
 				db.clear();
-				listener.trigger(nPlayers, startDraw);
+				frame.game(nPlayers, startDraw);
 			}
 			
 		});

@@ -4,6 +4,7 @@ import com.debauchery.Globals;
 import com.debauchery.R;
 import com.debauchery.fragment.iface.FragmentInterface;
 import com.debauchery.fragment.iface.FragmentTurnInterface;
+import com.debauchery.fragment.iface.GameActivityInterface;
 import com.debauchery.sketch.SketchPad;
 
 import android.app.Activity;
@@ -17,8 +18,8 @@ public class DrawFragment extends FragmentInterface implements FragmentTurnInter
 	private static DrawFragment INSTANCE = null;
 	SketchPad sketchpad;
 	int turn;
-	public DrawFragment(int turn) {
-		super(R.layout.slide_act_sketch);
+	public DrawFragment(GameActivityInterface g, int turn) {
+		super(g,R.layout.slide_act_sketch);
 		this.turn = turn;
 		// TODO Auto-generated constructor stub
 	}
@@ -49,9 +50,9 @@ public class DrawFragment extends FragmentInterface implements FragmentTurnInter
 		sketchpad =  (SketchPad) this.find(R.id.fd_sketchpad);
 		sketchpad.loadData(db.getSketch(turn));
 	}
-	public static DrawFragment instance(int t) {
+	public static DrawFragment instance(GameActivityInterface g, int t) {
 		// TODO Auto-generated method stub
-		if(INSTANCE == null) INSTANCE = new DrawFragment(t);
+		if(INSTANCE == null) INSTANCE = new DrawFragment(g,t);
 		else INSTANCE.setTurn(t);
 		return INSTANCE;
 	}

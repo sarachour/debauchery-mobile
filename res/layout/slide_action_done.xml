@@ -24,7 +24,13 @@
         android:text="save" />
 
     <Button
-        android:id="@+id/Button01"
+        android:id="@+id/dv_review"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="review game again" />
+
+    <Button
+        android:id="@+id/dv_quit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="back to menu" />

@@ -15,83 +15,61 @@ import android.widget.Button;
 public class MainActivity extends ActionBarActivity {
 	final String GAME_TYPE_KEY = "GAME_KEY";
 	final int LOCAL_GAME=0; 
+	final int MAIN_MENU=1;
+	int type = MAIN_MENU;
+	
 	Preferences prefs;
-	MainActivity that;
-	private boolean go(int gtype){
+	private void go(){
 		Intent i;
-		switch(gtype){
+		System.out.println("CREATING:"+type);
+		switch(type){
 			case LOCAL_GAME:
-				prefs.put(GAME_TYPE_KEY, LOCAL_GAME);
 				i = new Intent(getApplicationContext(), LocalGameActivity.class);
 				startActivity(i);
 				break;
+			case MAIN_MENU:
 			default:
-				prefs.put(GAME_TYPE_KEY, -1);
-				return false;
+				i = new Intent(getApplicationContext(), MainMenuActivity.class);
+				startActivity(i);
+				break;
 		}
-		return true;
+		
 	}
-	protected boolean loadSuspendedActivity(){
-		int gtype = prefs.getInt(GAME_TYPE_KEY);
-		return this.go(gtype);
+	protected void loadSuspendedActivity(Bundle b){
+		type = prefs.getInt(GAME_TYPE_KEY);
+		if(b != null && b.containsKey(Globals.GAME_TYPE_KEY)){
+			type = b.getInt(Globals.GAME_TYPE_KEY);
+			System.out.println("LOADING BUNDLE.");
+		}
+		
+		this.go();
 	}
-	protected void createMainActivity(){
-		setContentView(R.layout.activity_main);
-		
-		final Button local = (Button) findViewById(R.id.main_local);
-		
-		local.setOnClickListener(new OnClickListener(){
-			@Override
-			public void onClick(View v) {
-				that.go(LOCAL_GAME);
-			}
-		});
-		
+	@Override
+	public void onSaveInstanceState(Bundle savedInstanceState) {
+		super.onSaveInstanceState(savedInstanceState);
+		this.prefs.put(Globals.GAME_TYPE_KEY, type);
 	}
 	@Override
 	public void onRestoreInstanceState(Bundle savedInstanceState){
-		System.out.println("MAIN RESTORE");
 		super.onRestoreInstanceState(savedInstanceState);
+		this.loadSuspendedActivity(this.getIntent().getExtras());
 	}
 	@Override
 	protected void onRestart (){
 		super.onRestart();
-		System.out.println("MAIN RESTART");
-		if(!this.loadSuspendedActivity()){
-			this.createMainActivity();
-		}
+		this.loadSuspendedActivity(this.getIntent().getExtras());
 	}
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		this.that = this;
 		Preferences.create(this);
 		this.prefs = new Preferences();
-		if(!this.loadSuspendedActivity()){
-			this.createMainActivity();
-		}
+		
+		this.loadSuspendedActivity(this.getIntent().getExtras());
 			
 	}
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
 
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main, menu);
-		return true;
-	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
-		int id = item.getItemId();
-		if (id == R.id.action_settings) {
-			return true;
-		}
-		return super.onOptionsItemSelected(item);
-	}
 
 
 }

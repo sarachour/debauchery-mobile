@@ -12,11 +12,13 @@ import android.view.ViewGroup;
 public abstract class FragmentInterface extends Fragment {
 	protected Databases db;
 	protected Preferences prefs;
+	protected GameActivityInterface frame;
 	private int VIEW_ID;
-	public FragmentInterface(int viewid){
+	public FragmentInterface(GameActivityInterface g, int viewid){
 		db = Databases.DB;
 		prefs = new Preferences();
 		VIEW_ID = viewid;
+		frame = g;
 	}
 	public abstract void create();
 	public abstract void save();

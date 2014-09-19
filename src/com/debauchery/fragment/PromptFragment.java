@@ -4,6 +4,7 @@ import com.debauchery.Globals;
 import com.debauchery.R;
 import com.debauchery.fragment.iface.FragmentInterface;
 import com.debauchery.fragment.iface.FragmentTurnInterface;
+import com.debauchery.fragment.iface.GameActivityInterface;
 import com.debauchery.state.Databases;
 
 import android.app.Activity;
@@ -15,8 +16,8 @@ import android.widget.TextView;
 public class PromptFragment extends FragmentInterface implements FragmentTurnInterface{
 	private static PromptFragment INSTANCE;
 	int turn;
-	public PromptFragment(int turn) {
-		super(R.layout.slide_view_prompt);
+	public PromptFragment(GameActivityInterface g, int turn) {
+		super(g,R.layout.slide_view_prompt);
 		this.turn = turn;
 		// TODO Auto-generated constructor stub
 	}
@@ -44,9 +45,9 @@ public class PromptFragment extends FragmentInterface implements FragmentTurnInt
 		System.out.println("PROMPT:"+pr);
 		prompt.setText(pr);
 	}
-	public static PromptFragment instance(int t) {
+	public static PromptFragment instance(GameActivityInterface g, int t) {
 		// TODO Auto-generated method stub
-		if(INSTANCE == null) INSTANCE = new PromptFragment(t);
+		if(INSTANCE == null) INSTANCE = new PromptFragment(g,t);
 		else INSTANCE.setTurn(t);
 		return INSTANCE;
 	}

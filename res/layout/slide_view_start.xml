@@ -1,0 +1,33 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/describe_view"
+    style="@style/AppTheme"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="0dp"
+    tools:context=".DrawActivity" >
+
+    <TextView
+        android:id="@+id/TextView01"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.19"
+        android:text="You&apos;re starting! Draw/Describe the starting topic."
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <ImageView
+        android:id="@+id/pass_pic"
+        android:layout_width="match_parent"
+        android:layout_height="171dp"
+        android:layout_weight="0.27"
+        android:src="@drawable/phone" />
+
+    <TextView
+        android:id="@+id/lg_player_turn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.20"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+</LinearLayout>

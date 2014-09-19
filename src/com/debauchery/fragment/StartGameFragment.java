@@ -13,11 +13,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
-public class PassOverFragment extends FragmentInterface implements FragmentTurnInterface{
-	private static PassOverFragment INSTANCE;
+public class StartGameFragment extends FragmentInterface implements FragmentTurnInterface{
+	private static StartGameFragment INSTANCE;
 	int turn;
-	public PassOverFragment(GameActivityInterface g, int turn) {
-		super(g,R.layout.slide_view_pass);
+	public StartGameFragment(GameActivityInterface g, int turn) {
+		super(g,R.layout.slide_view_start);
 		this.turn = turn;
 		// TODO Auto-generated constructor stub
 	}
@@ -42,9 +42,9 @@ public class PassOverFragment extends FragmentInterface implements FragmentTurnI
 		// TODO Auto-generated method stub
 		
 	}
-	public static PassOverFragment instance(GameActivityInterface g, int t) {
+	public static StartGameFragment instance(GameActivityInterface g, int t) {
 		// TODO Auto-generated method stub
-		if(INSTANCE == null) INSTANCE = new PassOverFragment(g,t);
+		if(INSTANCE == null) INSTANCE = new StartGameFragment(g,t);
 		else INSTANCE.setTurn(t);
 		return INSTANCE;
 	}

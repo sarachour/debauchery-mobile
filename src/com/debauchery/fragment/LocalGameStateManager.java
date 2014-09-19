@@ -1,9 +1,9 @@
 package com.debauchery.fragment;
 
 import com.debauchery.R;
-import com.debauchery.fragment.LocalSettingsFragment.SettingsFinishedListener;
 import com.debauchery.fragment.iface.FragmentInterface;
 import com.debauchery.fragment.iface.FragmentTurnInterface;
+import com.debauchery.fragment.iface.GameActivityInterface;
 import com.debauchery.state.Databases;
 import com.debauchery.state.Preferences;
 
@@ -21,62 +21,60 @@ import android.view.ViewGroup;
 
 public class LocalGameStateManager {
 	int nstates;
+	int nstates_start=2;
+	int nstates_game;
+	int nstates_end=1;
+	int nstates_review;
+	int nstates_done=1;
+	
 	int nplayers;
 	boolean startWithDrawing=false;
 	Preferences prefs;
 	int idx;
 	
-	public static interface GameStateChangedListener {
-		public void onChange(int turn);
-	}
-	public static class LocalGameSettings {
-		LocalSettingsFragment ls;
-		public LocalGameSettings(FragmentManager fm, int parent_id, SettingsFinishedListener sel) {
-			ls =  new LocalSettingsFragment(sel);
-			fm.beginTransaction().replace(parent_id,ls).commit();	
-			// TODO Auto-generated constructor stub
-		}
-		public void load(){
-			ls.load();
-		}
-		public void save(){
-			
-		}
-	}
 	final int DRAW=0;
 	final int SHOW=1;
 	final int DESCRIBE=2;
 	final int PROMPT=3;
 	final int PASS=4;
 	final int DONE=5;
+	final int SETTINGS=6;
+	final int START=7;
+	final int END=8;
 	final String INDEX_KEY = "LOCALGAMESTATE_INDEX";
 	final String SDRAW_KEY = "LOCALGAMESTATE_SDRAW";
 	final String NPLAYERS_KEY = "LOCALGAMESTATE_NPLAYERS";
 	
-	FragmentInterface currentFragment = null;
-	FragmentManager sp;
-	GameStateChangedListener listener = null;
-	int parent_id;
+	FragmentInterface current = null; //current fragment
+	GameActivityInterface parent;
+	
+
+	
 	int curr_turn=-1;
 	int curr_state=-1;
-	public LocalGameStateManager(FragmentManager supportFragmentManager, int sp_id) {
-		sp = supportFragmentManager;
-		this.parent_id = sp_id;
+	
+	public LocalGameStateManager(GameActivityInterface g) {
 		this.prefs = new Preferences();
+		parent = g;
 	}
 	public void init(int nplayers, boolean startWithDrawing){
 		this.nplayers = nplayers;
 		this.startWithDrawing = startWithDrawing;
-		this.nstates = nplayers*2 + nplayers;
+		//settings -> start -> play slides -> end -> review -> done
+		this.nstates_game = (nplayers*3-2);
+		this.nstates_review = nplayers;
+		this.nstates = this.nstates_start 
+						+ this.nstates_review 
+						+ this.nstates_game 
+						+ this.nstates_end
+						+ this.nstates_done;
+		
 		System.out.println("states:"+this.nstates+",players:"+this.nplayers);
 		idx = 0;
 		this.set();
 	}
-	public void setListener(GameStateChangedListener l){
-		this.listener = l;
-	}
 	public void save(){
-		if(currentFragment != null) currentFragment.save();
+		if(current != null) current.save();
 		//save state
 		this.prefs.put(INDEX_KEY, idx);
 		this.prefs.put(SDRAW_KEY, startWithDrawing);
@@ -90,48 +88,63 @@ public class LocalGameStateManager {
 		this.set();
 	}
 	private int getTurn(int i){
-		if(i < 0){
+		if(i < this.nstates_start){
 			return 0;
 		}
-		if(i < nplayers*2){
-			return i/2;
+		i-=this.nstates_start;
+		if(i < this.nstates_game){
+			return i/3;
 		}
+		//remove by states following game.
+		i -= this.nstates_end;
+		
 		//review phase
-		i-=nplayers*2;
+		i-=this.nstates_game;
 		if(i < nplayers){
 			return i;
 		}
-		return -1;
+		return 0;
 	}
 	private int getState(int i){
 		int st = i;
 		//the first card
 		//past the review cards
-		if(i >= nplayers*2+nplayers){
-			return DONE;
+		if(i == 0){
+			return SETTINGS;
 		}
-		else if(i < 0){
-			i=0;
-		}
+		else if(i==1)
+			return START;
 		
-		boolean onView;
-		if(i < nplayers*2){
-			if(i%2==0) onView = false;
-			else onView = true;
-		}
-		else{
-			onView = true;
-		}
+		i-= this.nstates_start;
 		
 		int turn = getTurn(st);
-		if((startWithDrawing && turn%2==0) || (!startWithDrawing && turn%2==1)){
-			if(onView) return SHOW;
-			else return DRAW;
+		boolean isOnPic =((startWithDrawing && turn%2==0) || (!startWithDrawing && turn%2==1));
+		
+		if(i < this.nstates_game){
+			if(i%3==0) { //draw mode
+				if(isOnPic) return DRAW;
+				return DESCRIBE;
+			}
+			else if(i%3 == 1)
+				return PASS;
+			else if(i%3==2) { //view mode
+				if(isOnPic) return SHOW;
+				return PROMPT;
+			}
+			
 		}
-		else{
-			if(onView) return PROMPT;
-			else return DESCRIBE;
+		i-= this.nstates_game;
+		if(i == 0)
+			return END;
+		
+		i--;
+		if(i < this.nstates_review){
+			if(isOnPic) return SHOW;
+			return PROMPT;
 		}
+		i -= this.nstates_review;
+		return DONE;
+		
 			
 			
 	}
@@ -140,17 +153,23 @@ public class LocalGameStateManager {
 		
 		switch(i){
 			case DRAW:
-				currentFragment= new DrawFragment(t); return currentFragment;
+				current= new DrawFragment(parent,t); return current;
 			case DESCRIBE:
-				currentFragment=  new DescribeFragment(t); return currentFragment;
+				current=  new DescribeFragment(parent,t); return current;
 			case PROMPT:
-				currentFragment= new PromptFragment(t); return currentFragment;
+				current= new PromptFragment(parent, t); return current;
 			case SHOW:
-				currentFragment=  new ShowFragment(t); return currentFragment;
+				current=  new ShowFragment(parent,t); return current;
 			case PASS:
-				currentFragment=  new PassOverFragment(t); return currentFragment;
+				current=  new PassOverFragment(parent,t); return current;
 			case DONE:
-				currentFragment=  new DoneFragment(t); return currentFragment;
+				current=  new DoneFragment(parent,t); return current;
+			case SETTINGS:
+				current = new LocalSettingsFragment(parent); return current;
+			case START:
+				current=  new StartGameFragment(parent,t); return current;
+			case END:
+				current=  new EndGameFragment(parent,t); return current;
 			default:
 				return null;
 		}
@@ -172,11 +191,12 @@ public class LocalGameStateManager {
 			return;
 		curr_state = viewstate;
 		curr_turn = turn;
-		if(currentFragment != null)
-			currentFragment.save();
-		sp.beginTransaction().replace(parent_id, this.getItem(viewstate, turn)).commit();	
-		if(this.listener != null) this.listener.onChange(turn);
-		System.out.println("idx:"+idx+" turn:"+turn+" view:"+viewstate);
+		if(current != null)
+			current.save();
+		System.out.println(parent);
+		parent.mgr().beginTransaction().replace(
+				parent.gameContainerId(), this.getItem(viewstate, turn)).commit();	
+		parent.change(viewstate, turn);
 		
 	}
 	public void next(){
