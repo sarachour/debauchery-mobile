@@ -13,7 +13,7 @@
         android:ems="10"
         android:hint="Describe what you saw here."
         android:textColor="#EEEEEE"
-        android:textSize="18sp">
+        android:textSize="24sp">
 	
         <requestFocus />
     </com.debauchery.view.GameEditText>

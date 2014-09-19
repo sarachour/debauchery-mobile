@@ -109,7 +109,7 @@ public class LocalGameStateManager {
 		int st = i;
 		//the first card
 		//past the review cards
-		if(i == 0){
+		if(i <= 0){
 			return SETTINGS;
 		}
 		else if(i==1)
