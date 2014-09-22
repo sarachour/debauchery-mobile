@@ -53,7 +53,7 @@
         android:layout_height="100dp"
         android:layout_weight="0.27"
         android:scaleType="fitCenter"
-        svgimageview:svg="@drawable/choose_mode" />
+        svgimageview:svg="@drawable/choose_mode_draw" />
 
     <Button
         android:id="@+id/lv_start"

@@ -8,27 +8,12 @@
     android:padding="0dp"
     tools:context=".DrawActivity" >
 
-    <TextView
-        android:id="@+id/TextView01"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.40"
-        android:text="You were the last person! "
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
     <ImageView
         android:id="@+id/pass_pic"
         android:layout_width="match_parent"
         android:layout_height="171dp"
         android:layout_weight="0.27"
-        android:src="@drawable/phone" />
-
-    <TextView
-        android:id="@+id/lg_player_turn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.20"
-        android:text="you can now review what everyone else wrote!"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:scaleType="fitCenter"
+        android:src="@drawable/game_end" />
 
 </LinearLayout>

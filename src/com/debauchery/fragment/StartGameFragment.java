@@ -11,14 +11,17 @@ import android.app.Activity;
 import android.content.Intent;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class StartGameFragment extends FragmentInterface implements FragmentTurnInterface{
 	private static StartGameFragment INSTANCE;
 	int turn;
-	public StartGameFragment(GameActivityInterface g, int turn) {
+	boolean startwithdraw;
+	public StartGameFragment(GameActivityInterface g, int turn, boolean startwithdraw) {
 		super(g,R.layout.slide_view_start);
 		this.turn = turn;
+		this.startwithdraw = startwithdraw;
 		// TODO Auto-generated constructor stub
 	}
 	
@@ -30,6 +33,11 @@ public class StartGameFragment extends FragmentInterface implements FragmentTurn
 	public void create() {
 		// TODO Auto-generated method stub
 		this.load();
+		ImageView s= (ImageView) find(R.id.pr_s_img);
+		if(startwithdraw)
+			s.setImageResource(R.drawable.game_start_draw);
+		else
+			s.setImageResource(R.drawable.game_start_describe);
 	}
 
 	@Override
@@ -42,9 +50,9 @@ public class StartGameFragment extends FragmentInterface implements FragmentTurn
 		// TODO Auto-generated method stub
 		
 	}
-	public static StartGameFragment instance(GameActivityInterface g, int t) {
+	public static StartGameFragment instance(GameActivityInterface g, int t, boolean b) {
 		// TODO Auto-generated method stub
-		if(INSTANCE == null) INSTANCE = new StartGameFragment(g,t);
+		if(INSTANCE == null) INSTANCE = new StartGameFragment(g,t,b);
 		else INSTANCE.setTurn(t);
 		return INSTANCE;
 	}

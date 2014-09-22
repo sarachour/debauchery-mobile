@@ -167,7 +167,7 @@ public class LocalGameStateManager {
 			case SETTINGS:
 				current = new LocalSettingsFragment(parent); return current;
 			case START:
-				current=  new StartGameFragment(parent,t); return current;
+				current=  new StartGameFragment(parent,t,startWithDrawing); return current;
 			case END:
 				current=  new EndGameFragment(parent,t); return current;
 			default:
