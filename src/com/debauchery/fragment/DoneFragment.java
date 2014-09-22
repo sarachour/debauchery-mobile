@@ -33,6 +33,7 @@ public class DoneFragment extends FragmentInterface implements FragmentTurnInter
 	public void create() {
 		Button save = (Button) this.find(R.id.dv_save);
 		Button quit = (Button) this.find(R.id.dv_quit);
+		Button review = (Button) this.find(R.id.dv_review);
 		
 		quit.setOnClickListener(new OnClickListener(){
 
@@ -43,7 +44,16 @@ public class DoneFragment extends FragmentInterface implements FragmentTurnInter
 			}
 			
 		});
-		
+		review.setOnClickListener(new OnClickListener(){
+
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				frame.review();
+				
+			}
+			
+		});
 		save.setOnClickListener(new OnClickListener(){
 
 			@Override

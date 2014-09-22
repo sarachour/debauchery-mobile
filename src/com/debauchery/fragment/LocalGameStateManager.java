@@ -205,5 +205,11 @@ public class LocalGameStateManager {
 		this.set();
 		
 	}
+	public void review() {
+		// TODO Auto-generated method stub
+		idx = this.nstates_start 
+				+ this.nstates_game;
+		this.set();
+	}
 	
 }

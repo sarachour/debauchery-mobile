@@ -127,5 +127,10 @@ public class LocalGameActivity extends FragmentActivity implements GameActivityI
 		TextView t = (TextView) this.findViewById(R.id.lg_player_turn);
 		t.setText("Turn "+turn);
 	}
+	@Override
+	public void review() {
+		// TODO Auto-generated method stub
+		this.game.review();
+	}
 	
 }
