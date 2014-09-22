@@ -1,5 +1,8 @@
 package com.debauchery.fragment;
 
+import com.caverock.androidsvg.SVG;
+import com.caverock.androidsvg.SVGImageView;
+import com.caverock.androidsvg.SVGParseException;
 import com.debauchery.Globals;
 import com.debauchery.R;
 import com.debauchery.fragment.iface.FragmentInterface;
@@ -22,7 +25,6 @@ import android.widget.TextView;
 import android.widget.ToggleButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.SeekBar.OnSeekBarChangeListener;
-
 public class LocalSettingsFragment extends FragmentInterface{
 	
 	int nPlayers = 0;
@@ -47,8 +49,27 @@ public class LocalSettingsFragment extends FragmentInterface{
 		// TODO Auto-generated method stub
 		Button start = (Button) find(R.id.lv_start);
 		SeekBar nplayers_bar = (SeekBar) find(R.id.lv_nplayers);
-		ToggleButton start_mode_but = (ToggleButton) find(R.id.lv_start_mode);
 		TextView nplayers_label = (TextView) find(R.id.lv_nplayers_prompt);
+		SVGImageView choose_style = (SVGImageView) find(R.id.lv_mode);
+		
+		
+		choose_style.setOnClickListener(new OnClickListener(){
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				// TODO Auto-generated method stub
+				startDraw = !startDraw;
+				SVGImageView choose_style = (SVGImageView) find(R.id.lv_mode);
+				if(startDraw) 
+					choose_style.setImageResource(R.drawable.choose_mode_draw);
+				else
+					choose_style.setImageResource(R.drawable.choose_mode_describe);
+			}
+		});
+		if(startDraw) 
+			choose_style.setImageResource(R.drawable.choose_mode_draw);
+		else
+			choose_style.setImageResource(R.drawable.choose_mode_describe);
 		
 		nPlayers = nplayers_bar.getProgress();
 		nplayers_label.setText(nPlayers+"");
@@ -76,15 +97,6 @@ public class LocalSettingsFragment extends FragmentInterface{
 			}
 			
 		});
-		start_mode_but.setOnCheckedChangeListener(new OnCheckedChangeListener(){
-
-			@Override
-			public void onCheckedChanged(CompoundButton arg0, boolean arg1) {
-				// TODO Auto-generated method stub
-				startDraw = arg1;
-			}
-			
-		});
 		
 		start.setOnClickListener(new OnClickListener(){
 
@@ -106,7 +118,7 @@ public class LocalSettingsFragment extends FragmentInterface{
 	@Override
 	public void load() {
 		SeekBar nplayers_bar = (SeekBar) find(R.id.lv_nplayers);
-		ToggleButton start_mode_but = (ToggleButton) find(R.id.lv_start_mode);
+		SVGImageView choose_style = (SVGImageView) find(R.id.lv_mode);
 		TextView nplayers_label = (TextView) find(R.id.lv_nplayers_prompt);
 		
 		// TODO Auto-generated method stub
@@ -115,8 +127,11 @@ public class LocalSettingsFragment extends FragmentInterface{
 		
 		nplayers_bar.setProgress(nPlayers);
 		nplayers_label.setText(""+nPlayers);
-		if(startDraw != start_mode_but.isChecked())
-			start_mode_but.toggle();
+		if(startDraw) 
+			choose_style.setImageResource(R.drawable.choose_mode_draw);
+		else
+			choose_style.setImageResource(R.drawable.choose_mode_describe);
+		
 	}
 
 }

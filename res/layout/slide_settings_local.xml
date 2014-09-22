@@ -1,4 +1,5 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:svgimageview="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/describe_view"
     android:layout_width="match_parent"
@@ -8,9 +9,12 @@
 
     <TextView
         android:id="@+id/TextView01"
-        android:layout_width="249dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/label_ask_nplayers" />
+        android:layout_margin="10dp"
+        android:text="@string/label_ask_nplayers"
+        android:textColor="#EEEEEE"
+        android:textSize="24sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -29,22 +33,27 @@
             android:id="@+id/lv_nplayers_prompt"
             android:layout_width="87dp"
             android:layout_height="match_parent"
-            android:text="TextView" />
+            android:text="TextView"
+            android:textColor="#EEEEEE"
+            android:textSize="24sp" />
     </LinearLayout>
 
     <TextView
         android:id="@+id/lv_label_2"
-        android:layout_width="249dp"
-        android:layout_height="wrap_content"
-        android:text="@string/label_ask_startmode" />
-
-    <ToggleButton
-        android:id="@+id/lv_start_mode"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textOff="@+string/action_start_description"
-        android:textOn="@+string/action_start_drawing"
-        android:text="ToggleButton" />
+        android:layout_margin="10dp"
+        android:text="@string/label_ask_startmode"
+        android:textColor="#EEEEEE"
+        android:textSize="24sp" />
+
+    <com.caverock.androidsvg.SVGImageView
+        android:id="@+id/lv_mode"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_weight="0.27"
+        android:scaleType="fitCenter"
+        svgimageview:svg="@drawable/choose_mode" />
 
     <Button
         android:id="@+id/lv_start"
