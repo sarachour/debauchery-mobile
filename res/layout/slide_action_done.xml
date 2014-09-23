@@ -19,11 +19,17 @@
         android:gravity="center"
         android:orientation="vertical"
         android:padding="24dp"
-        android:text="The End"
+        android:text="Fin"
         android:textColor="#EEEEEE"
         android:textSize="32sp"
         android:textStyle="bold"
         android:typeface="sans" />
+
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="295dp"
+        android:layout_height="147dp"
+        android:src="@drawable/face_royal" />
 
     <Button
         android:id="@+id/dv_save"

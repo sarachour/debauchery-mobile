@@ -41,6 +41,8 @@ public class LocalGameStateManager {
 	final int SETTINGS=6;
 	final int START=7;
 	final int END=8;
+	final int INSTR_SHOW=9;
+	final int INSTR_PROMPT=10;
 	final String INDEX_KEY = "LOCALGAMESTATE_INDEX";
 	final String SDRAW_KEY = "LOCALGAMESTATE_SDRAW";
 	final String NPLAYERS_KEY = "LOCALGAMESTATE_NPLAYERS";
@@ -61,7 +63,7 @@ public class LocalGameStateManager {
 		this.nplayers = nplayers;
 		this.startWithDrawing = startWithDrawing;
 		//settings -> start -> play slides -> end -> review -> done
-		this.nstates_game = (nplayers*3-2);
+		this.nstates_game = (nplayers*4-3);
 		this.nstates_review = nplayers;
 		this.nstates = this.nstates_start 
 						+ this.nstates_review 
@@ -93,7 +95,7 @@ public class LocalGameStateManager {
 		}
 		i-=this.nstates_start;
 		if(i < this.nstates_game){
-			return i/3;
+			return i/4;
 		}
 		//remove by states following game.
 		i -= this.nstates_end;
@@ -121,15 +123,19 @@ public class LocalGameStateManager {
 		boolean isOnPic =((startWithDrawing && turn%2==0) || (!startWithDrawing && turn%2==1));
 		
 		if(i < this.nstates_game){
-			if(i%3==0) { //draw mode
+			if(i%4==0) { //draw mode
 				if(isOnPic) return DRAW;
 				return DESCRIBE;
 			}
-			else if(i%3 == 1)
+			else if(i%4 == 1)
 				return PASS;
-			else if(i%3==2) { //view mode
+			else if(i%4==2) { //view mode
 				if(isOnPic) return SHOW;
 				return PROMPT;
+			}
+			else if(i%4 == 3) {
+				if(isOnPic) return INSTR_SHOW;
+				else return INSTR_PROMPT;
 			}
 			
 		}
@@ -191,6 +197,18 @@ public class LocalGameStateManager {
 						"Round Finished!", 
 						R.drawable.phone_royal,
 						"Let's Review"); return current;
+			case INSTR_SHOW:
+				current=  new InstructionFragment(parent,
+						R.drawable.violet_bg_repeat,
+						"Describe", 
+						R.drawable.phone_describe,
+						"the Drawing"); return current;
+			case INSTR_PROMPT:
+				current=  new InstructionFragment(parent,
+						R.drawable.violet_bg_repeat,
+						"Draw the", 
+						R.drawable.phone_draw,
+						"Description"); return current;
 			default:
 				return null;
 		}
