@@ -4,7 +4,9 @@
     android:id="@+id/describe_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/blue_bg_repeat"
     android:orientation="vertical"
+    android:padding="5dp"
     tools:context=".DescribeActivity" >
 
     <TextView
@@ -13,7 +15,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:text="@string/label_ask_nplayers"
-        android:textColor="#EEEEEE"
+        android:textColor="#444444"
         android:textSize="24sp" />
 
     <LinearLayout
@@ -34,7 +36,7 @@
             android:layout_width="87dp"
             android:layout_height="match_parent"
             android:text="TextView"
-            android:textColor="#EEEEEE"
+            android:textColor="#444444"
             android:textSize="24sp" />
     </LinearLayout>
 
@@ -44,7 +46,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:text="@string/label_ask_startmode"
-        android:textColor="#EEEEEE"
+        android:textColor="@color/inset_color"
         android:textSize="24sp" />
 
     <com.caverock.androidsvg.SVGImageView

@@ -161,15 +161,36 @@ public class LocalGameStateManager {
 			case SHOW:
 				current=  new ShowFragment(parent,t); return current;
 			case PASS:
-				current=  new PassOverFragment(parent,t); return current;
+				current=  new InstructionFragment(parent,
+						R.drawable.green_bg_repeat,
+						"Pass Phone to", 
+						R.drawable.phone_orange,
+						"Next Person"); return current;
 			case DONE:
 				current=  new DoneFragment(parent,t); return current;
 			case SETTINGS:
 				current = new LocalSettingsFragment(parent); return current;
 			case START:
-				current=  new StartGameFragment(parent,t,startWithDrawing); return current;
+				if(this.startWithDrawing)
+					current=  new InstructionFragment(parent,
+							R.drawable.blue_bg_repeat,
+							"Draw the Starting", 
+							R.drawable.phone_draw,
+							"Topic");
+				else
+					current=  new InstructionFragment(parent,
+							R.drawable.blue_bg_repeat,
+							"Describe the Starting", 
+							R.drawable.phone_describe,
+							"Topic"); 
+				
+				return current;
 			case END:
-				current=  new EndGameFragment(parent,t); return current;
+				current=  new InstructionFragment(parent,
+						R.drawable.violet_bg_repeat,
+						"Round Finished!", 
+						R.drawable.phone_royal,
+						"Let's Review"); return current;
 			default:
 				return null;
 		}

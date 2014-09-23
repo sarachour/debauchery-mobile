@@ -4,6 +4,7 @@
     style="@style/AppTheme"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/orange_bg_repeat"
     android:orientation="vertical"
     android:padding="0dp"
     tools:context=".DrawActivity" >
@@ -14,10 +15,15 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="0.20"
+        android:fontFamily="sans-serif-condensed"
+        android:gravity="center"
         android:orientation="vertical"
         android:padding="24dp"
-        android:textColor="#EEEEEE"
-        android:textSize="24sp" >
+        android:text="testing the text a bit"
+        android:textColor="#444444"
+        android:textSize="36sp"
+        android:typeface="sans" >
+
     </TextView>
 
 </LinearLayout>

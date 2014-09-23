@@ -24,14 +24,14 @@
 	    <item name="android:layout_width">fill_parent</item>
 	    <item name="android:layout_height">fill_parent</item>
 	    <item name="android:orientation">horizontal</item>
-	    <item name="android:gravity">center_vertical</item>
+	    <item name="android:gravity">center</item>
     </style>
     <style name="CardStyle" parent="AppTheme">
         <item name="android:background">@drawable/card_shape</item>
 	    <item name="android:layout_width">fill_parent</item>
 	    <item name="android:layout_height">fill_parent</item>
 	    <item name="android:orientation">horizontal</item>
-	    <item name="android:gravity">center_vertical</item>
+	    <item name="android:gravity">center</item>
     </style>
 	<style name="ReviewWedgeStyle" parent="AppTheme">
         <item name="android:background">@drawable/card_shape</item>

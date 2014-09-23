@@ -13,16 +13,23 @@
         android:text="&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;" />
 
     <LinearLayout
-        style="@style/CardStyle"
         android:layout_width="match_parent"
-        android:layout_height="44dp"
+        android:layout_height="52dp"
+        android:background="@drawable/inset_shape"
         android:padding="10dp" >
 
         <TextView
             android:id="@+id/lg_player_turn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:layout_weight="0.89"
+            android:fontFamily="sans-serif-condensed"
+            android:gravity="center"
+            android:text="TextView"
+            android:textColor="#EEEEEE"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:typeface="sans" />
 
     </LinearLayout>
 

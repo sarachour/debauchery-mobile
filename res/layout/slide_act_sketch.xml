@@ -1,10 +1,10 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/describe_view"
-    style="@style/CardStyle"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="0dp"
+    android:background="@drawable/orange_bg_repeat"
+    android:padding="10dp"
     tools:context=".DrawActivity" >
 
     <com.debauchery.sketch.SketchPad
@@ -15,7 +15,8 @@
     <SlidingDrawer
         android:id="@+id/fd_controls"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="282dp"
+        android:layout_gravity="bottom"
         android:content="@+id/content"
         android:handle="@+id/fd_show_controls" >
 

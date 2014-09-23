@@ -3,17 +3,18 @@
     android:id="@+id/describe_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/orange_bg_repeat"
     android:orientation="vertical"
     tools:context=".DescribeActivity" >
 
     <com.debauchery.view.GameEditText
         android:id="@+id/sa_describe"
-        android:layout_height="match_parent"
         android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:ems="10"
         android:hint="Describe what you saw here."
-        android:textColor="#EEEEEE"
-        android:textSize="24sp">
+        android:textColor="#444444"
+        android:textSize="24sp" >
 	
         <requestFocus />
     </com.debauchery.view.GameEditText>

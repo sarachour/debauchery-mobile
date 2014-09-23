@@ -4,35 +4,62 @@
     style="@style/AppTheme"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/violet_bg_repeat"
     android:orientation="vertical"
-    android:padding="0dp"
+    android:padding="10dp"
     tools:context=".DrawActivity" >
 
     <TextView
         android:id="@+id/sv_prompt"
-        style="@style/AppTheme"
+        style="@style/InsetStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="25dp"
+        android:fontFamily="sans-serif-condensed"
+        android:gravity="center"
         android:orientation="vertical"
         android:padding="24dp"
-        android:text="Done" />
+        android:text="The End"
+        android:textColor="#EEEEEE"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        android:typeface="sans" />
 
     <Button
         android:id="@+id/dv_save"
+        style="@style/InsetStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="save" />
+        android:layout_margin="5dp"
+        android:fontFamily="sans-serif-condensed"
+        android:gravity="center"
+        android:text="Save"
+        android:textColor="#CCCCCC"
+        android:textSize="32sp"
+        android:typeface="normal" />
 
     <Button
         android:id="@+id/dv_review"
+        style="@style/InsetStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="review game again" />
+        android:layout_margin="5dp"
+        android:fontFamily="sans-serif-condensed"
+        android:text="Review Game"
+        android:textColor="#CCCCCC"
+        android:textSize="32sp"
+        android:typeface="sans" />
 
     <Button
         android:id="@+id/dv_quit"
+        style="@style/InsetStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="back to menu" />
+        android:layout_margin="5dp"
+        android:fontFamily="sans-serif-condensed"
+        android:text="Main Menu"
+        android:textColor="#CCCCCC"
+        android:textSize="32sp"
+        android:typeface="sans" />
 
 </LinearLayout>

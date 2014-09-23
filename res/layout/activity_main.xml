@@ -3,20 +3,46 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#dc5092"
+    android:gravity="bottom"
     android:orientation="vertical"
+    android:padding="25dp"
     tools:context="com.debauchery.MainActivity"
     tools:ignore="MergeRootFrame" >
 
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="269dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-condensed"
+        android:gravity="center"
+        android:text="Debauchery"
+        android:textColor="#666666"
+        android:textSize="42sp"
+        android:textStyle="bold"
+        android:typeface="sans" />
+
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="match_parent"
+        android:layout_height="308dp"
+        android:layout_weight="0.11"
+        android:src="@drawable/face_royal" />
+
     <Button
         android:id="@+id/main_local"
+        style="@style/CardStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="5dp"
         android:text="Local Game" />
 
     <Button
         android:id="@+id/main_friends"
+        style="@style/CardStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="5dp"
         android:text="Remote Game" />
-    
+
 </LinearLayout>
