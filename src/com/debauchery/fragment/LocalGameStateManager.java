@@ -36,6 +36,8 @@ public class LocalGameStateManager {
 	final int SHOW=1;
 	final int DESCRIBE=2;
 	final int PROMPT=3;
+	final int PROMPT_REVIEW = 11;
+	final int SHOW_REVIEW = 12;
 	final int PASS=4;
 	final int DONE=5;
 	final int SETTINGS=6;
@@ -129,13 +131,13 @@ public class LocalGameStateManager {
 			}
 			else if(i%4 == 1)
 				return PASS;
-			else if(i%4==2) { //view mode
-				if(isOnPic) return SHOW;
-				return PROMPT;
-			}
-			else if(i%4 == 3) {
+			else if(i%4 == 2) {
 				if(isOnPic) return INSTR_SHOW;
 				else return INSTR_PROMPT;
+			}
+			else if(i%4==3) { //view mode
+				if(isOnPic) return SHOW;
+				return PROMPT;
 			}
 			
 		}
@@ -145,8 +147,8 @@ public class LocalGameStateManager {
 		
 		i--;
 		if(i < this.nstates_review){
-			if(isOnPic) return SHOW;
-			return PROMPT;
+			if(isOnPic) return SHOW_REVIEW;
+			return PROMPT_REVIEW;
 		}
 		i -= this.nstates_review;
 		return DONE;
@@ -163,12 +165,24 @@ public class LocalGameStateManager {
 			case DESCRIBE:
 				current=  new DescribeFragment(parent,t); return current;
 			case PROMPT:
-				current= new PromptFragment(parent, t); return current;
+				current= new PromptFragment(parent, t, false); return current;
 			case SHOW:
-				current=  new ShowFragment(parent,t); return current;
+				current=  new ShowFragment(parent,t, false); return current;
+			case PROMPT_REVIEW:
+				if(t > 0)
+					current= new PromptFragment(parent, t,true); 
+				else
+					current=  new PromptFragment(parent,t,false); 
+				return current;
+			case SHOW_REVIEW:
+				if(t > 0)
+					current=  new ShowFragment(parent,t,true); 
+				else 
+					current=  new ShowFragment(parent,t,false); 
+				return current;
 			case PASS:
 				current=  new InstructionFragment(parent,
-						R.drawable.green_bg_repeat,
+						R.drawable.bg_green_repeat,
 						"Pass Phone to", 
 						R.drawable.phone_orange,
 						"Next Person"); return current;
@@ -179,13 +193,13 @@ public class LocalGameStateManager {
 			case START:
 				if(this.startWithDrawing)
 					current=  new InstructionFragment(parent,
-							R.drawable.blue_bg_repeat,
+							R.color.blue,
 							"Draw the Starting", 
 							R.drawable.phone_draw,
 							"Topic");
 				else
 					current=  new InstructionFragment(parent,
-							R.drawable.blue_bg_repeat,
+							R.color.blue,
 							"Describe the Starting", 
 							R.drawable.phone_describe,
 							"Topic"); 
@@ -193,19 +207,19 @@ public class LocalGameStateManager {
 				return current;
 			case END:
 				current=  new InstructionFragment(parent,
-						R.drawable.violet_bg_repeat,
+						R.color.violet,
 						"Round Finished!", 
 						R.drawable.phone_royal,
 						"Let's Review"); return current;
 			case INSTR_SHOW:
 				current=  new InstructionFragment(parent,
-						R.drawable.violet_bg_repeat,
+						R.color.green,
 						"Describe", 
 						R.drawable.phone_describe,
 						"the Drawing"); return current;
 			case INSTR_PROMPT:
 				current=  new InstructionFragment(parent,
-						R.drawable.violet_bg_repeat,
+						R.color.green,
 						"Draw the", 
 						R.drawable.phone_draw,
 						"Description"); return current;
@@ -219,8 +233,14 @@ public class LocalGameStateManager {
 		return idx;
 	}
 	public void prev(){
-		if(idx >= 0) idx--;
-		System.out.println("count:"+idx);
+		if(idx < 0) return;
+		final int viewstate = this.getState(idx);
+		final int turn = this.getTurn(idx);
+		if(turn > 0 &&(viewstate == DRAW || viewstate == DESCRIBE)){
+			idx -= 2;
+		}
+		else
+			idx --;
 		this.set();
 	}
 	private void set(){

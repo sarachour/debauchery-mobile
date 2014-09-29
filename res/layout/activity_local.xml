@@ -6,48 +6,13 @@
     android:orientation="vertical"
     tools:context=".DescribeActivity" >
 
-    <Button
-        android:id="@+id/lg_prev"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="52dp"
-        android:background="@drawable/inset_shape"
-        android:padding="10dp" >
-
-        <TextView
-            android:id="@+id/lg_player_turn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.89"
-            android:fontFamily="sans-serif-condensed"
-            android:gravity="center"
-            android:text="TextView"
-            android:textColor="#EEEEEE"
-            android:textSize="28sp"
-            android:textStyle="bold"
-            android:typeface="sans" />
-
-    </LinearLayout>
-
     <FrameLayout
         android:id="@+id/lg_frag_container"
-        style="@drawable/inset_shape"
+        style="@drawable/rounded_corners_black"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="3.44"
-        android:background="@drawable/inset_shape"
-        android:padding="10dp" >
+        android:layout_weight="3.44" >
 
     </FrameLayout>
-
-    <Button
-        android:id="@+id/lg_next"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text=">>>>>>>>>" />
 
 </LinearLayout>

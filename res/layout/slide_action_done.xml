@@ -4,14 +4,14 @@
     style="@style/AppTheme"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/violet_bg_repeat"
+    android:background="@color/violet"
     android:orientation="vertical"
     android:padding="10dp"
     tools:context=".DrawActivity" >
 
     <TextView
         android:id="@+id/sv_prompt"
-        style="@style/InsetStyle"
+        style="@style/black_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="25dp"
@@ -33,39 +33,26 @@
 
     <Button
         android:id="@+id/dv_save"
-        style="@style/InsetStyle"
+        style="@style/white_small_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
-        android:fontFamily="sans-serif-condensed"
-        android:gravity="center"
-        android:text="Save"
-        android:textColor="#CCCCCC"
-        android:textSize="32sp"
-        android:typeface="normal" />
+        android:text="Save" />
 
     <Button
         android:id="@+id/dv_review"
-        style="@style/InsetStyle"
+        style="@style/white_small_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
-        android:fontFamily="sans-serif-condensed"
-        android:text="Review Game"
-        android:textColor="#CCCCCC"
-        android:textSize="32sp"
-        android:typeface="sans" />
+        android:text="Review Game" />
 
     <Button
         android:id="@+id/dv_quit"
-        style="@style/InsetStyle"
+        style="@style/white_small_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
-        android:fontFamily="sans-serif-condensed"
-        android:text="Main Menu"
-        android:textColor="#CCCCCC"
-        android:textSize="32sp"
-        android:typeface="sans" />
+        android:text="Main Menu" />
 
 </LinearLayout>

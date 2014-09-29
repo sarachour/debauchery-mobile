@@ -1,15 +1,50 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/describe_view"
-    style="@style/CardStyle"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/orange_bg_repeat"
+    android:background="@color/orange"
     android:orientation="vertical"
     tools:context=".DescribeActivity" >
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="36dp"
+        android:background="@color/grey"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp" >
+
+        <TextView
+            android:id="@+id/turn"
+            style="@style/small_white_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_weight="1.18"
+            android:gravity="left"
+            android:text="TextView" />
+
+        <Button
+            android:id="@+id/back"
+            style="@style/white_small_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:layout_weight="1.18"
+            android:text="Back" />
+
+        <Button
+            android:id="@+id/next"
+            style="@style/white_small_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:layout_weight="1.18"
+            android:text="Next" />
+    </LinearLayout>
+
     <com.debauchery.sketch.SketchPad
-        android:id="@+id/sv_sketchpad"
+        android:id="@+id/sketchpad"
         android:layout_width="fill_parent"
         android:layout_height="match_parent"
         android:layout_margin="10dp" />

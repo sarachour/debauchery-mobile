@@ -1,66 +1,81 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:svgimageview="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/describe_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/blue_bg_repeat"
+    android:background="@color/pink"
     android:orientation="vertical"
     android:padding="5dp"
     tools:context=".DescribeActivity" >
 
     <TextView
+        android:id="@+id/textView1"
+        style="@style/white_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Settings"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="32sp" />
+
+    <TextView
         android:id="@+id/TextView01"
+        style="@style/white_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:text="@string/label_ask_nplayers"
-        android:textColor="#444444"
-        android:textSize="24sp" />
+        android:layout_weight="0.00"
+        android:padding="5dp"
+        android:text="@string/label_ask_nplayers" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:orientation="vertical" >
 
         <SeekBar
             android:id="@+id/lv_nplayers"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:indeterminate="false"
             android:max="20"
             android:progress="5" />
 
         <TextView
             android:id="@+id/lv_nplayers_prompt"
-            android:layout_width="87dp"
-            android:layout_height="match_parent"
-            android:text="TextView"
-            android:textColor="#444444"
-            android:textSize="24sp" />
+            style="@style/white_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:text="33" />
     </LinearLayout>
 
     <TextView
         android:id="@+id/lv_label_2"
+        style="@style/white_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:text="@string/label_ask_startmode"
-        android:textColor="@color/inset_color"
-        android:textSize="24sp" />
+        android:padding="5dp"
+        android:text="@string/label_ask_startmode" />
 
-    <com.caverock.androidsvg.SVGImageView
+    <ImageView
         android:id="@+id/lv_mode"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_weight="0.27"
+        android:layout_width="217dp"
+        android:layout_height="102dp"
+        android:layout_gravity="center"
+        android:padding="0dp"
         android:scaleType="fitCenter"
-        svgimageview:svg="@drawable/choose_mode_draw" />
+        android:src="@drawable/choose_mode_draw" />
 
     <Button
         android:id="@+id/lv_start"
-        android:layout_width="match_parent"
+        style="@style/blue_button"
+        android:layout_width="244dp"
         android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center|center_vertical"
+        android:layout_margin="25dp"
+        android:gravity="center"
         android:text="@string/action_start" />
 
 </LinearLayout>

@@ -3,7 +3,7 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#dc5092"
+    android:background="@color/pink"
     android:gravity="bottom"
     android:orientation="vertical"
     android:padding="25dp"
@@ -31,7 +31,7 @@
 
     <Button
         android:id="@+id/main_local"
-        style="@style/CardStyle"
+        style="@style/white_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
@@ -39,10 +39,18 @@
 
     <Button
         android:id="@+id/main_friends"
-        style="@style/CardStyle"
+        style="@style/white_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
         android:text="Remote Game" />
+
+    <Button
+        android:id="@+id/mm_gallery"
+        style="@style/white_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:text="Gallery" />
 
 </LinearLayout>

@@ -1,8 +1,5 @@
 package com.debauchery.fragment;
 
-import com.caverock.androidsvg.SVG;
-import com.caverock.androidsvg.SVGImageView;
-import com.caverock.androidsvg.SVGParseException;
 import com.debauchery.Globals;
 import com.debauchery.R;
 import com.debauchery.fragment.iface.FragmentInterface;
@@ -20,6 +17,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.ToggleButton;
@@ -50,7 +48,7 @@ public class LocalSettingsFragment extends FragmentInterface{
 		Button start = (Button) find(R.id.lv_start);
 		SeekBar nplayers_bar = (SeekBar) find(R.id.lv_nplayers);
 		TextView nplayers_label = (TextView) find(R.id.lv_nplayers_prompt);
-		SVGImageView choose_style = (SVGImageView) find(R.id.lv_mode);
+		ImageView choose_style = (ImageView) find(R.id.lv_mode);
 		
 		
 		choose_style.setOnClickListener(new OnClickListener(){
@@ -59,7 +57,7 @@ public class LocalSettingsFragment extends FragmentInterface{
 				// TODO Auto-generated method stub
 				// TODO Auto-generated method stub
 				startDraw = !startDraw;
-				SVGImageView choose_style = (SVGImageView) find(R.id.lv_mode);
+				ImageView choose_style = (ImageView) find(R.id.lv_mode);
 				if(startDraw) 
 					choose_style.setImageResource(R.drawable.choose_mode_draw);
 				else
@@ -118,7 +116,7 @@ public class LocalSettingsFragment extends FragmentInterface{
 	@Override
 	public void load() {
 		SeekBar nplayers_bar = (SeekBar) find(R.id.lv_nplayers);
-		SVGImageView choose_style = (SVGImageView) find(R.id.lv_mode);
+		ImageView choose_style = (ImageView) find(R.id.lv_mode);
 		TextView nplayers_label = (TextView) find(R.id.lv_nplayers_prompt);
 		
 		// TODO Auto-generated method stub

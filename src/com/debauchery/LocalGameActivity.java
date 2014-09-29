@@ -48,42 +48,17 @@ public class LocalGameActivity extends FragmentActivity implements GameActivityI
 		
 		this.load();
 		
-		Button next = (Button) this.findViewById(R.id.lg_next);
-		Button prev = (Button) this.findViewById(R.id.lg_prev);
-		
-		next.setOnClickListener(new OnClickListener(){
-
-			@Override
-			public void onClick(View arg0) {
-				// TODO Auto-generated method stub
-				game.next();
-			}
-			
-		});
-		prev.setOnClickListener(new OnClickListener(){
-
-			@Override
-			public void onClick(View arg0) {
-				// TODO Auto-generated method stub
-				game.prev();
-			}
-			
-		});
 	}
 	public boolean onCreateOptionsMenu(Menu menu) {
 	    // Inflate the menu items for use in the action bar
 	    MenuInflater inflater = getMenuInflater();
-	    inflater.inflate(R.menu.action, menu);
+	    inflater.inflate(R.menu.main, menu);
 	    return super.onCreateOptionsMenu(menu);
 	}
 	public boolean onOptionsItemSelected(MenuItem item) {
 	    // Handle presses on the action bar items
 	    switch (item.getItemId()) {
-	        case R.id.action_prev:
-	        		game.prev();
-	        		return true;
-	        case R.id.action_next:
-	        		game.next();
+	        case R.id.action_settings:
 	        		return true;
 	        default:
 	            return super.onOptionsItemSelected(item);
@@ -124,13 +99,21 @@ public class LocalGameActivity extends FragmentActivity implements GameActivityI
 	@Override
 	public void change(int type, int turn) {
 		// TODO Auto-generated method stub
-		TextView t = (TextView) this.findViewById(R.id.lg_player_turn);
-		t.setText("Turn "+turn);
 	}
 	@Override
 	public void review() {
 		// TODO Auto-generated method stub
 		this.game.review();
+	}
+	@Override
+	public void prev() {
+		// TODO Auto-generated method stub
+		game.prev();
+	}
+	@Override
+	public void next() {
+		// TODO Auto-generated method stub
+		game.next();
 	}
 	
 }

@@ -17,42 +17,63 @@
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>
     
+    <style name="text" parent="AppTheme">
+	    <item name="android:textStyle">bold</item>
+	    <!--   <item name="android:fontFamily">sans-serif-condensed</item> -->
+	    <item name="android:typeface">sans</item>
+	    <item name="android:textSize">24sp</item>
+	    <item name="android:layout_width">fill_parent</item>
+	    <item name="android:layout_height">fill_parent</item>
+	    <item name="android:orientation">horizontal</item>
+	    <item name="android:gravity">center</item>
+    </style>
+    <style name="small_text" parent="text">
+	    <item name="android:textSize">14sp</item>
+    </style>
     
-    <color name="inset_color">#FF444444</color>
-    <style name="InsetStyle" parent="AppTheme">
-        <item name="android:background">@drawable/inset_shape</item>
-	    <item name="android:layout_width">fill_parent</item>
-	    <item name="android:layout_height">fill_parent</item>
-	    <item name="android:orientation">horizontal</item>
-	    <item name="android:gravity">center</item>
+    <style name="white_text" parent="text">
+	    <item name="android:textColor">@color/white</item>
     </style>
-    <style name="CardStyle" parent="AppTheme">
-        <item name="android:background">@drawable/card_shape</item>
-	    <item name="android:layout_width">fill_parent</item>
-	    <item name="android:layout_height">fill_parent</item>
-	    <item name="android:orientation">horizontal</item>
-	    <item name="android:gravity">center</item>
+    <style name="small_white_text" parent="small_text">
+	    <item name="android:textColor">@color/white</item>
     </style>
-	<style name="ReviewWedgeStyle" parent="AppTheme">
-        <item name="android:background">@drawable/card_shape</item>
-	    <item name="android:layout_width">fill_parent</item>
-	    <item name="android:layout_height">150dp</item>
-        <item name="android:layout_marginBottom">5dp</item>
-        <item name="android:layout_marginTop">5dp</item>
-	    <item name="android:padding">5dp</item>
-	    <item name="android:orientation">horizontal</item>
-	    <item name="android:gravity">center_vertical</item>
+    <style name="black_text" parent="text">
+	    <item name="android:textColor">@color/grey</item>
     </style>
-    <style parent="WhiteTextStyle" name="SmallWhiteTextStyle">
-		<item name="android:textSize">14sp</item>
-	</style>
-    <style parent="WhiteTextStyle" name="SubHeaderWhiteTextStyle">
-		<item name="android:textSize">25sp</item>
-	</style>
-	<style parent="TextStyle" name="WhiteTextStyle">
-		<item name="android:textColor">#EEEEEE</item>
-	</style>
-	<style name="TextStyle">
-		<item name="android:typeface">monospace</item>
-	</style>
+    <style name="small_black_text" parent="small_text">
+	    <item name="android:textColor">@color/grey</item>
+    </style>
+    
+    <style name="blue_button" parent="white_text">
+        <item name="android:background">@drawable/rounded_corners_blue</item>
+    </style>
+    <style name="blue_small_button" parent="small_white_text">
+        <item name="android:background">@drawable/rounded_corners_blue</item>
+    </style>
+    
+    <style name="black_small_button" parent="small_white_text">
+	    <item name="android:background">@drawable/rounded_corners_black</item>
+    </style>
+    <style name="disabled_small_button" parent="small_white_text">
+	    <item name="android:background">@drawable/rounded_corners_black</item>
+	    <item name="android:textColor">@color/grey</item>
+    </style>
+    <style name="black_button" parent="white_text">
+        <item name="android:background">@drawable/rounded_corners_black</item>
+    </style>
+    <style name="white_button" parent="black_text">
+        <item name="android:background">@drawable/rounded_corners_white</item>
+    </style>
+    <style name="white_small_button" parent="small_black_text">
+	    <item name="android:background">@drawable/rounded_corners_white</item>
+    </style>
+    <color name="orange">#FFAD5C</color>
+    <color name="pink">#dc5092</color>
+    <color name="white">#EEEEEE</color>
+    <color name="grey">#666666</color>
+    <color name="darkgrey">#444444</color>
+    <color name="blue">#70B8FF</color>
+    <color name="violet">#DB4DFF</color>
+    <color name="green">#4DDB94</color>
+    
 </resources>

@@ -12,7 +12,9 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.View.OnKeyListener;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
@@ -29,9 +31,9 @@ public class DescribeFragment extends FragmentInterface implements FragmentTurnI
 
 	public void create() {
 		// TODO Auto-generated method stub
-		System.out.println("DESCRIBE: create");
-		
 		final EditText edit =  (EditText) find(R.id.sa_describe);
+		Button next = (Button) this.find(R.id.sa_d_done);
+		Button prev = (Button) this.find(R.id.sa_d_back);
 		description = db.getDescription(turn);
 		edit.setText(description);
 		if(turn == 0){
@@ -59,6 +61,25 @@ public class DescribeFragment extends FragmentInterface implements FragmentTurnI
 			
 		});
 		
+		
+		next.setOnClickListener(new OnClickListener(){
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				frame.next();
+			}
+			
+		});
+		prev.setOnClickListener(new OnClickListener(){
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				frame.prev();
+			}
+			
+		});
 	}
 	
 	public void save() {
@@ -71,6 +92,8 @@ public class DescribeFragment extends FragmentInterface implements FragmentTurnI
 		final EditText edit =  (EditText) find(R.id.sa_describe);
 		description = db.getDescription(turn);
 		edit.setText(description);
+		TextView lvl = (TextView) this.find(R.id.sa_d_turn);
+		lvl.setText("Turn "+this.turn);
 	}
 
 	@Override

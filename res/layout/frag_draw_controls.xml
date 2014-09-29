@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res/afzkl.development.colorpickerview.demo"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/LinearLayout1"
-    style="@style/InsetStyle"
+    style="@style/black_button"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -19,28 +19,28 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="0.08"
-            android:src="@drawable/fill" />
+            android:src="@drawable/icon_fill" />
 
         <ImageButton
             android:id="@+id/fdc_undo"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="0.08"
-            android:src="@drawable/undo" />
+            android:src="@drawable/icon_undo" />
 
         <ImageButton
             android:id="@+id/fdc_redo"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="0.08"
-            android:src="@drawable/redo" />
+            android:src="@drawable/icon_redo" />
 
         <ImageButton
             android:id="@+id/fdc_clear"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="0.08"
-            android:src="@drawable/clear" />
+            android:src="@drawable/icon_clear" />
     </LinearLayout>
 
     <LinearLayout
@@ -67,7 +67,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="2dp"
                 android:text="Color"
-                android:textAppearance="@style/SmallWhiteTextStyle" />
+                android:textAppearance="@style/small_white_text" />
 
             <View
                 android:id="@+id/fdc_colorpicker_swatch"
@@ -81,7 +81,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="2dp"
                 android:text="Pen Thickness"
-                android:textAppearance="@style/SmallWhiteTextStyle" />
+                android:textAppearance="@style/small_white_text" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -99,7 +99,7 @@
                     android:layout_width="32dp"
                     android:layout_height="wrap_content"
                     android:text="0"
-                    android:textAppearance="@style/SubHeaderWhiteTextStyle" />
+                    android:textAppearance="@style/small_white_text" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

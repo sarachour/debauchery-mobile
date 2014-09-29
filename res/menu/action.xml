@@ -4,14 +4,14 @@
     <item
         android:id="@+id/action_next"
         android:orderInCategory="200"
-        android:icon="@drawable/right"
+        android:icon="@drawable/icon_right"
         android:title="next"
         android:showAsAction="ifRoom"/>
 
      <item
         android:id="@+id/action_prev"
         android:orderInCategory="100"
-        android:icon="@drawable/left"
+        android:icon="@drawable/icon_left"
         android:title="prev"
         android:showAsAction="ifRoom"/>
 </menu>

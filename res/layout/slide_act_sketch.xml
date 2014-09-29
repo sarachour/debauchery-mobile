@@ -1,47 +1,86 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/describe_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/orange_bg_repeat"
-    android:padding="10dp"
+    android:background="@color/orange"
+    android:orientation="vertical"
     tools:context=".DrawActivity" >
 
-    <com.debauchery.sketch.SketchPad
-        android:id="@+id/fd_sketchpad"
-        android:layout_width="fill_parent"
-        android:layout_height="match_parent" />
-
-    <SlidingDrawer
-        android:id="@+id/fd_controls"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="282dp"
-        android:layout_gravity="bottom"
-        android:content="@+id/content"
-        android:handle="@+id/fd_show_controls" >
+        android:layout_height="36dp"
+        android:background="@color/grey"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp" >
 
-        <ImageButton
-            android:id="@+id/fd_show_controls"
-            style="@style/InsetStyle"
-            android:layout_width="50dp"
-            android:layout_height="30dp"
-            android:src="@drawable/up" />
+        <TextView
+            android:id="@+id/fd_turn"
+            style="@style/small_white_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_weight="1.18"
+            android:gravity="left"
+            android:text="TextView" />
 
-        <LinearLayout
-            android:id="@+id/content"
+        <Button
+            android:id="@+id/fd_back"
+            style="@style/white_small_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:layout_weight="1.18"
+            android:text="Back" />
+
+        <Button
+            android:id="@+id/fd_done"
+            style="@style/white_small_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:layout_weight="1.18"
+            android:text="Done" />
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:layout_margin="5dp" >
+
+        <com.debauchery.sketch.SketchPad
+            android:id="@+id/fd_sketchpad"
             android:layout_width="match_parent"
-            android:layout_height="458dp"
-            android:orientation="vertical" >
+            android:layout_height="match_parent" />
+
+        <SlidingDrawer
+            android:id="@+id/fd_controls"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:content="@+id/content"
+            android:handle="@+id/fd_show_controls" >
+
+            <ImageButton
+                android:id="@+id/fd_show_controls"
+                style="@style/black_button"
+                android:layout_width="50dp"
+                android:layout_height="30dp"
+                android:src="@drawable/icon_up" />
 
             <LinearLayout
-                android:id="@+id/fd_controls_menu"
+                android:id="@+id/content"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:orientation="vertical" >
 
+                <LinearLayout
+                    android:id="@+id/fd_controls_menu"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical" >
+                </LinearLayout>
             </LinearLayout>
+        </SlidingDrawer>
+    </FrameLayout>
 
-        </LinearLayout>
-    </SlidingDrawer>
-
-</FrameLayout>
+</LinearLayout>

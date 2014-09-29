@@ -15,7 +15,7 @@ import android.view.inputmethod.InputConnection;
 import android.widget.EditText;
 
 public class GameEditText extends EditText{
-	private Drawable imgCloseButton = getResources().getDrawable(R.drawable.clear);
+	private Drawable imgCloseButton = getResources().getDrawable(R.drawable.icon_clear);
     
 	public GameEditText(Context context) {
 		super(context);
